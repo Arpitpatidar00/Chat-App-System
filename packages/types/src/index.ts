@@ -7,3 +7,4 @@ export * from './attachment.types.js';
 export * from './websocket-events.types.js';
 export * from './notification.types.js';
 export * from './privacy.types.js';
+export * from './monitoring.types.js';

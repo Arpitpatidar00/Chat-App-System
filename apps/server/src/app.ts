@@ -24,6 +24,7 @@ import { presenceService } from './features/presence/presence.service.js';
 import { blocksRoutes } from './features/privacy/blocks.routes.js';
 import { reportsRoutes } from './features/privacy/reports.routes.js';
 import { privacyRoutes } from './features/privacy/privacy.routes.js';
+import { canaryRoutes } from './features/monitoring/canary.routes.js';
 import { tokenBucketRateLimiter } from './core/ratelimit/token-bucket.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
@@ -214,6 +215,9 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(reportsRoutes, { prefix: '/v1' });
   await app.register(privacyRoutes, { prefix: '/api/v1/privacy' });
   await app.register(privacyRoutes, { prefix: '/v1/privacy' });
+  await app.register(canaryRoutes, { prefix: '/health' });
+  await app.register(canaryRoutes, { prefix: '/api/v1/monitoring' });
+  await app.register(canaryRoutes, { prefix: '/v1/monitoring' });
 
   return app;
 }

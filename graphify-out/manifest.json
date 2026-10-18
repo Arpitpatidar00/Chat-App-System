@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792350749.6148467,
-    "seen": 1792350901.9539762,
-    "ast_hash": "b8c84a60409fef48cec48b738c9b1b01",
+    "mtime": 1792351147.7594607,
+    "seen": 1792351618.063639,
+    "ast_hash": "c7b79dff4992bbf026bb3de6b84648dc",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "packages/types/src/index.ts": {
-    "mtime": 1792349779.2491739,
-    "seen": 1792350901.955698,
-    "ast_hash": "2ff123ecadbc476d623d5c5883cc79a6",
+    "mtime": 1792351031.7495565,
+    "seen": 1792351618.065961,
+    "ast_hash": "21d36632b4d42244a53e962db42bc235",
     "semantic_hash": ""
   },
   "packages/types/src/message.types.ts": {
@@ -660,9 +660,9 @@
     "semantic_hash": ""
   },
   "phases/09-phase9-non-functional-acceptance-and-release.md": {
-    "mtime": 1792342081.7372518,
-    "seen": 1792344423.573524,
-    "ast_hash": "9f2a735a252f2395efc8fcf7f6ca7144",
+    "mtime": 1792351609.3808277,
+    "seen": 1792351618.067127,
+    "ast_hash": "a479ba5f400e82494d5719854c5ef7d4",
     "semantic_hash": ""
   },
   "phases/10-architecture-tech-stack-and-monorepo.md": {
@@ -951,6 +951,48 @@
     "mtime": 1792349766.1078951,
     "seen": 1792350901.95577,
     "ast_hash": "f81db430ede04969fc9bfbbbf3fe8c5e",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/monitoring/canary-monitor.ts": {
+    "mtime": 1792351054.9859414,
+    "seen": 1792351618.064696,
+    "ast_hash": "644b8c5ef72bf9a957ff40ff3966491e",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/monitoring/canary.controller.ts": {
+    "mtime": 1792351091.492512,
+    "seen": 1792351618.064697,
+    "ast_hash": "cb6144aa4ff003c62ba479999d6a78de",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/monitoring/canary.routes.ts": {
+    "mtime": 1792351098.7069755,
+    "seen": 1792351618.0646982,
+    "ast_hash": "5524115b458fe6254c739af49c44f569",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/monitoring/dr-failover.service.ts": {
+    "mtime": 1792351332.5684097,
+    "seen": 1792351618.064699,
+    "ast_hash": "a812dedc274ff2b1132357d957baf1ee",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/monitoring/phase9.test.ts": {
+    "mtime": 1792351428.8626516,
+    "seen": 1792351618.0647,
+    "ast_hash": "514fc6cb88e3721f5207ba9f792bc4f8",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/monitoring/security-audit-scanner.ts": {
+    "mtime": 1792351242.3527627,
+    "seen": 1792351618.0647008,
+    "ast_hash": "833bbad13b3d4d6abf69605f82a221d1",
+    "semantic_hash": ""
+  },
+  "packages/types/src/monitoring.types.ts": {
+    "mtime": 1792351021.4938254,
+    "seen": 1792351618.0659862,
+    "ast_hash": "07228411800066086f47d34b3f8fa4f9",
     "semantic_hash": ""
   }
 }
