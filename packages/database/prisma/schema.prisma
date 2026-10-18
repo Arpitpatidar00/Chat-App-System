@@ -1,0 +1,350 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserStatus {
+  PENDING
+  VERIFIED
+  APPROVED
+  SUSPENDED
+  DELETED
+}
+
+enum Platform {
+  IOS
+  ANDROID
+  WEB
+}
+
+enum DeviceStatus {
+  ACTIVE
+  REVOKED
+}
+
+enum ConversationType {
+  DIRECT
+  GROUP
+}
+
+enum MemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+  REMOVED
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  FILE
+  LINK
+  SYSTEM
+}
+
+enum EventType {
+  EDIT
+  DELETE_EVERYONE
+  REACTION_ADD
+  REACTION_REMOVE
+  PIN
+  UNPIN
+}
+
+enum AttachmentStatus {
+  UPLOADING
+  COMMITTED
+  DELETED
+}
+
+enum ReportStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+  PURGED
+}
+
+enum AdminAction {
+  VIEW_REPORT
+  SUSPEND_USER
+  RESOLVE_REPORT
+  REVOKE_DEVICE
+}
+
+model User {
+  id              String         @id @default(uuid()) @db.Uuid
+  username        String         @unique
+  status          UserStatus     @default(PENDING)
+  presencePrivacy Json           @default("{\"visibility\": \"EVERYONE\"}") @map("presence_privacy")
+  createdAt       DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime       @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  devices         Device[]
+  keyVault        KeyBackupVault?
+  memberships     ConversationMember[]
+  createdChats    Conversation[] @relation("CreatedBy")
+  sentMessages    Message[]      @relation("SentMessages")
+  receipts        MessageReceipt[]
+  hiddenMessages  UserHiddenMessage[]
+  blockedUsers    UserBlock[]    @relation("Blocker")
+  blockedBy       UserBlock[]    @relation("Blocked")
+  reportsFiled    ModerationReport[] @relation("Reporter")
+  reportsReceived ModerationReport[] @relation("ReportedUser")
+  reviewedReports ModerationReport[] @relation("Reviewer")
+  adminAuditLogs  AdminAuditLog[]
+  historyPackages GroupHistoryPackage[]
+  attachments     Attachment[]
+
+  @@map("users")
+}
+
+model Device {
+  deviceId         String       @id @default(uuid()) @map("device_id") @db.Uuid
+  userId           String       @map("user_id") @db.Uuid
+  deviceName       String       @map("device_name")
+  platform         Platform
+  pushToken        String?      @map("push_token")
+  identityKeyPub   Bytes        @map("identity_key_pub")
+  signedPrekeyPub  Bytes        @map("signed_prekey_pub")
+  signedPrekeySig  Bytes        @map("signed_prekey_sig")
+  status           DeviceStatus @default(ACTIVE)
+  lastActiveAt     DateTime     @default(now()) @map("last_active_at") @db.Timestamptz
+  createdAt        DateTime     @default(now()) @map("created_at") @db.Timestamptz
+
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  oneTimePrekeys   OneTimePrekey[]
+  sentMessages     Message[]    @relation("SenderDevice")
+
+  @@map("devices")
+}
+
+model OneTimePrekey {
+  id        BigInt   @id @default(autoincrement())
+  deviceId  String   @map("device_id") @db.Uuid
+  keyId     Int      @map("key_id")
+  publicKey Bytes    @map("public_key")
+  consumed  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  device    Device   @relation(fields: [deviceId], references: [deviceId], onDelete: Cascade)
+
+  @@unique([deviceId, keyId])
+  @@index([deviceId, consumed])
+  @@map("one_time_prekeys")
+}
+
+model KeyBackupVault {
+  userId             String   @id @map("user_id") @db.Uuid
+  encryptedVaultBlob Bytes    @map("encrypted_vault_blob")
+  kdfSalt            Bytes    @map("kdf_salt")
+  kdfParams          Json     @map("kdf_params")
+  version            Int      @default(1)
+  updatedAt          DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("key_backup_vault")
+}
+
+model Conversation {
+  id              String           @id @default(uuid()) @db.Uuid
+  type            ConversationType
+  directPairHash  String?          @unique @map("direct_pair_hash")
+  title           String?
+  lastSeqId       BigInt           @default(0) @map("last_seq_id")
+  createdBy       String           @map("created_by") @db.Uuid
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  creator         User             @relation("CreatedBy", fields: [createdBy], references: [id])
+  members         ConversationMember[]
+  messages        Message[]
+  events          MessageEvent[]
+  historyPackages GroupHistoryPackage[]
+  attachments     Attachment[]
+  reports         ModerationReport[]
+
+  @@map("conversations")
+}
+
+model ConversationMember {
+  conversationId    String     @map("conversation_id") @db.Uuid
+  userId            String     @map("user_id") @db.Uuid
+  role              MemberRole @default(MEMBER)
+  joinedAtSeqId     BigInt     @default(0) @map("joined_at_seq_id")
+  historyFloorSeqId BigInt     @default(1) @map("history_floor_seq_id")
+  removedAtSeqId    BigInt?    @map("removed_at_seq_id")
+  mutedUntil        DateTime?  @map("muted_until") @db.Timestamptz
+
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([conversationId, userId])
+  @@index([userId, conversationId])
+  @@map("conversation_members")
+}
+
+model Message {
+  id                String       @id @default(uuid()) @db.Uuid
+  conversationId    String       @map("conversation_id") @db.Uuid
+  seqId             BigInt       @map("seq_id")
+  senderId          String       @map("sender_id") @db.Uuid
+  senderDeviceId    String       @map("sender_device_id") @db.Uuid
+  clientMsgId       String       @map("client_msg_id") @db.Uuid
+  msgType           MessageType  @default(TEXT) @map("msg_type")
+  encryptedPayloads Json         @map("encrypted_payloads")
+  createdAt         DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  isTombstoned      Boolean      @default(false) @map("is_tombstoned")
+
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender            User         @relation("SentMessages", fields: [senderId], references: [id])
+  senderDevice      Device       @relation("SenderDevice", fields: [senderDeviceId], references: [deviceId])
+  receipts          MessageReceipt[]
+  hiddenByUsers     UserHiddenMessage[]
+  events            MessageEvent[]
+
+  @@unique([conversationId, seqId])
+  @@unique([senderDeviceId, clientMsgId])
+  @@index([conversationId, seqId(sort: Asc)])
+  @@map("messages")
+}
+
+model MessageReceipt {
+  conversationId String    @map("conversation_id") @db.Uuid
+  messageId      String    @map("message_id") @db.Uuid
+  userId         String    @map("user_id") @db.Uuid
+  status         Int       @default(1) @db.SmallInt // 1=SENT, 2=DELIVERED, 3=READ
+  deliveredAt    DateTime? @map("delivered_at") @db.Timestamptz
+  readAt         DateTime? @map("read_at") @db.Timestamptz
+
+  message        Message   @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([messageId, userId])
+  @@index([conversationId, userId, status])
+  @@map("message_receipts")
+}
+
+model MessageEvent {
+  eventId          BigInt       @id @default(autoincrement()) @map("event_id")
+  conversationId   String       @map("conversation_id") @db.Uuid
+  targetMessageId  String       @map("target_message_id") @db.Uuid
+  actorId          String       @map("actor_id") @db.Uuid
+  actorDeviceId    String       @map("actor_device_id") @db.Uuid
+  eventType        EventType    @map("event_type")
+  encryptedPatch   Bytes?       @map("encrypted_patch")
+  createdAt        DateTime     @default(now()) @map("created_at") @db.Timestamptz
+
+  conversation     Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  targetMessage    Message      @relation(fields: [targetMessageId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, eventId(sort: Asc)])
+  @@map("message_events")
+}
+
+model UserHiddenMessage {
+  userId    String   @map("user_id") @db.Uuid
+  messageId String   @map("message_id") @db.Uuid
+  hiddenAt  DateTime @default(now()) @map("hidden_at") @db.Timestamptz
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@id([userId, messageId])
+  @@map("user_hidden_messages")
+}
+
+model GroupHistoryPackage {
+  id                         String   @id @default(uuid()) @db.Uuid
+  conversationId             String   @map("conversation_id") @db.Uuid
+  recipientUserId            String   @map("recipient_user_id") @db.Uuid
+  fromSeqId                  BigInt   @map("from_seq_id")
+  toSeqId                    BigInt   @map("to_seq_id")
+  encryptedHistoryKeyBundle  Bytes    @map("encrypted_history_key_bundle")
+  createdAt                  DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  conversation               Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  recipient                  User         @relation(fields: [recipientUserId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, recipientUserId])
+  @@map("group_history_packages")
+}
+
+model Attachment {
+  id                  String           @id @default(uuid()) @db.Uuid
+  conversationId      String           @map("conversation_id") @db.Uuid
+  uploaderId          String           @map("uploader_id") @db.Uuid
+  objectKey           String           @unique @map("object_key")
+  ciphertextSizeBytes Int              @map("ciphertext_size_bytes")
+  declaredMime        String           @map("declared_mime")
+  sha256Ciphertext    String           @map("sha256_ciphertext")
+  status              AttachmentStatus @default(UPLOADING)
+  createdAt           DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  conversation        Conversation     @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  uploader            User             @relation(fields: [uploaderId], references: [id])
+
+  @@index([conversationId, status])
+  @@map("attachments")
+}
+
+model UserBlock {
+  blockerId String   @map("blocker_id") @db.Uuid
+  blockedId String   @map("blocked_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  blocker   User     @relation("Blocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked   User     @relation("Blocked", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@id([blockerId, blockedId])
+  @@index([blockedId, blockerId])
+  @@map("user_blocks")
+}
+
+model ModerationReport {
+  reportId                   String       @id @default(uuid()) @map("report_id") @db.Uuid
+  reporterId                 String       @map("reporter_id") @db.Uuid
+  reportedUserId             String       @map("reported_user_id") @db.Uuid
+  conversationId             String       @map("conversation_id") @db.Uuid
+  reasonCode                 String       @map("reason_code")
+  disclosedMessagesEncrypted Bytes        @map("disclosed_messages_encrypted_for_mod")
+  metadataSnapshot           Json         @map("metadata_snapshot")
+  status                     ReportStatus @default(OPEN)
+  assignedReviewerId         String?      @map("assigned_reviewer_id") @db.Uuid
+  retentionExpiresAt         DateTime     @default(dbgenerated("(now() + interval '90 days')")) @map("retention_expires_at") @db.Timestamptz
+  createdAt                  DateTime     @default(now()) @map("created_at") @db.Timestamptz
+
+  reporter                   User         @relation("Reporter", fields: [reporterId], references: [id])
+  reportedUser               User         @relation("ReportedUser", fields: [reportedUserId], references: [id])
+  assignedReviewer           User?        @relation("Reviewer", fields: [assignedReviewerId], references: [id])
+  conversation               Conversation @relation(fields: [conversationId], references: [id])
+
+  @@map("moderation_reports")
+}
+
+model AdminAuditLog {
+  logId         BigInt      @id @default(autoincrement()) @map("log_id")
+  actorAdminId  String      @map("actor_admin_id") @db.Uuid
+  actionType    AdminAction @map("action_type")
+  targetId      String      @map("target_id") @db.Uuid
+  ipAddress     String      @map("ip_address")
+  justification String
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamptz
+
+  admin         User        @relation(fields: [actorAdminId], references: [id])
+
+  @@map("admin_audit_logs")
+}
+
+model DeletedEntityRegistry {
+  entityType String   @map("entity_type") // 'MESSAGE' or 'ATTACHMENT'
+  entityId   String   @map("entity_id") @db.Uuid
+  deletedAt  DateTime @default(now()) @map("deleted_at") @db.Timestamptz
+
+  @@id([entityType, entityId])
+  @@map("deleted_entities_registry")
+}
