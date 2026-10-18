@@ -1,0 +1,16 @@
+{
+  "name": "@chat/crypto",
+  "version": "1.0.0",
+  "description": "Cryptographic engine: AES-256-GCM, X25519, Ed25519, HKDF, Key Derivation",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "node --test dist/**/*.test.js",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  }
+}
