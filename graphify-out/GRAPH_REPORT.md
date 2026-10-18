@@ -1,17 +1,17 @@
 # Graph Report - chat-app  (2026-10-19)
 
 ## Corpus Check
-- 142 files · ~108,955 words
+- 158 files · ~114,300 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: (none) 2, .example 1, .prisma 1)
 
 ## Summary
-- 1486 nodes · 2316 edges · 80 communities (65 shown, 15 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 40 edges (avg confidence: 0.91)
+- 1575 nodes · 2564 edges · 83 communities (68 shown, 15 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5b1d5984`
+- Built from commit: `59817e4d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,7 @@
 - 07 — Phase 7: History, Encrypted Search, and Notifications
 - 08 — Phase 8: Privacy, Reporting, and Data Lifecycle
 - app.ts
-- WebSocketGateway
+- B. Shared Contracts (`@chat/types`)
 - 01 — Phase 1: Eligibility, Identity, and Access
 - 02 — Phase 2: E2EE and Durable Messaging
 - 09 — Phase 9: Non-Functional Acceptance and Release
@@ -81,12 +81,12 @@
 - pushGateway
 - types/tsconfig.json
 - 00 — Phase 0: Requirements, Product Decisions & Engineering Baseline
-- phase3.test.ts
+- receiptsController
 - authRepository
 - Chat System — AI Agent Implementation & Phase Registry
 - conversationsController
 - message-throughput.js
-- messagesController
+- audit-logs.repository.ts
 - conversations.repository.ts
 - devicesRepository
 - presenceService
@@ -94,19 +94,22 @@
 - env.ts
 - receiptsRepository
 - messages.repository.ts
-- authController
+- attachmentsController
+- devicesController
+- blocksRepository
+- tombstone-scrubber.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `DomainError` - 56 edges
-2. `Result` - 43 edges
-3. `ok()` - 43 edges
-4. `NotFoundError` - 36 edges
-5. `err()` - 36 edges
-6. `ForbiddenError` - 25 edges
-7. `fastify` - 23 edges
-8. `prisma` - 23 edges
-9. `buildApp()` - 21 edges
-10. `B. Shared Contracts (`@chat/types`)` - 21 edges
+1. `DomainError` - 63 edges
+2. `Result` - 50 edges
+3. `ok()` - 50 edges
+4. `NotFoundError` - 41 edges
+5. `err()` - 41 edges
+6. `ForbiddenError` - 31 edges
+7. `prisma` - 31 edges
+8. `fastify` - 30 edges
+9. `buildApp()` - 25 edges
+10. `conversationsService` - 21 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Feature Branches` --references--> `main()`  [INFERRED]
@@ -123,23 +126,23 @@
 ## Import Cycles
 - None detected.
 
-## Communities (80 total, 15 thin omitted)
+## Communities (83 total, 15 thin omitted)
 
 ### Community 1 - "messages.service.ts"
-Cohesion: 0.07
-Nodes (48): AttachmentDeletedError, AttachmentTooLargeError, ConflictError, DeleteWindowExpiredError, DomainError, EditWindowExpiredError, ForbiddenError, GroupLimitExceededError (+40 more)
+Cohesion: 0.06
+Nodes (60): AttachmentDeletedError, AttachmentTooLargeError, ConflictError, DeleteWindowExpiredError, DomainError, EditWindowExpiredError, ForbiddenError, GroupLimitExceededError (+52 more)
 
 ### Community 2 - "Hardening Controls"
 Cohesion: 0.05
 Nodes (42): Broken Access Control, Broken Authentication, Cross-Site Scripting (XSS), Data Classification, Dependency Audit Triage, Destructive Operations on Derived Paths, File Upload Safety, Hardening Patterns (+34 more)
 
 ### Community 3 - "crypto.test.ts"
-Cohesion: 0.10
-Nodes (32): DecryptedNotificationAlert, NotificationDecryptor, PreviewEnvelopeData, clientSessionManager, DeviceSession, PresignedUrlResult, RFC-5869, decryptAesGcm() (+24 more)
+Cohesion: 0.08
+Nodes (35): DecryptedNotificationAlert, NotificationDecryptor, PreviewEnvelopeData, clientSessionManager, DeviceSession, moderationCrypto, RFC-5869, decryptAesGcm() (+27 more)
 
 ### Community 4 - "useMessageSend.ts"
-Cohesion: 0.05
-Nodes (55): ChatMessageItem, ChatScreen(), ChatScreenProps, MessageBubble(), MessageBubbleProps, ReceiptIcon(), ReceiptIconProps, MessageSender (+47 more)
+Cohesion: 0.07
+Nodes (28): ChatMessageItem, ChatScreen(), ChatScreenProps, MessageBubble(), MessageBubbleProps, ReceiptIcon(), ReceiptIconProps, MessageSender (+20 more)
 
 ### Community 5 - "Code Review and Quality"
 Cohesion: 0.07
@@ -282,12 +285,12 @@ Cohesion: 0.17
 Nodes (11): 1. User Value, 2. Feasibility, 3. Differentiation, Assumption Audit, Core Evaluation Dimensions, Decision Framework, Might Be True (Nice to Have), Must Be True (Dealbreakers) (+3 more)
 
 ### Community 41 - "server/package.json"
-Cohesion: 0.05
-Nodes (43): dependencies, @chat/crypto, @chat/database, @chat/types, dotenv, fastify, @fastify/cors, @fastify/helmet (+35 more)
+Cohesion: 0.04
+Nodes (45): dependencies, @chat/crypto, @chat/database, @chat/types, dotenv, fastify, @fastify/cors, @fastify/helmet (+37 more)
 
 ### Community 42 - "phase3.test.ts"
-Cohesion: 0.26
-Nodes (6): env, closeRedisConnections(), createAuthToken(), main(), signJwt(), prisma
+Cohesion: 0.15
+Nodes (12): env, RateLimitResult, closeRedisConnections(), ActiveSession, wsGateway, createAuthToken(), PresenceRecord, createAuthToken() (+4 more)
 
 ### Community 43 - "types/package.json"
 Cohesion: 0.17
@@ -314,8 +317,12 @@ Cohesion: 0.17
 Nodes (11): 08 — Phase 8: Privacy, Reporting, and Data Lifecycle, 1. Scope & Ownership, 2. Requirements Traceability, 3. Server Data Models (PostgreSQL DDL), 4. Client ↔ Server Workflows & Protocols, 5. Phase 8 AI Implementation Tasks, 6. Phase 8 End-to-End (E2E) Acceptance Test Suite, Flow 8A: Bidirectional User Blocking (`FR-068`, `FR-069`) (+3 more)
 
 ### Community 49 - "app.ts"
-Cohesion: 0.23
-Nodes (14): buildApp(), authenticateAndCheckEligibility(), fastify, requireAuth, attachmentsRoutes(), authRoutes(), conversationsRoutes(), devicesRoutes() (+6 more)
+Cohesion: 0.16
+Nodes (17): buildApp(), authenticateAndCheckEligibility(), fastify, requireAuth, attachmentsRoutes(), authController, authRoutes(), conversationsRoutes() (+9 more)
+
+### Community 50 - "B. Shared Contracts (`@chat/types`)"
+Cohesion: 0.06
+Nodes (30): FastifyRequest, WebSocketGateway, EnrollDeviceData, RFC-7519, base64UrlDecode(), base64UrlEncode(), JwtClaims, DevicePlatform (+22 more)
 
 ### Community 51 - "01 — Phase 1: Eligibility, Identity, and Access"
 Cohesion: 0.18
@@ -341,6 +348,10 @@ Nodes (8): Analogous Inspiration, Constraint-Based Ideation, First Principles Th
 Cohesion: 0.25
 Nodes (7): compilerOptions, jsx, outDir, rootDir, extends, include, ../../tsconfig.base.json
 
+### Community 58 - "getRedisClient"
+Cohesion: 0.21
+Nodes (3): tokenBucketRateLimiter, getRedisClient(), presenceRepository
+
 ### Community 59 - "server/tsconfig.json"
 Cohesion: 0.29
 Nodes (6): compilerOptions, outDir, rootDir, extends, include, ../../tsconfig.base.json
@@ -354,8 +365,8 @@ Cohesion: 0.29
 Nodes (6): compilerOptions, outDir, rootDir, extends, include, ../../tsconfig.base.json
 
 ### Community 62 - "pushGateway"
-Cohesion: 0.15
-Nodes (7): InterceptedPushPacket, IPushGateway, pushGateway, PushResult, pushNotificationService, ClearNotificationPushPayload, OutboundPushPayload
+Cohesion: 0.17
+Nodes (6): InterceptedPushPacket, IPushGateway, pushGateway, PushResult, pushNotificationService, OutboundPushPayload
 
 ### Community 63 - "types/tsconfig.json"
 Cohesion: 0.29
@@ -365,9 +376,9 @@ Nodes (6): compilerOptions, outDir, rootDir, extends, include, ../../tsconfig.ba
 Cohesion: 0.29
 Nodes (6): 00 — Phase 0: Requirements, Product Decisions & Engineering Baseline, 1. Objective & Ownership, 2. Target Scale & Infrastructure Topology (Baseline v2.0), 3. Mandatory Decision Register (`DEC-01` to `DEC-15`), 4. Phase 0 AI Implementation Tasks, 5. Phase 0 Exit Gate Checklist
 
-### Community 65 - "phase3.test.ts"
-Cohesion: 0.14
-Nodes (7): ActiveSession, wsGateway, PresenceRecord, receiptsController, ReceiptDto, receiptsService, ws
+### Community 65 - "receiptsController"
+Cohesion: 0.20
+Nodes (3): privacyController, privacyRoutes(), receiptsController
 
 ### Community 67 - "Chat System — AI Agent Implementation & Phase Registry"
 Cohesion: 0.33
@@ -377,33 +388,37 @@ Nodes (5): Chat System — AI Agent Implementation & Phase Registry, 📑 Core D
 Cohesion: 0.40
 Nodes (3): errorRate, messageLatency, options
 
+### Community 70 - "audit-logs.repository.ts"
+Cohesion: 0.11
+Nodes (4): auditLogsRepository, CreateAuditLogParams, CreateReportParams, reportsRepository
+
 ### Community 74 - "LocalSearchRepository"
 Cohesion: 0.13
 Nodes (3): LocalMessageRecord, LocalSearchRepository, SearchResult
 
 ### Community 75 - "env.ts"
 Cohesion: 0.25
-Nodes (5): __dirname, envSchema, parsed, dotenv, zod
+Nodes (4): __dirname, envSchema, parsed, PresignedUrlResult
 
 ## Knowledge Gaps
 - **28 isolated node(s):** `@chat/crypto`, `@chat/types`, `@types/node`, `typescript`, `../../tsconfig.base.json` (+23 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 972 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1006 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `@prisma/client` connect `database/package.json` to `phase3.test.ts`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `fastify` connect `app.ts` to `messages.service.ts`, `receiptsController`, `presenceService`, `server/package.json`, `phase3.test.ts`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **What connects `@chat/crypto`, `@chat/types`, `@types/node` to the rest of the system?**
   _28 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `messages.service.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.06824193263974608 - nodes in this community are weakly interconnected._
-- **Why does `prisma` connect `phase3.test.ts` to `messages.service.ts`, `phase3.test.ts`, `storageProvider`, `conversations.repository.ts`, `receiptsRepository`, `messages.repository.ts`, `auth.repository.ts`, `app.ts`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+  _Cohesion score 0.05707450444292549 - nodes in this community are weakly interconnected._
+- **Why does `WebSocketGateway` connect `B. Shared Contracts (`@chat/types`)` to `phase3.test.ts`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Should `Hardening Controls` be split into smaller, more focused modules?**
   _Cohesion score 0.045454545454545456 - nodes in this community are weakly interconnected._
-- **Why does `fastify` connect `app.ts` to `phase3.test.ts`, `messages.service.ts`, `server/package.json`, `phase3.test.ts`, `presenceService`?**
+- **Why does `prisma` connect `phase3.test.ts` to `messages.service.ts`, `storageProvider`, `conversations.repository.ts`, `audit-logs.repository.ts`, `receiptsRepository`, `messages.repository.ts`, `auth.repository.ts`, `app.ts`, `tombstone-scrubber.ts`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **Should `crypto.test.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.09551020408163265 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08007013442431327 - nodes in this community are weakly interconnected._

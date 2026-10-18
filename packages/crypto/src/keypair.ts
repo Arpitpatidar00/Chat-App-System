@@ -35,6 +35,18 @@ export function generateEd25519KeyPair(): KeyPairPem {
 }
 
 /**
+ * Generates an RSA keypair for hybrid moderation disclosure envelopes.
+ */
+export function generateRsaKeyPair(): KeyPairPem {
+  const { publicKey, privateKey } = generateKeyPairSync('rsa', {
+    modulusLength: 2048,
+    publicKeyEncoding: { type: 'spki', format: 'pem' },
+    privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+  });
+  return { publicKey, privateKey };
+}
+
+/**
  * Computes shared secret using X25519 Diffie-Hellman.
  */
 export function computeSharedSecret(

@@ -18,6 +18,7 @@ import type {
 } from '@chat/types';
 import { wsGateway } from '../../core/websocket/gateway.js';
 import { prisma } from '@chat/database';
+import { blocksService } from '../privacy/blocks.service.js';
 
 export class ConversationsService {
   constructor(private readonly repo: ConversationsRepository = conversationsRepository) {}
@@ -84,6 +85,12 @@ export class ConversationsService {
     });
     if (!peer) {
       return err(new NotFoundError(`User with ID ${peerUserId} not found`));
+    }
+
+    // P8-T01: Reject direct conversation between blocked users
+    const isBlocked = await blocksService.isBidirectionallyBlocked(initiatorUserId, peerUserId);
+    if (isBlocked) {
+      return err(new ForbiddenError('USER_BLOCKED: Cannot create direct conversation with blocked user'));
     }
 
     const conversation = await this.repo.getOrCreateDirectConversation(
@@ -157,6 +164,12 @@ export class ConversationsService {
     );
     if (!actorMember || (actorMember.role !== 'OWNER' && actorMember.role !== 'ADMIN')) {
       return err(new ForbiddenError('Only group owners or admins can add members'));
+    }
+
+    // P8-T01: Blocked user cannot be added to group by blocker or blocked (FR-068, FR-069)
+    const isBlocked = await blocksService.isBidirectionallyBlocked(actorUserId, targetUserId);
+    if (isBlocked) {
+      return err(new ForbiddenError('USER_BLOCKED: Cannot add blocked user to group'));
     }
 
     // Capacity check: Max 100 active members (NFR-003)

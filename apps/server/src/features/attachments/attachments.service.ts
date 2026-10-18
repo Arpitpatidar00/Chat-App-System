@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { prisma } from '@chat/database';
 import { attachmentsRepository, type AttachmentsRepository } from './attachments.repository.js';
 import { conversationsRepository } from '../conversations/conversations.repository.js';
 import { storageProvider, type StorageProvider } from './storage-provider.js';
@@ -185,6 +186,21 @@ export class AttachmentsService {
 
     // Mark as DELETED in database
     await this.repo.deleteAttachment(attachmentId);
+
+    // P8-T07 & NFR-040: Persistent deletion registry for backup resurrection prevention
+    await prisma.deletedEntityRegistry.upsert({
+      where: {
+        entityType_entityId: {
+          entityType: 'ATTACHMENT',
+          entityId: attachmentId,
+        },
+      },
+      create: {
+        entityType: 'ATTACHMENT',
+        entityId: attachmentId,
+      },
+      update: {},
+    });
 
     // Purge binary object from S3 storage
     await this.storage.deleteObject(attachment.objectKey);

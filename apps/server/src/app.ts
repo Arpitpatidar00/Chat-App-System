@@ -21,6 +21,10 @@ import { attachmentsRoutes } from './features/attachments/attachments.routes.js'
 import { messagesService } from './features/messages/messages.service.js';
 import { receiptsService } from './features/receipts/receipts.service.js';
 import { presenceService } from './features/presence/presence.service.js';
+import { blocksRoutes } from './features/privacy/blocks.routes.js';
+import { reportsRoutes } from './features/privacy/reports.routes.js';
+import { privacyRoutes } from './features/privacy/privacy.routes.js';
+import { tokenBucketRateLimiter } from './core/ratelimit/token-bucket.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({
@@ -126,6 +130,23 @@ export async function buildApp(): Promise<FastifyInstance> {
 
         // P2-T03: Inbound WebSocket MSG_SEND ingestion & immediate MSG_ACK
         if (payload.action === 'MSG_SEND') {
+          // P8-T05 & FR-074: Per-user message burst rate limiting (30 msgs / 10s)
+          const limitCheck = await tokenBucketRateLimiter.consume(userId, 'MSG_SEND', 30, 10000);
+          if (!limitCheck.allowed) {
+            socket.send(
+              JSON.stringify({
+                action: 'MSG_ERROR',
+                clientMsgId: payload.clientMsgId,
+                error: {
+                  code: 'RATE_LIMIT_EXCEEDED',
+                  statusCode: 429,
+                  message: 'Too Many Requests: Message rate limit exceeded (30 messages / 10s)',
+                },
+              })
+            );
+            return;
+          }
+
           const ackResult = await messagesService.sendMessage(userId, deviceId, payload);
           if (ackResult.success) {
             socket.send(JSON.stringify(ackResult.data));
@@ -187,6 +208,12 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(receiptsRoutes, { prefix: '/api/v1/receipts' });
   await app.register(presenceRoutes, { prefix: '/api/v1/presence' });
   await app.register(attachmentsRoutes, { prefix: '/api/v1/attachments' });
+  await app.register(blocksRoutes, { prefix: '/api/v1/blocks' });
+  await app.register(blocksRoutes, { prefix: '/v1/blocks' });
+  await app.register(reportsRoutes, { prefix: '/api/v1' });
+  await app.register(reportsRoutes, { prefix: '/v1' });
+  await app.register(privacyRoutes, { prefix: '/api/v1/privacy' });
+  await app.register(privacyRoutes, { prefix: '/v1/privacy' });
 
   return app;
 }

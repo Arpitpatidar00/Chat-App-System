@@ -23,6 +23,7 @@ import type {
 } from '@chat/types';
 import { randomUUID } from 'node:crypto';
 import { pushNotificationService } from '../notifications/push-notification.service.js';
+import { blocksService } from '../privacy/blocks.service.js';
 
 export class MessagesService {
   constructor(
@@ -44,6 +45,17 @@ export class MessagesService {
     const isMember = conv.members.some((m) => m.userId === senderId && m.removedAtSeqId === null);
     if (!isMember) {
       return err(new ForbiddenError('You cannot send messages to this conversation'));
+    }
+
+    // P8-T01: Bidirectional block enforcement in direct chats (FR-068, FR-069)
+    if (conv.type === 'DIRECT') {
+      const peer = conv.members.find((m) => m.userId !== senderId);
+      if (peer) {
+        const isBlocked = await blocksService.isBidirectionallyBlocked(senderId, peer.userId);
+        if (isBlocked) {
+          return err(new ForbiddenError('USER_BLOCKED: Message cannot be delivered to blocked user'));
+        }
+      }
     }
 
     // 2. Idempotency check: senderDeviceId + clientMsgId
@@ -95,7 +107,7 @@ export class MessagesService {
     }
 
     // 5. Asynchronously dispatch zero-plaintext push notification wakeups (FR-061 to FR-067)
-    await pushNotificationService
+    pushNotificationService
       .notifyConversationMembers(conv.id, message, senderId)
       .catch(() => {});
 

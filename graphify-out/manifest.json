@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792348839.9999003,
-    "seen": 1792349578.8518982,
-    "ast_hash": "a03052e5623cb6537d1a4015b39724b4",
+    "mtime": 1792350749.6148467,
+    "seen": 1792350901.9539762,
+    "ast_hash": "b8c84a60409fef48cec48b738c9b1b01",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.service.ts": {
-    "mtime": 1792347457.4479496,
-    "seen": 1792347861.385352,
-    "ast_hash": "a47df06b9b9c93a38c9d43db53b654af",
+    "mtime": 1792349848.3863325,
+    "seen": 1792350901.954559,
+    "ast_hash": "5b6132d0f1d3831f335881f978193842",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.controller.ts": {
@@ -174,9 +174,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.repository.ts": {
-    "mtime": 1792348788.1863627,
-    "seen": 1792349578.8526452,
-    "ast_hash": "16a6f19e6d9bb0f92297295d36973119",
+    "mtime": 1792350031.7446969,
+    "seen": 1792350901.9547572,
+    "ast_hash": "85be489d8af3ec21a35833204f9d8a36",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.routes.ts": {
@@ -186,9 +186,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.service.ts": {
-    "mtime": 1792349284.0958533,
-    "seen": 1792349578.852674,
-    "ast_hash": "854ced7e1afc4e2600255677bfb13753",
+    "mtime": 1792350733.2143147,
+    "seen": 1792350901.954786,
+    "ast_hash": "4c3da0478546f20026e7897dea97f0ce",
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.controller.ts": {
@@ -204,9 +204,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.service.ts": {
-    "mtime": 1792346080.0051062,
-    "seen": 1792346441.24249,
-    "ast_hash": "d4df21ba02b10c18d26e14405851e04e",
+    "mtime": 1792349876.478682,
+    "seen": 1792350901.9550111,
+    "ast_hash": "b536c5b463eab4f00f7863f94a553221",
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/receipts.controller.ts": {
@@ -294,9 +294,9 @@
     "semantic_hash": ""
   },
   "packages/crypto/src/keypair.ts": {
-    "mtime": 1792343579.6513653,
-    "seen": 1792344423.5734441,
-    "ast_hash": "751d6d107c583b8a6d908e4049d86cd5",
+    "mtime": 1792350120.1047728,
+    "seen": 1792350901.9554439,
+    "ast_hash": "7678ee68b4dcdc80d1f71c32a8e4033b",
     "semantic_hash": ""
   },
   "packages/crypto/src/moderation.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "packages/types/src/index.ts": {
-    "mtime": 1792348775.1574166,
-    "seen": 1792349578.853548,
-    "ast_hash": "5a97f539f21a6b146be9dc9b93448923",
+    "mtime": 1792349779.2491739,
+    "seen": 1792350901.955698,
+    "ast_hash": "2ff123ecadbc476d623d5c5883cc79a6",
     "semantic_hash": ""
   },
   "packages/types/src/message.types.ts": {
@@ -654,9 +654,9 @@
     "semantic_hash": ""
   },
   "phases/08-phase8-privacy-reporting-and-data-lifecycle.md": {
-    "mtime": 1792342059.8932445,
-    "seen": 1792344423.573523,
-    "ast_hash": "3d90248c88382863fedc31b04fdbdcfb",
+    "mtime": 1792350893.7964563,
+    "seen": 1792350901.956852,
+    "ast_hash": "18859fe5116dacfcd1dc321805a904c9",
     "semantic_hash": ""
   },
   "phases/09-phase9-non-functional-acceptance-and-release.md": {
@@ -792,9 +792,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/attachments/attachments.service.ts": {
-    "mtime": 1792348174.3106291,
-    "seen": 1792348424.9834828,
-    "ast_hash": "bf5cbcd02f46aec449b794e3735ce408",
+    "mtime": 1792350054.4581647,
+    "seen": 1792350901.9542542,
+    "ast_hash": "e59a4eb620a0c18a7c09444298384e04",
     "semantic_hash": ""
   },
   "apps/server/src/features/attachments/attachments.validator.ts": {
@@ -855,6 +855,102 @@
     "mtime": 1792348755.8112397,
     "seen": 1792349578.8535502,
     "ast_hash": "766fe111fa2c688c2ffd6309742e0965",
+    "semantic_hash": ""
+  },
+  "apps/server/src/core/ratelimit/token-bucket.ts": {
+    "mtime": 1792350720.723837,
+    "seen": 1792350901.954087,
+    "ast_hash": "fe04b2be61ae85baf0995e4f24b0daed",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/audit-logs.repository.ts": {
+    "mtime": 1792349918.5769563,
+    "seen": 1792350901.955012,
+    "ast_hash": "ef164ef2ab7290c57b6d29256715a63b",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/blocks.controller.ts": {
+    "mtime": 1792349886.9973783,
+    "seen": 1792350901.955013,
+    "ast_hash": "53bd993c10fc0dee8674820d0b729be9",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/blocks.repository.ts": {
+    "mtime": 1792349794.3785627,
+    "seen": 1792350901.955014,
+    "ast_hash": "8caf06c333b0c041de539662704dc02e",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/blocks.routes.ts": {
+    "mtime": 1792349894.549396,
+    "seen": 1792350901.955015,
+    "ast_hash": "c819d58512bac1b3536c623180f44cf5",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/blocks.service.ts": {
+    "mtime": 1792349803.805175,
+    "seen": 1792350901.955016,
+    "ast_hash": "24a9c8819dab140fc3837dc9d25e4a7f",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/moderation-crypto.ts": {
+    "mtime": 1792350143.6382797,
+    "seen": 1792350901.9550169,
+    "ast_hash": "e29514d35a499109331bedd1533395bc",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/phase8.test.ts": {
+    "mtime": 1792350762.1095152,
+    "seen": 1792350901.955018,
+    "ast_hash": "ab252d0cf58a524131e48bbebf9b4905",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/privacy.controller.ts": {
+    "mtime": 1792350001.1832767,
+    "seen": 1792350901.955019,
+    "ast_hash": "3526c0d49445399118a7446f874a04f8",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/privacy.routes.ts": {
+    "mtime": 1792350008.0208247,
+    "seen": 1792350901.95502,
+    "ast_hash": "1de53260edd5db6e93a5bb43aaecae65",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/reports.controller.ts": {
+    "mtime": 1792349960.7746458,
+    "seen": 1792350901.9550211,
+    "ast_hash": "8d3d5d9833ddfbc40700c6a0e0e48172",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/reports.repository.ts": {
+    "mtime": 1792350156.868902,
+    "seen": 1792350901.955022,
+    "ast_hash": "3e7f1c0b81dd68effce1520eaf18d1ab",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/reports.routes.ts": {
+    "mtime": 1792349969.1508138,
+    "seen": 1792350901.955023,
+    "ast_hash": "3c42f01f982236faa22adaf28e6284fc",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/reports.service.ts": {
+    "mtime": 1792349951.009912,
+    "seen": 1792350901.955023,
+    "ast_hash": "b0e5932b28abef3b9d20acece2c94437",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/privacy/tombstone-scrubber.ts": {
+    "mtime": 1792350018.9823146,
+    "seen": 1792350901.9550238,
+    "ast_hash": "704b9ffa67b389571fed503cc910e87d",
+    "semantic_hash": ""
+  },
+  "packages/types/src/privacy.types.ts": {
+    "mtime": 1792349766.1078951,
+    "seen": 1792350901.95577,
+    "ast_hash": "f81db430ede04969fc9bfbbbf3fe8c5e",
     "semantic_hash": ""
   }
 }

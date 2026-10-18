@@ -194,6 +194,21 @@ export class MessagesRepository {
         },
       });
 
+      // P8-T07 & NFR-040: Persistent deletion registry for backup resurrection prevention
+      await tx.deletedEntityRegistry.upsert({
+        where: {
+          entityType_entityId: {
+            entityType: 'MESSAGE',
+            entityId: message.id,
+          },
+        },
+        create: {
+          entityType: 'MESSAGE',
+          entityId: message.id,
+        },
+        update: {},
+      });
+
       return updated;
     });
   }

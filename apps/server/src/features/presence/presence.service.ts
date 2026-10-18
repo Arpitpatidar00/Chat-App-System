@@ -2,7 +2,7 @@ import { presenceRepository, type PresenceRepository } from './presence.reposito
 import { conversationsRepository } from '../conversations/conversations.repository.js';
 import { wsGateway } from '../../core/websocket/gateway.js';
 import { ok, err, type Result } from '../../core/result/result.js';
-import { NotFoundError, type DomainError } from '../../core/errors/domain-error.js';
+import { NotFoundError, ForbiddenError, type DomainError } from '../../core/errors/domain-error.js';
 import type { UserPresenceDTO } from '@chat/types';
 
 export class PresenceService {
@@ -33,14 +33,12 @@ export class PresenceService {
       });
     }
 
-    // 1. Check if target has blocked the requester (NFR-030)
-    const isBlocked = await this.repo.isBlocked(targetUserId, requesterId);
+    // 1. Check if target has blocked the requester or vice-versa (NFR-030, FR-068, FR-069)
+    const isBlocked =
+      (await this.repo.isBlocked(targetUserId, requesterId)) ||
+      (await this.repo.isBlocked(requesterId, targetUserId));
     if (isBlocked) {
-      return ok({
-        userId: targetUserId,
-        isOnline: false,
-        lastSeenAt: null,
-      });
+      return err(new ForbiddenError('USER_BLOCKED: Access to presence of blocked user is forbidden'));
     }
 
     // 2. Check target's visibility setting

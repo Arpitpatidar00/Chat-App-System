@@ -5,7 +5,7 @@
 - **Owner Role:** Security & Privacy Agent / Identity & Access Agent
 - **Reviewer Role:** QA & Reliability Agent / Human Decision Owner
 - **Prerequisite:** Phase 7 (`07-phase7-history-encrypted-search-and-notifications.md`)
-- **Status:** READY
+- **Status:** COMPLETED & SIGNED OFF
 
 ---
 
@@ -113,14 +113,14 @@ Redis Token Bucket middleware enforces per-user rate limits:
 
 ## 5. Phase 8 AI Implementation Tasks
 
-- [ ] **P8-T01: User Blocking Middleware:** Implement bidirectional block enforcement across 1:1 chat, group invitations, presence, and typing.
-- [ ] **P8-T02: Scoped Cryptographic Report Ingestion:** Implement `/v1/reports` validating `Mod_PK` re-encrypted payloads with user-selected context messages.
-- [ ] **P8-T03: Scoped Moderator Review API:** Implement `/v1/admin/reports/{id}` restricted to assigned reviewers.
-- [ ] **P8-T04: Write-Ahead Admin Audit Logger:** Implement immutable logging of all administrative actions with IP and justification recording.
-- [ ] **P8-T05: Redis Token Bucket Rate Limiter:** Build rate limiting middleware enforcing 30 msgs / 10s rules (`FR-074`).
-- [ ] **P8-T06: Metadata Transparency Manifest Endpoint:** Implement `GET /v1/privacy/metadata-manifest` exposing retained metadata policies (`FR-085`, `NFR-041`).
-- [ ] **P8-T07: Post-Restore Tombstone Scrubbing Hook:** Build database restoration hygiene script purging resurrected rows present in `deleted_entities_registry` (`NFR-040`).
-- [ ] **P8-T08: Routine Admin Metadata-Only Audit:** Execute automated test asserting routine admin credentials cannot query decrypted message text.
+- [x] **P8-T01: User Blocking Middleware:** Implement bidirectional block enforcement across 1:1 chat, group invitations, presence, and typing.
+- [x] **P8-T02: Scoped Cryptographic Report Ingestion:** Implement `/v1/reports` validating `Mod_PK` re-encrypted payloads with user-selected context messages.
+- [x] **P8-T03: Scoped Moderator Review API:** Implement `/v1/admin/reports/{id}` restricted to assigned reviewers.
+- [x] **P8-T04: Write-Ahead Admin Audit Logger:** Implement immutable logging of all administrative actions with IP and justification recording.
+- [x] **P8-T05: Redis Token Bucket Rate Limiter:** Build rate limiting middleware enforcing 30 msgs / 10s rules (`FR-074`).
+- [x] **P8-T06: Metadata Transparency Manifest Endpoint:** Implement `GET /v1/privacy/metadata-manifest` exposing retained metadata policies (`FR-085`, `NFR-041`).
+- [x] **P8-T07: Post-Restore Tombstone Scrubbing Hook:** Build database restoration hygiene script purging resurrected rows present in `deleted_entities_registry` (`NFR-040`).
+- [x] **P8-T08: Routine Admin Metadata-Only Audit:** Execute automated test asserting routine admin credentials cannot query decrypted message text.
 
 ---
 
