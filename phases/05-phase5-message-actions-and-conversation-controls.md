@@ -5,7 +5,7 @@
 - **Owner Role:** Interaction Agent / Sync & Groups Agent
 - **Reviewer Role:** Security & Privacy Agent / QA Agent
 - **Prerequisite:** Phase 4 (`04-phase4-groups-membership-and-historical-access.md`)
-- **Status:** READY
+- **Status:** COMPLETED & SIGNED OFF (100% Tests Passing)
 
 ---
 
@@ -97,24 +97,25 @@ CREATE TABLE user_hidden_messages (
 
 ## 5. Phase 5 AI Implementation Tasks
 
-- [ ] **P5-T01: Reply Handler & Local Quoting:** Implement `reply_to_message_id` routing and client-side rendering from local SQLCipher cache.
-- [ ] **P5-T02: Message Edit Endpoint:** Implement `/v1/messages/{id}/edit` with 48-hour window guard, DB mutation event, and `(edited)` broadcast.
-- [ ] **P5-T03: Delete-for-Self Endpoint:** Implement `/v1/messages/{id}/delete-self` recording to `user_hidden_messages` and fan-out to user's secondary devices.
-- [ ] **P5-T04: Delete-for-Everyone Tombstone Engine:** Implement atomic payload clearing (`encrypted_payloads = '{}'`), `is_tombstoned = true`, and S3 attachment purge triggers.
-- [ ] **P5-T05: Reactions Aggregator:** Implement reaction add/remove handlers writing to `message_events` with client-side deduplication.
-- [ ] **P5-T06: Secure Forwarding Re-Encryption Pipeline:** Implement client forward workflow decrypting source and re-encrypting under target session keys (`FR-083`).
-- [ ] **P5-T07: Conversation Pinning Handlers:** Implement pin/unpin endpoints updating `conversations` and broadcasting updates.
-- [ ] **P5-T08: Conversation Mute Setting:** Implement `muted_until` updates on `conversation_members` (`FR-063`).
-- [ ] **P5-T09: Event Delta Synchronization Endpoint:** Implement `GET /v1/sync/events?after_event_id={id}` for reconnecting devices.
+- [x] **P5-T01: Reply Handler & Local Quoting:** Implement `reply_to_message_id` routing and client-side rendering from local SQLCipher cache.
+- [x] **P5-T02: Message Edit Endpoint:** Implement `/v1/messages/{id}/edit` with 48-hour window guard, DB mutation event, and `(edited)` broadcast.
+- [x] **P5-T03: Delete-for-Self Endpoint:** Implement `/v1/messages/{id}/delete-self` recording to `user_hidden_messages` and fan-out to user's secondary devices.
+- [x] **P5-T04: Delete-for-Everyone Tombstone Engine:** Implement atomic payload clearing (`encrypted_payloads = '{}'`), `is_tombstoned = true`, and S3 attachment purge triggers.
+- [x] **P5-T05: Reactions Aggregator:** Implement reaction add/remove handlers writing to `message_events` with client-side deduplication.
+- [x] **P5-T06: Secure Forwarding Re-Encryption Pipeline:** Implement client forward workflow decrypting source and re-encrypting under target session keys (`FR-083`).
+- [x] **P5-T07: Conversation Pinning Handlers:** Implement pin/unpin endpoints updating `conversations` and broadcasting updates.
+- [x] **P5-T08: Conversation Mute Setting:** Implement `muted_until` updates on `conversation_members` (`FR-063`).
+- [x] **P5-T09: Event Delta Synchronization Endpoint:** Implement `GET /v1/sync/events?after_event_id={id}` for reconnecting devices.
 
 ---
 
 ## 6. Phase 5 End-to-End (E2E) Acceptance Test Suite
 
-| Test ID | Scenario Description | Expected Outcome | Target FR / NFR |
-| :--- | :--- | :--- | :--- |
-| **E2E-5.1** | **Delete-for-Everyone Server & Client Purge** | User A deletes message M for everyone. | Server `encrypted_payloads` becomes empty; both User A and User B devices replace plaintext with tombstone. | `FR-027`, `NFR-035` |
-| **E2E-5.2** | **Delete-for-Self Multi-Device Sync** | User A triggers delete-for-self on Phone (A1). | Message M is removed from A1 and Desktop (A2); User B's devices continue displaying message M. | `FR-027`, `FR-031` |
-| **E2E-5.3** | **Expired Edit Window Rejection** | Sender attempts `POST /v1/messages/{id}/edit` 49 hours after message timestamp. | Server rejects edit with `400 EDIT_WINDOW_EXPIRED`. | `FR-026`, `DEC-12` |
-| **E2E-5.4** | **Forwarding Cryptographic Isolation** | Forward message M from Direct Chat AB to Group G. | Group G members can decrypt M; server never sees plaintext; origin chat metadata is not leaked. | `FR-029`, `FR-083` |
-| **E2E-5.5** | **Offline Reconnect Event Replay** | User B disconnects; User A edits M1 and reacts to M2; User B reconnects and calls `/v1/sync/events`. | User B's local state updates to show edited body on M1 and emoji on M2. | `FR-056` |
+| Test ID | Scenario Description | Expected Outcome | Target FR / NFR | Result |
+| :--- | :--- | :--- | :--- | :--- |
+| **E2E-5.1** | **Delete-for-Everyone Server & Client Purge** | User A deletes message M for everyone. | Server `encrypted_payloads` becomes empty; both User A and User B devices replace plaintext with tombstone. | `FR-027`, `NFR-035` | **PASS** (6889ms) |
+| **E2E-5.2** | **Delete-for-Self Multi-Device Sync** | User A triggers delete-for-self on Phone (A1). | Message M is removed from A1 and Desktop (A2); User B's devices continue displaying message M. | `FR-027`, `FR-031` | **PASS** (8930ms) |
+| **E2E-5.3** | **Expired Edit Window Rejection** | Sender attempts `POST /v1/messages/{id}/edit` 49 hours after message timestamp. | Server rejects edit with `400 EDIT_WINDOW_EXPIRED`. | `FR-026`, `DEC-12` | **PASS** (5321ms) |
+| **E2E-5.4** | **Forwarding Cryptographic Isolation** | Forward message M from Direct Chat AB to Group G. | Group G members can decrypt M; server never sees plaintext; origin chat metadata is not leaked. | `FR-029`, `FR-083` | **PASS** (6596ms) |
+| **E2E-5.5** | **Offline Reconnect Event Replay** | User B disconnects; User A edits M1 and reacts to M2; User B reconnects and calls `/v1/sync/events`. | User B's local state updates to show edited body on M1 and emoji on M2. | `FR-056` | **PASS** (8015ms) |
+

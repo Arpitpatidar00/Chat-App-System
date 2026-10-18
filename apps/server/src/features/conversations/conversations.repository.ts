@@ -286,6 +286,24 @@ export class ConversationsRepository {
       },
     });
   }
+
+  public async updateMuteStatus(
+    conversationId: string,
+    userId: string,
+    mutedUntil: Date | null
+  ): Promise<ConversationMember> {
+    return prisma.conversationMember.update({
+      where: {
+        conversationId_userId: {
+          conversationId,
+          userId,
+        },
+      },
+      data: {
+        mutedUntil,
+      },
+    });
+  }
 }
 
 export const conversationsRepository = new ConversationsRepository();

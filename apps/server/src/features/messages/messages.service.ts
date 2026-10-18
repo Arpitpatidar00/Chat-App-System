@@ -2,8 +2,25 @@ import { messagesRepository, type MessagesRepository } from './messages.reposito
 import { conversationsRepository } from '../conversations/conversations.repository.js';
 import { wsGateway } from '../../core/websocket/gateway.js';
 import { ok, err, type Result } from '../../core/result/result.js';
-import { NotFoundError, ForbiddenError, type DomainError } from '../../core/errors/domain-error.js';
-import type { SendMessageRequestDTO, MessageAckDTO, MessageDTO, EncryptedPayloads } from '@chat/types';
+import {
+  NotFoundError,
+  ForbiddenError,
+  ValidationError,
+  EditWindowExpiredError,
+  DeleteWindowExpiredError,
+  type DomainError,
+} from '../../core/errors/domain-error.js';
+import type {
+  SendMessageRequestDTO,
+  MessageAckDTO,
+  MessageDTO,
+  EncryptedPayloads,
+  EditMessageRequestDTO,
+  ReactionRequestDTO,
+  PinRequestDTO,
+  MessageEventDTO,
+  SyncEventsResponseDTO,
+} from '@chat/types';
 import { randomUUID } from 'node:crypto';
 
 export class MessagesService {
@@ -87,8 +104,8 @@ export class MessagesService {
   }
 
   /**
-   * P2-T07: Reconnect Retrieval & Offline Retention (FR-022, FR-024).
-   * Returns messages strictly ordered by seq_id ASC where seq_id > lastKnownSeqId.
+   * P2-T07 & P5-T03: Reconnect Retrieval & Offline Retention.
+   * Returns messages strictly ordered by seq_id ASC, excluding user's hidden messages.
    */
   public async syncMessages(
     conversationId: string,
@@ -106,13 +123,14 @@ export class MessagesService {
       return err(new ForbiddenError('You are not an active member of this conversation'));
     }
 
-    // P4-T03: Bounded Pre-Join History & Forward Secrecy Check (FR-013, FR-081, NFR-036)
+    // P4-T03 & P5-T03: Bounded Pre-Join History, Forward Secrecy & Delete-for-Self exclusion
     const messages = await this.repo.getMessagesBounded(
       conversationId,
       lastKnownSeqId,
       member.historyFloorSeqId,
       member.removedAtSeqId,
-      limit
+      limit,
+      userId
     );
 
     const dtos: MessageDTO[] = messages.map((m) => ({
@@ -131,6 +149,295 @@ export class MessagesService {
     return ok(dtos);
   }
 
+  /**
+   * P5-T04: Delete-for-Everyone (Tombstone) (FR-027, NFR-035, NFR-038).
+   * Sender (within 48h) or Group Admin/Owner (any time).
+   */
+  public async deleteForEveryone(
+    actorId: string,
+    actorDeviceId: string,
+    messageId: string
+  ): Promise<Result<{ success: boolean; messageId: string }, DomainError>> {
+    const message = await this.repo.findById(messageId);
+    if (!message) {
+      return err(new NotFoundError(`Message ${messageId} not found`));
+    }
+
+    const conv = await this.convRepo.findById(message.conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${message.conversationId} not found`));
+    }
+
+    const member = conv.members.find((m) => m.userId === actorId && m.removedAtSeqId === null);
+    if (!member) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    const isSender = message.senderId === actorId;
+    const isOwnerOrAdmin = member.role === 'OWNER' || member.role === 'ADMIN';
+
+    if (!isSender && !isOwnerOrAdmin) {
+      return err(
+        new ForbiddenError('Only the message author or a conversation admin can delete for everyone')
+      );
+    }
+
+    // Sender 48-hour window enforcement (DEC-04)
+    if (isSender && !isOwnerOrAdmin) {
+      const ageMs = Date.now() - new Date(message.createdAt).getTime();
+      const FORTY_EIGHT_HOURS_MS = 48 * 60 * 60 * 1000;
+      if (ageMs > FORTY_EIGHT_HOURS_MS) {
+        return err(
+          new DeleteWindowExpiredError('Delete-for-everyone window expired (48 hours)')
+        );
+      }
+    }
+
+    if (!message.isTombstoned) {
+      await this.repo.tombstoneMessage(message, actorId, actorDeviceId);
+
+      // Realtime broadcast to all active conversation members
+      for (const m of conv.members) {
+        if (m.removedAtSeqId === null) {
+          wsGateway.sendToUserAllDevices(m.userId, {
+            action: 'MSG_TOMBSTONED',
+            messageId: message.id,
+            conversationId: message.conversationId,
+          });
+        }
+      }
+    }
+
+    return ok({ success: true, messageId: message.id });
+  }
+
+  /**
+   * P5-T03: Delete-for-Self (FR-027, FR-031).
+   */
+  public async deleteForSelf(
+    actorId: string,
+    messageId: string
+  ): Promise<Result<{ success: boolean; messageId: string }, DomainError>> {
+    const message = await this.repo.findById(messageId);
+    if (!message) {
+      return err(new NotFoundError(`Message ${messageId} not found`));
+    }
+
+    const conv = await this.convRepo.findById(message.conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${message.conversationId} not found`));
+    }
+
+    const isMember = conv.members.some((m) => m.userId === actorId && m.removedAtSeqId === null);
+    if (!isMember) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    await this.repo.hideMessageForUser(actorId, messageId);
+
+    // Fan-out MSG_HIDDEN_SELF strictly to all enrolled devices of the deleting user
+    wsGateway.sendToUserAllDevices(actorId, {
+      action: 'MSG_HIDDEN_SELF',
+      messageId: message.id,
+      conversationId: message.conversationId,
+    });
+
+    return ok({ success: true, messageId: message.id });
+  }
+
+  /**
+   * P5-T02: Message Edit Endpoint (FR-026, DEC-12).
+   * Sender only, 48-hour window guard, must not be tombstoned.
+   */
+  public async editMessage(
+    actorId: string,
+    actorDeviceId: string,
+    messageId: string,
+    dto: EditMessageRequestDTO
+  ): Promise<Result<{ success: boolean; messageId: string; isEdited: boolean }, DomainError>> {
+    const message = await this.repo.findById(messageId);
+    if (!message) {
+      return err(new NotFoundError(`Message ${messageId} not found`));
+    }
+
+    if (message.senderId !== actorId) {
+      return err(new ForbiddenError('Only the original sender can edit this message'));
+    }
+
+    if (message.isTombstoned) {
+      return err(new ValidationError('Cannot edit a deleted message'));
+    }
+
+    const ageMs = Date.now() - new Date(message.createdAt).getTime();
+    const FORTY_EIGHT_HOURS_MS = 48 * 60 * 60 * 1000;
+    if (ageMs > FORTY_EIGHT_HOURS_MS) {
+      return err(new EditWindowExpiredError('Message edit window expired (48 hours)'));
+    }
+
+    const conv = await this.convRepo.findById(message.conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${message.conversationId} not found`));
+    }
+
+    await this.repo.editMessage(message, dto.encryptedPayloads, actorId, actorDeviceId);
+
+    // Broadcast MSG_EDITED to all active members
+    for (const m of conv.members) {
+      if (m.removedAtSeqId === null) {
+        wsGateway.sendToUserAllDevices(m.userId, {
+          action: 'MSG_EDITED',
+          messageId: message.id,
+          conversationId: message.conversationId,
+          encryptedPayloads: dto.encryptedPayloads,
+        });
+      }
+    }
+
+    return ok({ success: true, messageId: message.id, isEdited: true });
+  }
+
+  /**
+   * P5-T05: Reactions Aggregator (FR-028).
+   */
+  public async reactToMessage(
+    actorId: string,
+    actorDeviceId: string,
+    messageId: string,
+    dto: ReactionRequestDTO
+  ): Promise<Result<{ success: boolean; messageId: string; emoji: string; action: string }, DomainError>> {
+    const message = await this.repo.findById(messageId);
+    if (!message) {
+      return err(new NotFoundError(`Message ${messageId} not found`));
+    }
+
+    const conv = await this.convRepo.findById(message.conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${message.conversationId} not found`));
+    }
+
+    const isMember = conv.members.some((m) => m.userId === actorId && m.removedAtSeqId === null);
+    if (!isMember) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    await this.repo.recordReaction(
+      message.conversationId,
+      message.id,
+      actorId,
+      actorDeviceId,
+      dto.emoji,
+      dto.action
+    );
+
+    // Broadcast MSG_REACTION to active members
+    for (const m of conv.members) {
+      if (m.removedAtSeqId === null) {
+        wsGateway.sendToUserAllDevices(m.userId, {
+          action: 'MSG_REACTION',
+          messageId: message.id,
+          conversationId: message.conversationId,
+          userId: actorId,
+          emoji: dto.emoji,
+          reactionAction: dto.action,
+        });
+      }
+    }
+
+    return ok({
+      success: true,
+      messageId: message.id,
+      emoji: dto.emoji,
+      action: dto.action,
+    });
+  }
+
+  /**
+   * P5-T07: Conversation Pinning Handlers (FR-030).
+   */
+  public async pinMessage(
+    actorId: string,
+    actorDeviceId: string,
+    conversationId: string,
+    dto: PinRequestDTO
+  ): Promise<Result<{ success: boolean; conversationId: string; messageId: string; action: string }, DomainError>> {
+    const conv = await this.convRepo.findById(conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${conversationId} not found`));
+    }
+
+    const isMember = conv.members.some((m) => m.userId === actorId && m.removedAtSeqId === null);
+    if (!isMember) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    const message = await this.repo.findById(dto.messageId);
+    if (!message || message.conversationId !== conversationId) {
+      return err(new NotFoundError(`Message ${dto.messageId} does not exist in this conversation`));
+    }
+
+    await this.repo.recordPin(
+      conversationId,
+      dto.messageId,
+      actorId,
+      actorDeviceId,
+      dto.action
+    );
+
+    // Broadcast CONV_PIN_UPDATE
+    for (const m of conv.members) {
+      if (m.removedAtSeqId === null) {
+        wsGateway.sendToUserAllDevices(m.userId, {
+          action: 'CONV_PIN_UPDATE',
+          conversationId,
+          messageId: dto.messageId,
+          pinAction: dto.action,
+          actorId,
+        });
+      }
+    }
+
+    return ok({
+      success: true,
+      conversationId,
+      messageId: dto.messageId,
+      action: dto.action,
+    });
+  }
+
+  /**
+   * P5-T09: Event Delta Synchronization Endpoint (FR-056).
+   */
+  public async syncEvents(
+    conversationId: string,
+    userId: string,
+    afterEventId: bigint,
+    limit = 100
+  ): Promise<Result<SyncEventsResponseDTO, DomainError>> {
+    const conv = await this.convRepo.findById(conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${conversationId} not found`));
+    }
+
+    const isMember = conv.members.some((m) => m.userId === userId && m.removedAtSeqId === null);
+    if (!isMember) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    const events = await this.repo.getEventsAfter(conversationId, afterEventId, limit);
+
+    const dtos: MessageEventDTO[] = events.map((e) => ({
+      eventId: e.eventId.toString(),
+      conversationId: e.conversationId,
+      targetMessageId: e.targetMessageId,
+      actorId: e.actorId,
+      actorDeviceId: e.actorDeviceId,
+      eventType: e.eventType as any,
+      encryptedPatch: e.encryptedPatch ? Buffer.from(e.encryptedPatch).toString('utf-8') : null,
+      createdAt: e.createdAt.toISOString(),
+    }));
+
+    return ok({ events: dtos });
+  }
 }
 
 export const messagesService = new MessagesService();

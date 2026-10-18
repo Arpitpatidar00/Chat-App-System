@@ -306,6 +306,37 @@ export class ConversationsService {
       createdAt: pkg.createdAt.toISOString(),
     });
   }
+
+  /**
+   * P5-T08: Conversation Mute Setting (FR-063).
+   */
+  public async muteConversation(
+    userId: string,
+    conversationId: string,
+    mutedUntil: string | null
+  ): Promise<Result<{ conversationId: string; mutedUntil: string | null }, DomainError>> {
+    const conv = await this.repo.findById(conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${conversationId} not found`));
+    }
+
+    const member = conv.members.find((m) => m.userId === userId && m.removedAtSeqId === null);
+    if (!member) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    const mutedDate = mutedUntil ? new Date(mutedUntil) : null;
+    await this.repo.updateMuteStatus(conversationId, userId, mutedDate);
+
+    // Fan-out CONV_MUTE_UPDATE to user's enrolled devices
+    wsGateway.sendToUserAllDevices(userId, {
+      action: 'CONV_MUTE_UPDATE',
+      conversationId,
+      mutedUntil,
+    });
+
+    return ok({ conversationId, mutedUntil });
+  }
 }
 
 export const conversationsService = new ConversationsService();

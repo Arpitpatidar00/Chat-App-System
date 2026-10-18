@@ -14,5 +14,7 @@ export const conversationsRoutes: FastifyPluginAsync = async (fastify) => {
   fastify.delete('/:id/members/:userId', (req, rep) => conversationsController.removeMember(req as any, rep));
   fastify.post('/:id/history-package', (req, rep) => conversationsController.uploadHistoryPackage(req as any, rep));
   fastify.get('/:id/history-package', (req, rep) => conversationsController.getHistoryPackage(req as any, rep));
+  fastify.patch('/:id/mute', (req, rep) => conversationsController.mute(req as any, rep));
+  fastify.post('/:id/pin', (req, rep) => conversationsController.pin(req as any, rep));
 };
 

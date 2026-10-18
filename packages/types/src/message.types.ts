@@ -35,3 +35,44 @@ export interface MessageAckDTO {
   createdAt: string;
   status: 'SENT';
 }
+
+export interface EditMessageRequestDTO {
+  encryptedPayloads: EncryptedPayloads;
+}
+
+export interface ReactionRequestDTO {
+  emoji: string;
+  action: 'ADD' | 'REMOVE';
+}
+
+export interface PinRequestDTO {
+  messageId: string;
+  action: 'PIN' | 'UNPIN';
+}
+
+export interface MuteConversationRequestDTO {
+  mutedUntil: string | null;
+}
+
+export type EventTypeDTO =
+  | 'EDIT'
+  | 'DELETE_EVERYONE'
+  | 'REACTION_ADD'
+  | 'REACTION_REMOVE'
+  | 'PIN'
+  | 'UNPIN';
+
+export interface MessageEventDTO {
+  eventId: string;
+  conversationId: string;
+  targetMessageId: string;
+  actorId: string;
+  actorDeviceId: string;
+  eventType: EventTypeDTO;
+  encryptedPatch?: string | null;
+  createdAt: string;
+}
+
+export interface SyncEventsResponseDTO {
+  events: MessageEventDTO[];
+}

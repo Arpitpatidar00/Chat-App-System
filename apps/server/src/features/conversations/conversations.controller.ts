@@ -180,6 +180,57 @@ export class ConversationsController {
 
     return reply.status(200).send({ data: result.data });
   }
+
+  public async mute(
+    request: FastifyRequest<{
+      Params: { id: string };
+      Body: { mutedUntil: string | null };
+    }>,
+    reply: FastifyReply
+  ) {
+    const userId = request.user?.userId;
+    if (!userId) {
+      return reply.status(401).send({ error: { code: 'UNAUTHORIZED', message: 'Missing user context' } });
+    }
+
+    const { mutedUntil } = request.body || {};
+    const result = await this.service.muteConversation(userId, request.params.id, mutedUntil ?? null);
+    if (!result.success) {
+      return reply.status(result.error.statusCode).send({
+        error: { code: result.error.errorCode, message: result.error.message },
+      });
+    }
+
+    return reply.status(200).send({ data: result.data });
+  }
+
+  public async pin(
+    request: FastifyRequest<{
+      Params: { id: string };
+      Body: { messageId: string; action: 'PIN' | 'UNPIN' };
+    }>,
+    reply: FastifyReply
+  ) {
+    const user = request.user;
+    if (!user) {
+      return reply.status(401).send({ error: { code: 'UNAUTHORIZED', message: 'Missing user context' } });
+    }
+
+    const { messagesService } = await import('../messages/messages.service.js');
+    const result = await messagesService.pinMessage(
+      user.userId,
+      user.deviceId,
+      request.params.id,
+      request.body
+    );
+    if (!result.success) {
+      return reply.status(result.error.statusCode).send({
+        error: { code: result.error.errorCode, message: result.error.message },
+      });
+    }
+
+    return reply.status(200).send({ data: result.data });
+  }
 }
 
 export const conversationsController = new ConversationsController();

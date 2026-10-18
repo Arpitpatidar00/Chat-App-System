@@ -13,6 +13,7 @@ import { verifyJwt } from '@chat/crypto';
 import { authRoutes } from './features/auth/auth.routes.js';
 import { conversationsRoutes } from './features/conversations/conversations.routes.js';
 import { messagesRoutes } from './features/messages/messages.routes.js';
+import { syncRoutes } from './features/messages/sync.routes.js';
 import { receiptsRoutes } from './features/receipts/receipts.routes.js';
 import { presenceRoutes } from './features/presence/presence.routes.js';
 import { devicesRoutes } from './features/devices/devices.routes.js';
@@ -180,6 +181,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(devicesRoutes, { prefix: '/api/v1' });
   await app.register(conversationsRoutes, { prefix: '/api/v1/conversations' });
   await app.register(messagesRoutes, { prefix: '/api/v1/messages' });
+  await app.register(syncRoutes, { prefix: '/api/v1/sync' });
   await app.register(receiptsRoutes, { prefix: '/api/v1/receipts' });
   await app.register(presenceRoutes, { prefix: '/api/v1/presence' });
 

@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792346152.8268542,
-    "seen": 1792346441.241848,
-    "ast_hash": "36dc0e23340234edb60edbd618fee921",
+    "mtime": 1792347567.8133817,
+    "seen": 1792347861.385043,
+    "ast_hash": "c56d9763681f8465ecc41e05eb204195",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/core/errors/domain-error.ts": {
-    "mtime": 1792346798.2474272,
-    "seen": 1792347137.0164878,
-    "ast_hash": "3c38a39b6de5c2be734fbdb63b1d3414",
+    "mtime": 1792347349.9744723,
+    "seen": 1792347861.385099,
+    "ast_hash": "7fbc12b663a69da07885bc8c7da56da0",
     "semantic_hash": ""
   },
   "apps/server/src/core/redis/redis-client.ts": {
@@ -144,51 +144,51 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.controller.ts": {
-    "mtime": 1792346688.4899905,
-    "seen": 1792347137.0167391,
-    "ast_hash": "f8baf0cb9c61735ecf3b65215d4b0a9f",
+    "mtime": 1792347478.2355056,
+    "seen": 1792347861.385349,
+    "ast_hash": "33c4efe07a436a13ab354ac56791fb92",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.repository.ts": {
-    "mtime": 1792346628.2405243,
-    "seen": 1792347137.01674,
-    "ast_hash": "0eda5a414876e144fb756b264dfac664",
+    "mtime": 1792347397.7935297,
+    "seen": 1792347861.38535,
+    "ast_hash": "38bd5b772d86704b0ffa90f68a8a3142",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.routes.ts": {
-    "mtime": 1792346700.884092,
-    "seen": 1792347137.016741,
-    "ast_hash": "e27bbf09525e17850463c8fdb698a489",
+    "mtime": 1792347488.5027266,
+    "seen": 1792347861.385351,
+    "ast_hash": "0b85f30641c2a0587833e023bd178ef6",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.service.ts": {
-    "mtime": 1792346823.6696894,
-    "seen": 1792347137.016742,
-    "ast_hash": "b3aeb755a49abbd5a7364ea8bd1cbf46",
+    "mtime": 1792347457.4479496,
+    "seen": 1792347861.385352,
+    "ast_hash": "a47df06b9b9c93a38c9d43db53b654af",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.controller.ts": {
-    "mtime": 1792346766.9667091,
-    "seen": 1792347137.0168571,
-    "ast_hash": "345a8be6730edcc1fae38f4d9592bb49",
+    "mtime": 1792347506.4263477,
+    "seen": 1792347861.3854988,
+    "ast_hash": "a2dbf0dc06e811748f89a522911c7ac8",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.repository.ts": {
-    "mtime": 1792346721.237005,
-    "seen": 1792347137.016858,
-    "ast_hash": "8a8a571105e4a7308a435046ae251174",
+    "mtime": 1792347371.3082972,
+    "seen": 1792347861.385501,
+    "ast_hash": "41321a5f7ce8e364b7f69739fe4c6240",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.routes.ts": {
-    "mtime": 1792346779.4884036,
-    "seen": 1792347137.0168588,
-    "ast_hash": "bb238530c9cfba3feaea2fb58fa9c0e0",
+    "mtime": 1792347533.9656796,
+    "seen": 1792347861.3855019,
+    "ast_hash": "81c25bfcfa70eb1d5bd77871e4879ac0",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.service.ts": {
-    "mtime": 1792346730.6742203,
-    "seen": 1792347137.0168588,
-    "ast_hash": "10e172d5a7052c31b3d2ba79d5986362",
+    "mtime": 1792347585.8335674,
+    "seen": 1792347861.3855019,
+    "ast_hash": "fb76b21a2626b2e41320aa868f4221d7",
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.controller.ts": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "packages/types/src/message.types.ts": {
-    "mtime": 1792343289.4107995,
-    "seen": 1792344423.5734558,
-    "ast_hash": "cf05bc7e3d6e3ef23cb136ab763b9c37",
+    "mtime": 1792347329.622911,
+    "seen": 1792347861.386425,
+    "ast_hash": "8f03651992d12db29f8149578aac0ff9",
     "semantic_hash": ""
   },
   "packages/types/src/presence.types.ts": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "packages/types/src/websocket-events.types.ts": {
-    "mtime": 1792343323.8813992,
-    "seen": 1792344423.573459,
-    "ast_hash": "d4d8ad60575a57c5485c82d1794aa7e7",
+    "mtime": 1792347342.9354992,
+    "seen": 1792347861.3864782,
+    "ast_hash": "6184524b10db003b0b21addc56ca9a07",
     "semantic_hash": ""
   },
   "packages/types/tsconfig.json": {
@@ -636,9 +636,9 @@
     "semantic_hash": ""
   },
   "phases/05-phase5-message-actions-and-conversation-controls.md": {
-    "mtime": 1792341992.5722399,
-    "seen": 1792344423.573521,
-    "ast_hash": "438a62558c854c3b2cc4d950c6ad8e86",
+    "mtime": 1792347852.9097002,
+    "seen": 1792347861.387486,
+    "ast_hash": "6c6b9cf0d55f22b1b3a178d186da92e0",
     "semantic_hash": ""
   },
   "phases/06-phase6-attachments-and-links.md": {
@@ -759,6 +759,18 @@
     "mtime": 1792346864.2421002,
     "seen": 1792347137.016743,
     "ast_hash": "37598d12f223d2e3c5c363805b759ce9",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/messages/phase5.test.ts": {
+    "mtime": 1792347717.812421,
+    "seen": 1792347861.385531,
+    "ast_hash": "208115c6ed8af0a68195b2c6fde4760f",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/messages/sync.routes.ts": {
+    "mtime": 1792347545.7205756,
+    "seen": 1792347861.385532,
+    "ast_hash": "38f628e1c765661abc351ae2af06055f",
     "semantic_hash": ""
   }
 }

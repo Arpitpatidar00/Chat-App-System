@@ -93,14 +93,15 @@ export class MessagesRepository {
   }
 
   /**
-   * P4-T03: Bounded Pre-Join History & Forward Secrecy Retrieval (FR-013, FR-081, NFR-036).
+   * P4-T03 & P5-T03: Bounded Pre-Join History & Forward Secrecy Retrieval, excluding delete-for-self messages.
    */
   public async getMessagesBounded(
     conversationId: string,
     afterSeqId: bigint,
     floorSeqId: bigint,
     ceilingSeqId: bigint | null,
-    limit = 50
+    limit = 50,
+    userId?: string
   ): Promise<Message[]> {
     const effectiveFloor = afterSeqId >= floorSeqId ? afterSeqId : floorSeqId - 1n;
     return prisma.message.findMany({
@@ -110,10 +111,165 @@ export class MessagesRepository {
           gt: effectiveFloor,
           ...(ceilingSeqId !== null ? { lte: ceilingSeqId } : {}),
         },
+        ...(userId
+          ? {
+              hiddenByUsers: {
+                none: {
+                  userId,
+                },
+              },
+            }
+          : {}),
       },
       take: limit,
       orderBy: {
         seqId: 'asc',
+      },
+    });
+  }
+
+  /**
+   * P5-T04: Atomically clear payloads, mark isTombstoned=true, and append DELETE_EVERYONE event.
+   */
+  public async tombstoneMessage(
+    message: Message,
+    actorId: string,
+    actorDeviceId: string
+  ): Promise<Message> {
+    return uow.runInTransaction(async (tx: TransactionClient) => {
+      const updated = await tx.message.update({
+        where: { id: message.id },
+        data: {
+          encryptedPayloads: {},
+          isTombstoned: true,
+        },
+      });
+
+      await tx.messageEvent.create({
+        data: {
+          conversationId: message.conversationId,
+          targetMessageId: message.id,
+          actorId,
+          actorDeviceId,
+          eventType: 'DELETE_EVERYONE',
+        },
+      });
+
+      return updated;
+    });
+  }
+
+  /**
+   * P5-T03: Record Delete-for-Self in user_hidden_messages.
+   */
+  public async hideMessageForUser(userId: string, messageId: string): Promise<void> {
+    await prisma.userHiddenMessage.upsert({
+      where: {
+        userId_messageId: {
+          userId,
+          messageId,
+        },
+      },
+      create: {
+        userId,
+        messageId,
+      },
+      update: {},
+    });
+  }
+
+  /**
+   * P5-T02: Message Edit - update payloads and record EDIT event.
+   */
+  public async editMessage(
+    message: Message,
+    encryptedPayloads: EncryptedPayloads,
+    actorId: string,
+    actorDeviceId: string
+  ): Promise<Message> {
+    return uow.runInTransaction(async (tx: TransactionClient) => {
+      const updated = await tx.message.update({
+        where: { id: message.id },
+        data: {
+          encryptedPayloads: encryptedPayloads as any,
+        },
+      });
+
+      await tx.messageEvent.create({
+        data: {
+          conversationId: message.conversationId,
+          targetMessageId: message.id,
+          actorId,
+          actorDeviceId,
+          eventType: 'EDIT',
+          encryptedPatch: Buffer.from(JSON.stringify(encryptedPayloads)),
+        },
+      });
+
+      return updated;
+    });
+  }
+
+  /**
+   * P5-T05: Reactions - record REACTION_ADD or REACTION_REMOVE event.
+   */
+  public async recordReaction(
+    conversationId: string,
+    targetMessageId: string,
+    actorId: string,
+    actorDeviceId: string,
+    emoji: string,
+    action: 'ADD' | 'REMOVE'
+  ) {
+    return prisma.messageEvent.create({
+      data: {
+        conversationId,
+        targetMessageId,
+        actorId,
+        actorDeviceId,
+        eventType: action === 'ADD' ? 'REACTION_ADD' : 'REACTION_REMOVE',
+        encryptedPatch: Buffer.from(emoji, 'utf-8'),
+      },
+    });
+  }
+
+  /**
+   * P5-T07: Conversation Pinning - record PIN or UNPIN event.
+   */
+  public async recordPin(
+    conversationId: string,
+    targetMessageId: string,
+    actorId: string,
+    actorDeviceId: string,
+    action: 'PIN' | 'UNPIN'
+  ) {
+    return prisma.messageEvent.create({
+      data: {
+        conversationId,
+        targetMessageId,
+        actorId,
+        actorDeviceId,
+        eventType: action === 'PIN' ? 'PIN' : 'UNPIN',
+      },
+    });
+  }
+
+  /**
+   * P5-T09: Event Delta Synchronization - fetch message_events after a given event_id.
+   */
+  public async getEventsAfter(
+    conversationId: string,
+    afterEventId: bigint,
+    limit = 100
+  ) {
+    return prisma.messageEvent.findMany({
+      where: {
+        conversationId,
+        eventId: { gt: afterEventId },
+      },
+      take: limit,
+      orderBy: {
+        eventId: 'asc',
       },
     });
   }
