@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792347567.8133817,
-    "seen": 1792347861.385043,
-    "ast_hash": "c56d9763681f8465ecc41e05eb204195",
+    "mtime": 1792348217.135548,
+    "seen": 1792348424.9833112,
+    "ast_hash": "8c365fcc13b928c010a4f0da6060df82",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/core/errors/domain-error.ts": {
-    "mtime": 1792347349.9744723,
-    "seen": 1792347861.385099,
-    "ast_hash": "7fbc12b663a69da07885bc8c7da56da0",
+    "mtime": 1792348042.9297965,
+    "seen": 1792348424.983367,
+    "ast_hash": "f3a097a969a589473f50d806426e9023",
     "semantic_hash": ""
   },
   "apps/server/src/core/redis/redis-client.ts": {
@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "packages/crypto/src/index.ts": {
-    "mtime": 1792344740.7157784,
-    "seen": 1792345112.665293,
-    "ast_hash": "15c742fef379080a55e8a0bca74dec9a",
+    "mtime": 1792348087.4612615,
+    "seen": 1792348424.984525,
+    "ast_hash": "9db9cb171428bfdfbe559f377168bd0f",
     "semantic_hash": ""
   },
   "packages/crypto/src/kdf.ts": {
@@ -348,9 +348,9 @@
     "semantic_hash": ""
   },
   "packages/types/src/attachment.types.ts": {
-    "mtime": 1792343316.460118,
-    "seen": 1792344423.573453,
-    "ast_hash": "c5d47452490b9dfde9257a7bf44a5a62",
+    "mtime": 1792348098.0335622,
+    "seen": 1792348424.9847791,
+    "ast_hash": "fe10318e36656e1235b74eadca856bca",
     "semantic_hash": ""
   },
   "packages/types/src/auth.types.ts": {
@@ -642,9 +642,9 @@
     "semantic_hash": ""
   },
   "phases/06-phase6-attachments-and-links.md": {
-    "mtime": 1792342015.2699535,
-    "seen": 1792344423.5735219,
-    "ast_hash": "10d452969f844ffeb48a43bd75f8836a",
+    "mtime": 1792348417.4179883,
+    "seen": 1792348424.985902,
+    "ast_hash": "645e4c8758a29421343408f3686d21b5",
     "semantic_hash": ""
   },
   "phases/07-phase7-history-encrypted-search-and-notifications.md": {
@@ -771,6 +771,54 @@
     "mtime": 1792347545.7205756,
     "seen": 1792347861.385532,
     "ast_hash": "38f628e1c765661abc351ae2af06055f",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/attachments.controller.ts": {
+    "mtime": 1792348186.2466824,
+    "seen": 1792348424.98348,
+    "ast_hash": "4eef11f234804d127aaa38a25fb4543c",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/attachments.repository.ts": {
+    "mtime": 1792348154.9469411,
+    "seen": 1792348424.9834812,
+    "ast_hash": "46fa9ea7a636cc698a3201e0c87e6271",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/attachments.routes.ts": {
+    "mtime": 1792348194.5840507,
+    "seen": 1792348424.9834821,
+    "ast_hash": "c23e3cf663a8b74124dd79b74505cfa7",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/attachments.service.ts": {
+    "mtime": 1792348174.3106291,
+    "seen": 1792348424.9834828,
+    "ast_hash": "bf5cbcd02f46aec449b794e3735ce408",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/attachments.validator.ts": {
+    "mtime": 1792348144.5813074,
+    "seen": 1792348424.9834838,
+    "ast_hash": "ebeb5bf0dcaf52de652462830afb3377",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/phase6.test.ts": {
+    "mtime": 1792348288.4817638,
+    "seen": 1792348424.983485,
+    "ast_hash": "3b209d8bf2733c2f063bfa5c58ed8b89",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/attachments/storage-provider.ts": {
+    "mtime": 1792348130.2070158,
+    "seen": 1792348424.983486,
+    "ast_hash": "8c2f658260ccdc1b5858a121bc5755f9",
+    "semantic_hash": ""
+  },
+  "packages/crypto/src/attachment-crypto.ts": {
+    "mtime": 1792348081.1300032,
+    "seen": 1792348424.9845,
+    "ast_hash": "bfe249712335fd7447a185ed57086565",
     "semantic_hash": ""
   }
 }

@@ -37,7 +37,7 @@
   "35": "tasks",
   "36": "Spec-Driven Development",
   "37": "Source-Driven Development",
-  "38": "dependencies",
+  "38": "storageProvider",
   "39": "04 — Phase 4: Groups, Membership, and Historical Access",
   "40": "Refinement & Evaluation Criteria",
   "41": "server/package.json",
@@ -61,7 +61,7 @@
   "59": "server/tsconfig.json",
   "60": "crypto/tsconfig.json",
   "61": "database/tsconfig.json",
-  "62": "attachment.types.ts",
+  "62": "B. Shared Contracts (`@chat/types`)",
   "63": "types/tsconfig.json",
   "64": "00 — Phase 0: Requirements, Product Decisions & Engineering Baseline",
   "65": "receipts.service.ts",
@@ -72,10 +72,10 @@
   "70": "messagesController",
   "71": "conversations.repository.ts",
   "72": "devicesRepository",
-  "73": "scripts",
+  "73": "presenceService",
   "74": "devicesController",
-  "75": "devices.repository.ts",
-  "76": "receiptsController",
-  "77": "devDependencies",
-  "78": "messages.repository.ts"
+  "75": "env.ts",
+  "76": "conversation.types.ts",
+  "77": "attachmentsController",
+  "78": "authController"
 }

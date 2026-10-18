@@ -49,6 +49,21 @@ export class DeleteWindowExpiredError extends DomainError {
   public readonly errorCode = 'DELETE_WINDOW_EXPIRED';
 }
 
+export class AttachmentTooLargeError extends DomainError {
+  public readonly statusCode = 400;
+  public readonly errorCode = 'ATTACHMENT_TOO_LARGE';
+}
+
+export class UnsupportedFileTypeError extends DomainError {
+  public readonly statusCode = 400;
+  public readonly errorCode = 'UNSUPPORTED_FILE_TYPE';
+}
+
+export class AttachmentDeletedError extends DomainError {
+  public readonly statusCode = 410;
+  public readonly errorCode = 'ATTACHMENT_DELETED';
+}
+
 export class InternalServerError extends DomainError {
   public readonly statusCode = 500;
   public readonly errorCode = 'INTERNAL_SERVER_ERROR';

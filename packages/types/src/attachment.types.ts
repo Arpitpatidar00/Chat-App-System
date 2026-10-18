@@ -19,16 +19,31 @@ export interface InitAttachmentUploadDTO {
   ciphertextSizeBytes: number;
   declaredMime: string;
   sha256Ciphertext: string;
+  filename?: string;
 }
 
 export interface InitAttachmentResponseDTO {
   attachmentId: string;
   uploadUrl: string; // S3 pre-signed PUT URL
+  objectKey: string;
   expiresAt: string;
 }
 
 export interface AttachmentDownloadResponseDTO {
   attachmentId: string;
   downloadUrl: string; // S3 pre-signed GET URL
+  sha256Ciphertext: string;
   expiresAt: string;
+}
+
+export interface AttachmentDTO {
+  id: string;
+  conversationId: string;
+  uploaderId: string;
+  objectKey: string;
+  ciphertextSizeBytes: number;
+  declaredMime: string;
+  sha256Ciphertext: string;
+  status: AttachmentStatus;
+  createdAt: string;
 }

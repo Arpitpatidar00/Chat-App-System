@@ -17,6 +17,7 @@ import { syncRoutes } from './features/messages/sync.routes.js';
 import { receiptsRoutes } from './features/receipts/receipts.routes.js';
 import { presenceRoutes } from './features/presence/presence.routes.js';
 import { devicesRoutes } from './features/devices/devices.routes.js';
+import { attachmentsRoutes } from './features/attachments/attachments.routes.js';
 import { messagesService } from './features/messages/messages.service.js';
 import { receiptsService } from './features/receipts/receipts.service.js';
 import { presenceService } from './features/presence/presence.service.js';
@@ -184,6 +185,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(syncRoutes, { prefix: '/api/v1/sync' });
   await app.register(receiptsRoutes, { prefix: '/api/v1/receipts' });
   await app.register(presenceRoutes, { prefix: '/api/v1/presence' });
+  await app.register(attachmentsRoutes, { prefix: '/api/v1/attachments' });
 
   return app;
 }

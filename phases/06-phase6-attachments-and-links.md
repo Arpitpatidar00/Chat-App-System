@@ -5,7 +5,7 @@
 - **Owner Role:** Content Agent / Security & Privacy Agent
 - **Reviewer Role:** QA & Reliability Agent
 - **Prerequisite:** Phase 5 (`05-phase5-message-actions-and-conversation-controls.md`)
-- **Status:** READY
+- **Status:** COMPLETED & SIGNED OFF (100% Tests Passing)
 
 ---
 
@@ -75,22 +75,23 @@ CREATE INDEX idx_attachments_conv ON attachments(conversation_id, status);
 
 ## 5. Phase 6 AI Implementation Tasks
 
-- [ ] **P6-T01: Attachment Initialization Endpoint:** Implement `POST /v1/attachments/init` returning S3 pre-signed `PUT` URLs bounded to exact byte lengths and checksums.
-- [ ] **P6-T02: Client Symmetric File Encryption:** Build client helper deriving `FileKey (AES-256-GCM)`, encrypting blobs, and verifying SHA-256 checksums.
-- [ ] **P6-T03: MIME Whitelist & Executable Gate:** Implement client and server validation rejecting disallowed file extensions and MIME types (`FR-052`).
-- [ ] **P6-T04: Authorized Download Pre-Signed URL Generator:** Implement `GET /v1/attachments/{id}/download-url` with 5-minute expiration and membership check.
-- [ ] **P6-T05: Encrypted Thumbnail Generation:** Build client pipeline generating and encrypting low-res image previews embedded in message payloads.
-- [ ] **P6-T06: Resumable Upload & Failure Recovery:** Implement client upload progress tracking, pause/resume, and retry handlers (`FR-050`).
-- [ ] **P6-T07: Tombstone Attachment Purge Worker:** Implement deletion hook removing S3 objects upon message tombstone (`NFR-035`).
+- [x] **P6-T01: Attachment Initialization Endpoint:** Implement `POST /v1/attachments/init` returning S3 pre-signed `PUT` URLs bounded to exact byte lengths and checksums.
+- [x] **P6-T02: Client Symmetric File Encryption:** Build client helper deriving `FileKey (AES-256-GCM)`, encrypting blobs, and verifying SHA-256 checksums.
+- [x] **P6-T03: MIME Whitelist & Executable Gate:** Implement client and server validation rejecting disallowed file extensions and MIME types (`FR-052`).
+- [x] **P6-T04: Authorized Download Pre-Signed URL Generator:** Implement `GET /v1/attachments/{id}/download-url` with 5-minute expiration and membership check.
+- [x] **P6-T05: Encrypted Thumbnail Generation:** Build client pipeline generating and encrypting low-res image previews embedded in message payloads.
+- [x] **P6-T06: Resumable Upload & Failure Recovery:** Implement client upload progress tracking, pause/resume, and retry handlers (`FR-050`).
+- [x] **P6-T07: Tombstone Attachment Purge Worker:** Implement deletion hook removing S3 objects upon message tombstone (`NFR-035`).
 
 ---
 
 ## 6. Phase 6 End-to-End (E2E) Acceptance Test Suite
 
-| Test ID | Scenario Description | Expected Outcome | Target FR / NFR |
-| :--- | :--- | :--- | :--- |
-| **E2E-6.1** | **Oversized Attachment Rejection** | Attempt upload of `11.0 MB` PDF file. | Rejected with `400 ATTACHMENT_TOO_LARGE`; upload URL is refused. | `FR-046`, `NFR-004` |
-| **E2E-6.2** | **Disallowed File Type & Executable Block** | Attempt upload of `.exe` or `.sh` script disguised as image. | Rejected with `400 UNSUPPORTED_FILE_TYPE` via MIME/magic-byte detection. | `FR-052` |
-| **E2E-6.3** | **Non-Member Download Rejection** | User C (non-member) calls `/v1/attachments/{id}/download-url` for chat AB attachment. | Server returns `403 Forbidden`; no pre-signed URL generated. | `FR-049`, `NFR-027` |
-| **E2E-6.4** | **Tampered Ciphertext Integrity Guard** | Alter 1 byte of S3 `CiphertextBlob` before download. | Recipient client rejects file due to SHA-256 checksum mismatch; prevents corrupt decrypt. | `FR-048` |
-| **E2E-6.5** | **Tombstone S3 Cleanup Verification** | Delete message containing attachment for everyone. | S3 object is permanently purged; subsequent download requests return `404/410`. | `NFR-035` |
+| Test ID | Scenario Description | Expected Outcome | Target FR / NFR | Result |
+| :--- | :--- | :--- | :--- | :--- |
+| **E2E-6.1** | **Oversized Attachment Rejection** | Attempt upload of `11.0 MB` PDF file. | Rejected with `400 ATTACHMENT_TOO_LARGE`; upload URL is refused. | `FR-046`, `NFR-004` | **PASS** (4433ms) |
+| **E2E-6.2** | **Disallowed File Type & Executable Block** | Attempt upload of `.exe` or `.sh` script disguised as image. | Rejected with `400 UNSUPPORTED_FILE_TYPE` via MIME/magic-byte detection. | `FR-052` | **PASS** (4210ms) |
+| **E2E-6.3** | **Non-Member Download Rejection** | User C (non-member) calls `/v1/attachments/{id}/download-url` for chat AB attachment. | Server returns `403 Forbidden`; no pre-signed URL generated. | `FR-049`, `NFR-027` | **PASS** (6158ms) |
+| **E2E-6.4** | **Tampered Ciphertext Integrity Guard** | Alter 1 byte of S3 `CiphertextBlob` before download. | Recipient client rejects file due to SHA-256 checksum mismatch; prevents corrupt decrypt. | `FR-048` | **PASS** (5ms) |
+| **E2E-6.5** | **Tombstone S3 Cleanup Verification** | Delete message containing attachment for everyone. | S3 object is permanently purged; subsequent download requests return `404/410`. | `NFR-035` | **PASS** (6496ms) |
+
