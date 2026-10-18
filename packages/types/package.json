@@ -1,0 +1,14 @@
+{
+  "name": "@chat/types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript Contracts, DTOs & Events",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
