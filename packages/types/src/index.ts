@@ -5,3 +5,4 @@ export * from './receipt.types.js';
 export * from './presence.types.js';
 export * from './attachment.types.js';
 export * from './websocket-events.types.js';
+export * from './notification.types.js';

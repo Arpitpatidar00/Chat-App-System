@@ -228,6 +228,9 @@ importers:
         specifier: ^3.24.2
         version: 3.25.76
     devDependencies:
+      '@chat/mobile':
+        specifier: workspace:*
+        version: link:../mobile
       '@types/node':
         specifier: ^22.13.10
         version: 22.20.5

@@ -5,7 +5,7 @@
 - **Owner Role:** Mobile Agent / Content Agent / Security & Privacy Agent
 - **Reviewer Role:** QA & Reliability Agent
 - **Prerequisite:** Phase 6 (`06-phase6-attachments-and-links.md`)
-- **Status:** READY
+- **Status:** COMPLETED & SIGNED OFF
 
 ---
 
@@ -93,14 +93,14 @@ END;
 
 ## 5. Phase 7 AI Implementation Tasks
 
-- [ ] **P7-T01: Paged History Endpoint:** Implement `GET /v1/conversations/{id}/messages` with cursor pagination enforcing member history boundaries (`p95 ≤ 1s`).
-- [ ] **P7-T02: Client SQLCipher FTS5 Integration:** Build local SQLite FTS5 table indexing decrypted messages and attachment filenames upon decrypt.
-- [ ] **P7-T03: On-Device Search Repository:** Implement local search repository with snippet highlighting and result navigation (`p95 ≤ 2s`).
-- [ ] **P7-T04: Missing Key & Re-Index Graceful Handling:** Gracefully handle encrypted messages for which local keys are unavailable without corrupting search index.
-- [ ] **P7-T05: Push Notification Queue Worker:** Implement asynchronous worker dispatching FCM/APNs wakeups within `p95 ≤ 5s`.
-- [ ] **P7-T06: Zero-Plaintext Push Payloads:** Package encrypted preview envelopes into APNs/FCM payloads; build client iOS/Android background decryptors.
-- [ ] **P7-T07: Cross-Device Read Notification Dismissal:** Dispatch silent notification dismissal pushes (`CLEAR_NOTIFICATION`) upon read synchronization.
-- [ ] **P7-T08: Push Outage Fallback Testing:** Author tests proving messaging succeeds when push gateways fail.
+- [x] **P7-T01: Paged History Endpoint:** Implement `GET /v1/conversations/{id}/messages` with cursor pagination enforcing member history boundaries (`p95 ≤ 1s`).
+- [x] **P7-T02: Client SQLCipher FTS5 Integration:** Build local SQLite FTS5 table indexing decrypted messages and attachment filenames upon decrypt.
+- [x] **P7-T03: On-Device Search Repository:** Implement local search repository with snippet highlighting and result navigation (`p95 ≤ 2s`).
+- [x] **P7-T04: Missing Key & Re-Index Graceful Handling:** Gracefully handle encrypted messages for which local keys are unavailable without corrupting search index.
+- [x] **P7-T05: Push Notification Queue Worker:** Implement asynchronous worker dispatching FCM/APNs wakeups within `p95 ≤ 5s`.
+- [x] **P7-T06: Zero-Plaintext Push Payloads:** Package encrypted preview envelopes into APNs/FCM payloads; build client iOS/Android background decryptors.
+- [x] **P7-T07: Cross-Device Read Notification Dismissal:** Dispatch silent notification dismissal pushes (`CLEAR_NOTIFICATION`) upon read synchronization.
+- [x] **P7-T08: Push Outage Fallback Testing:** Author tests proving messaging succeeds when push gateways fail.
 
 ---
 

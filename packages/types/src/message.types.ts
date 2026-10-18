@@ -76,3 +76,15 @@ export interface MessageEventDTO {
 export interface SyncEventsResponseDTO {
   events: MessageEventDTO[];
 }
+
+export interface PagedHistoryQueryDTO {
+  limit?: string;
+  before_seq_id?: string;
+  beforeSeqId?: string;
+}
+
+export interface PagedHistoryResponseDTO {
+  messages: MessageDTO[];
+  hasMore: boolean;
+  nextCursor: string | null;
+}

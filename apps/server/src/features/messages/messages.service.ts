@@ -22,6 +22,7 @@ import type {
   SyncEventsResponseDTO,
 } from '@chat/types';
 import { randomUUID } from 'node:crypto';
+import { pushNotificationService } from '../notifications/push-notification.service.js';
 
 export class MessagesService {
   constructor(
@@ -93,6 +94,11 @@ export class MessagesService {
       }
     }
 
+    // 5. Asynchronously dispatch zero-plaintext push notification wakeups (FR-061 to FR-067)
+    await pushNotificationService
+      .notifyConversationMembers(conv.id, message, senderId)
+      .catch(() => {});
+
     return ok({
       action: 'MSG_ACK',
       clientMsgId: message.clientMsgId,
@@ -147,6 +153,63 @@ export class MessagesService {
     }));
 
     return ok(dtos);
+  }
+
+  /**
+   * P7-T01: Paged History Endpoint (FR-053 to FR-055, NFR-009).
+   * Validates membership and history floor/ceiling, returning messages ordered by seq_id DESC.
+   */
+  public async getPagedHistory(
+    conversationId: string,
+    userId: string,
+    beforeSeqId: bigint | null,
+    limit = 50
+  ): Promise<Result<{ messages: MessageDTO[]; hasMore: boolean; nextCursor: string | null }, DomainError>> {
+    const conv = await this.convRepo.findById(conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${conversationId} not found`));
+    }
+
+    const member = conv.members.find((m) => m.userId === userId);
+    if (!member) {
+      return err(new ForbiddenError('You are not a member of this conversation'));
+    }
+
+    const fetchLimit = limit + 1;
+    const messages = await this.repo.getPagedHistory(
+      conversationId,
+      beforeSeqId,
+      member.historyFloorSeqId,
+      member.removedAtSeqId,
+      fetchLimit,
+      userId
+    );
+
+    const hasMore = messages.length > limit;
+    const resultMessages = hasMore ? messages.slice(0, limit) : messages;
+    const nextCursor =
+      resultMessages.length > 0 && hasMore
+        ? resultMessages[resultMessages.length - 1]!.seqId.toString()
+        : null;
+
+    const dtos: MessageDTO[] = resultMessages.map((m) => ({
+      id: m.id,
+      conversationId: m.conversationId,
+      seqId: m.seqId.toString(),
+      senderId: m.senderId,
+      senderDeviceId: m.senderDeviceId,
+      clientMsgId: m.clientMsgId,
+      msgType: m.msgType as any,
+      encryptedPayloads: m.encryptedPayloads as unknown as EncryptedPayloads,
+      createdAt: m.createdAt.toISOString(),
+      isTombstoned: m.isTombstoned,
+    }));
+
+    return ok({
+      messages: dtos,
+      hasMore,
+      nextCursor,
+    });
   }
 
   /**

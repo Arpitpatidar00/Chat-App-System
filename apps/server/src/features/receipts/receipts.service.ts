@@ -2,6 +2,7 @@ import { receiptsRepository, type ReceiptsRepository } from './receipts.reposito
 import { wsGateway } from '../../core/websocket/gateway.js';
 import { ok, err, type Result } from '../../core/result/result.js';
 import { NotFoundError, type DomainError } from '../../core/errors/domain-error.js';
+import { pushNotificationService } from '../notifications/push-notification.service.js';
 
 export interface ReceiptDto {
   conversationId: string;
@@ -73,6 +74,11 @@ export class ReceiptsService {
       conversationId,
       maxSeqId,
     });
+
+    // P7-T07: Cross-Device Read Notification Dismissal (FR-066)
+    pushNotificationService
+      .dismissConversationNotifications(userId, conversationId, Number(seq))
+      .catch(() => {});
 
     return ok({ affected });
   }

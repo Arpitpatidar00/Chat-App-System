@@ -160,6 +160,11 @@ export class WebSocketGateway {
     return devices ? Array.from(devices) : [];
   }
 
+  public getUserActiveConnectionsCount(userId: string): number {
+    const devices = this.userDevices.get(userId);
+    return devices ? devices.size : 0;
+  }
+
   public isUserOnline(userId: string, maxHeartbeatAgeMs: number = 45000): boolean {
     const devices = this.userDevices.get(userId);
     if (!devices || devices.size === 0) return false;

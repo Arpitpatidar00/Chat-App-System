@@ -181,6 +181,7 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(authRoutes, { prefix: '/api/v1/auth' });
   await app.register(devicesRoutes, { prefix: '/api/v1' });
   await app.register(conversationsRoutes, { prefix: '/api/v1/conversations' });
+  await app.register(conversationsRoutes, { prefix: '/v1/conversations' });
   await app.register(messagesRoutes, { prefix: '/api/v1/messages' });
   await app.register(syncRoutes, { prefix: '/api/v1/sync' });
   await app.register(receiptsRoutes, { prefix: '/api/v1/receipts' });

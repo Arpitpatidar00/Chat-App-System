@@ -129,6 +129,45 @@ export class MessagesRepository {
   }
 
   /**
+   * P7-T01 & Flow 7A: Bounded Paged History Retrieval (FR-053 to FR-055, NFR-009).
+   * Returns historical messages ordered by seq_id DESC for backward pagination
+   * within member history boundaries (floorSeqId <= seqId < beforeSeqId)
+   * excluding delete-for-self messages.
+   */
+  public async getPagedHistory(
+    conversationId: string,
+    beforeSeqId: bigint | null,
+    floorSeqId: bigint,
+    ceilingSeqId: bigint | null,
+    limit = 50,
+    userId?: string
+  ): Promise<Message[]> {
+    return prisma.message.findMany({
+      where: {
+        conversationId,
+        seqId: {
+          gte: floorSeqId,
+          ...(beforeSeqId !== null ? { lt: beforeSeqId } : {}),
+          ...(ceilingSeqId !== null ? { lte: ceilingSeqId } : {}),
+        },
+        ...(userId
+          ? {
+              hiddenByUsers: {
+                none: {
+                  userId,
+                },
+              },
+            }
+          : {}),
+      },
+      take: limit,
+      orderBy: {
+        seqId: 'desc',
+      },
+    });
+  }
+
+  /**
    * P5-T04: Atomically clear payloads, mark isTombstoned=true, and append DELETE_EVERYONE event.
    */
   public async tombstoneMessage(

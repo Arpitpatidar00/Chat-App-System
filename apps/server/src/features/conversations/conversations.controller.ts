@@ -231,6 +231,36 @@ export class ConversationsController {
 
     return reply.status(200).send({ data: result.data });
   }
+
+  public async getMessages(
+    request: FastifyRequest<{
+      Params: { id: string };
+      Querystring: { limit?: string; before_seq_id?: string; beforeSeqId?: string };
+    }>,
+    reply: FastifyReply
+  ) {
+    const userId = request.user?.userId;
+    if (!userId) {
+      return reply.status(401).send({ error: { code: 'UNAUTHORIZED', message: 'Missing user context' } });
+    }
+
+    const { id: conversationId } = request.params;
+    const { limit, before_seq_id, beforeSeqId } = request.query;
+
+    const cursorStr = before_seq_id ?? beforeSeqId;
+    const beforeSeq = cursorStr ? BigInt(cursorStr) : null;
+    const takeLimit = limit ? Math.min(parseInt(limit, 10), 100) : 50;
+
+    const { messagesService } = await import('../messages/messages.service.js');
+    const result = await messagesService.getPagedHistory(conversationId, userId, beforeSeq, takeLimit);
+    if (!result.success) {
+      return reply.status(result.error.statusCode).send({
+        error: { code: result.error.errorCode, message: result.error.message },
+      });
+    }
+
+    return reply.status(200).send({ data: result.data });
+  }
 }
 
 export const conversationsController = new ConversationsController();

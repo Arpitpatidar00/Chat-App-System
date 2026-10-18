@@ -61,10 +61,10 @@
   "59": "server/tsconfig.json",
   "60": "crypto/tsconfig.json",
   "61": "database/tsconfig.json",
-  "62": "B. Shared Contracts (`@chat/types`)",
+  "62": "pushGateway",
   "63": "types/tsconfig.json",
   "64": "00 — Phase 0: Requirements, Product Decisions & Engineering Baseline",
-  "65": "receipts.service.ts",
+  "65": "phase3.test.ts",
   "66": "authRepository",
   "67": "Chat System — AI Agent Implementation & Phase Registry",
   "68": "conversationsController",
@@ -73,9 +73,10 @@
   "71": "conversations.repository.ts",
   "72": "devicesRepository",
   "73": "presenceService",
-  "74": "devicesController",
+  "74": "LocalSearchRepository",
   "75": "env.ts",
-  "76": "conversation.types.ts",
-  "77": "attachmentsController",
-  "78": "authController"
+  "76": "receiptsRepository",
+  "77": "messages.repository.ts",
+  "78": "authController",
+  "79": "auth.repository.ts"
 }
