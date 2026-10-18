@@ -21,6 +21,7 @@ import {
   decryptModerationReport,
   type ModerationReportPayload,
 } from './moderation.js';
+import { signJwt, verifyJwt } from './jwt.js';
 
 test('AES-256-GCM: encrypts and decrypts with authentication tag verification', () => {
   const key = randomBytes(32);
@@ -128,4 +129,30 @@ test('Moderation: Asymmetric report disclosure re-encryption (DEC-08)', () => {
   const decryptedReport = decryptModerationReport(encryptedReport, privateKey);
 
   assert.deepEqual(decryptedReport, payload);
+});
+
+test('JWT: signs and verifies claims with signature check and expiry', () => {
+  const secret = 'super-secret-key-for-test-32-bytes!';
+  const claims = {
+    userId: 'user-jwt-1',
+    deviceId: 'device-jwt-1',
+    username: 'alice',
+    status: 'VERIFIED' as const,
+    platform: 'IOS' as const,
+  };
+
+  const token = signJwt(claims, secret, 3600);
+  const decoded = verifyJwt(token, secret);
+
+  assert.ok(decoded);
+  assert.equal(decoded.userId, claims.userId);
+  assert.equal(decoded.username, claims.username);
+  assert.equal(decoded.status, claims.status);
+
+  // Rejects invalid secret
+  assert.equal(verifyJwt(token, 'wrong-secret'), null);
+
+  // Rejects expired token
+  const expiredToken = signJwt(claims, secret, -10);
+  assert.equal(verifyJwt(expiredToken, secret), null);
 });

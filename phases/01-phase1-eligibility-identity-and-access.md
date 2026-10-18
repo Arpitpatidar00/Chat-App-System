@@ -5,7 +5,7 @@
 - **Owner Role:** Identity & Access Agent
 - **Reviewer Role:** Security & Privacy Agent / QA Agent
 - **Prerequisite:** Phase 0 (`DEC-01`, `DEC-02`, `DEC-11`)
-- **Status:** READY
+- **Status:** COMPLETED & SIGNED OFF
 
 ---
 
@@ -93,13 +93,13 @@ CREATE INDEX idx_conversations_user ON conversation_members(user_id, conversatio
 
 ## 5. Phase 1 AI Implementation Tasks
 
-- [ ] **P1-T01: Authenticated Identity & Token Binding:** Implement JWT parsing, signature verification, and contextual binding of `user_id` across REST and WebSocket handlers.
-- [ ] **P1-T02: Eligibility Middleware:** Implement gate rejecting users in `PENDING`, `SUSPENDED`, or `DELETED` states with `403 ELIGIBILITY_REQUIRED`.
-- [ ] **P1-T03: Direct Conversation Upsert:** Implement `/v1/conversations/direct` using the canonical `direct_pair_hash` algorithm to prevent duplicate 1:1 threads under high concurrency.
-- [ ] **P1-T04: Conversation Listing & Navigation:** Implement `GET /v1/conversations` with pagination, ordering by last activity, unread summaries, and membership filtering.
-- [ ] **P1-T05: Scoped Membership Authorization:** Implement `EnsureMemberMiddleware` verifying caller is an active member (`role != 'REMOVED'`) of the target conversation.
-- [ ] **P1-T06: Suspension & Deactivation Enforcement:** Implement user suspension flow with instant WebSocket connection termination and Redis blocklisting.
-- [ ] **P1-T07: Structured Log Redaction:** Implement logging interceptor stripping authentication tokens, keys, and PII from server logs (`NFR-026`).
+- [x] **P1-T01: Authenticated Identity & Token Binding:** Implement JWT parsing, signature verification, and contextual binding of `user_id` across REST and WebSocket handlers.
+- [x] **P1-T02: Eligibility Middleware:** Implement gate rejecting users in `PENDING`, `SUSPENDED`, or `DELETED` states with `403 ELIGIBILITY_REQUIRED`.
+- [x] **P1-T03: Direct Conversation Upsert:** Implement `/v1/conversations/direct` using the canonical `direct_pair_hash` algorithm to prevent duplicate 1:1 threads under high concurrency.
+- [x] **P1-T04: Conversation Listing & Navigation:** Implement `GET /v1/conversations` with pagination, ordering by last activity, unread summaries, and membership filtering.
+- [x] **P1-T05: Scoped Membership Authorization:** Implement `EnsureMemberMiddleware` verifying caller is an active member (`role != 'REMOVED'`) of the target conversation.
+- [x] **P1-T06: Suspension & Deactivation Enforcement:** Implement user suspension flow with instant WebSocket connection termination and Redis blocklisting.
+- [x] **P1-T07: Structured Log Redaction:** Implement logging interceptor stripping authentication tokens, keys, and PII from server logs (`NFR-026`).
 
 ---
 

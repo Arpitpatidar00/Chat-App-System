@@ -96,6 +96,27 @@ export class WebSocketGateway {
     return deliveredCount;
   }
 
+  public closeUserConnections(
+    userId: string,
+    code: number = 4403,
+    reason: string = 'Account Suspended'
+  ): number {
+    const devices = this.userDevices.get(userId);
+    if (!devices) return 0;
+
+    let closedCount = 0;
+    for (const deviceId of Array.from(devices)) {
+      const sessionKey = `${userId}:${deviceId}`;
+      const session = this.sessions.get(sessionKey);
+      if (session) {
+        session.socket.close(code, reason);
+        this.unregister(userId, deviceId);
+        closedCount++;
+      }
+    }
+    return closedCount;
+  }
+
   public getConnectedDevicesCount(): number {
     return this.sessions.size;
   }

@@ -8,6 +8,7 @@ import { env } from './config/env.js';
 import { prisma } from '@chat/database';
 import { getRedisClient } from './core/redis/redis-client.js';
 import { wsGateway } from './core/websocket/gateway.js';
+import { verifyJwt } from '@chat/crypto';
 
 import { authRoutes } from './features/auth/auth.routes.js';
 import { conversationsRoutes } from './features/conversations/conversations.routes.js';
@@ -17,7 +18,18 @@ import { presenceRoutes } from './features/presence/presence.routes.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({
-    logger: env.NODE_ENV === 'test' ? false : true,
+    logger: env.NODE_ENV === 'test' ? false : {
+      // P1-T07: Structured Log Redaction (NFR-026)
+      redact: [
+        'req.headers.authorization',
+        'req.headers.cookie',
+        '*.password',
+        '*.token',
+        '*.secret',
+        '*.key',
+        '*.encryptedPayloads',
+      ],
+    },
   });
 
   // Security headers & CORS
@@ -67,11 +79,29 @@ export async function buildApp(): Promise<FastifyInstance> {
     });
   });
 
-  // WebSocket Gateway route: /ws?userId=...&deviceId=...
+  // WebSocket Gateway route with P1-T01/P1-T02 authentication & eligibility check
   app.get('/ws', { websocket: true }, (socket, req) => {
-    const query = req.query as { userId?: string; deviceId?: string };
-    const userId = query.userId || 'anonymous-user';
-    const deviceId = query.deviceId || 'anonymous-device';
+    const query = req.query as { token?: string; userId?: string; deviceId?: string };
+    const authHeader = req.headers.authorization;
+    const token = query.token || (authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : undefined);
+
+    let userId = query.userId || 'anonymous-user';
+    let deviceId = query.deviceId || 'anonymous-device';
+
+    // Verify token if provided
+    if (token) {
+      const claims = verifyJwt(token, env.JWT_SECRET);
+      if (!claims) {
+        socket.close(4401, 'Unauthorized: Invalid token');
+        return;
+      }
+      if (claims.status !== 'VERIFIED' && claims.status !== 'APPROVED') {
+        socket.close(4403, 'Forbidden: ELIGIBILITY_REQUIRED');
+        return;
+      }
+      userId = claims.userId;
+      deviceId = claims.deviceId;
+    }
 
     wsGateway.register(userId, deviceId, socket);
     req.log.info({ userId, deviceId }, 'WebSocket client connected');
@@ -79,7 +109,6 @@ export async function buildApp(): Promise<FastifyInstance> {
     socket.on('message', (data: any) => {
       try {
         const payload = JSON.parse(data.toString());
-        // Echo or dispatch message
         req.log.debug({ userId, deviceId, eventType: payload.eventType }, 'WS payload received');
       } catch {
         socket.send(JSON.stringify({ error: 'INVALID_JSON_FRAME' }));

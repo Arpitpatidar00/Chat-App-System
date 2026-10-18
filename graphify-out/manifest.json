@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792344147.2910285,
-    "seen": 1792344423.573411,
-    "ast_hash": "90dae07a0ec3f7dba16f7c3d6070048b",
+    "mtime": 1792344932.5716105,
+    "seen": 1792345112.66463,
+    "ast_hash": "af4ae7568105e124e1b3e2ca25c7a204",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -114,15 +114,15 @@
     "semantic_hash": ""
   },
   "apps/server/src/core/websocket/gateway.ts": {
-    "mtime": 1792343971.7968664,
-    "seen": 1792344423.573416,
-    "ast_hash": "723188313f1c5a430b270e26e02ba294",
+    "mtime": 1792344818.235771,
+    "seen": 1792345112.664777,
+    "ast_hash": "ebb6882194a3e0aadb28fbf161e27ccd",
     "semantic_hash": ""
   },
   "apps/server/src/features/auth/auth.controller.ts": {
-    "mtime": 1792343991.9313006,
-    "seen": 1792344423.573417,
-    "ast_hash": "97b739cc370617ecec42fad2dcd3a7c1",
+    "mtime": 1792344906.38769,
+    "seen": 1792345112.664778,
+    "ast_hash": "3a7c64cfe246abaafa79edf7f93b609e",
     "semantic_hash": ""
   },
   "apps/server/src/features/auth/auth.repository.ts": {
@@ -132,39 +132,39 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/auth/auth.routes.ts": {
-    "mtime": 1792343764.857477,
-    "seen": 1792344423.573419,
-    "ast_hash": "a556b5ee14cb0cec4d59255cbed195fd",
+    "mtime": 1792344914.4024856,
+    "seen": 1792345112.664808,
+    "ast_hash": "25ab60eed9ac0e748abaa20ceac66228",
     "semantic_hash": ""
   },
   "apps/server/src/features/auth/auth.service.ts": {
-    "mtime": 1792343984.3270767,
-    "seen": 1792344423.57342,
-    "ast_hash": "de82ed580fcb30da89fab47ba28f8235",
+    "mtime": 1792344897.3740451,
+    "seen": 1792345112.664809,
+    "ast_hash": "2285817b8833c4fe596c8ddff224f282",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.controller.ts": {
-    "mtime": 1792343786.1932964,
-    "seen": 1792344423.573421,
-    "ast_hash": "877132e34e26a1b5a2361b416b653018",
+    "mtime": 1792344871.7677224,
+    "seen": 1792345112.664812,
+    "ast_hash": "f8c90555308e8c8d52aab3f2becf988c",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.repository.ts": {
-    "mtime": 1792343999.1022623,
-    "seen": 1792344423.5734222,
-    "ast_hash": "77b1c2c71b968fda289d76801b9529b6",
+    "mtime": 1792344835.2864695,
+    "seen": 1792345112.664813,
+    "ast_hash": "018328e6dd66078e3935a25c639af850",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.routes.ts": {
-    "mtime": 1792343791.2816556,
-    "seen": 1792344423.5734231,
-    "ast_hash": "d5f760b26817fa82994a37481b4f96d0",
+    "mtime": 1792344878.9492989,
+    "seen": 1792345112.664814,
+    "ast_hash": "d9e1a39eb579a7b12b7b615fad263a5f",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.service.ts": {
-    "mtime": 1792344007.5546827,
-    "seen": 1792344423.573424,
-    "ast_hash": "6c13356fbae954cfdf6728274780ce4a",
+    "mtime": 1792344857.7444055,
+    "seen": 1792345112.6648152,
+    "ast_hash": "1110225c76b9dbc4aabb3a0b027058a1",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.controller.ts": {
@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "packages/crypto/package.json": {
-    "mtime": 1792343551.8997147,
-    "seen": 1792344423.57344,
-    "ast_hash": "5f6dc6b9309dfc2b95950827a82f3490",
+    "mtime": 1792344784.313293,
+    "seen": 1792345112.6652641,
+    "ast_hash": "5cdfd3ab03e1b4f20914695faadad83e",
     "semantic_hash": ""
   },
   "packages/crypto/src/aes-gcm.ts": {
@@ -276,15 +276,15 @@
     "semantic_hash": ""
   },
   "packages/crypto/src/crypto.test.ts": {
-    "mtime": 1792343644.1894362,
-    "seen": 1792344423.573441,
-    "ast_hash": "361440cc917ec369bdc2b17a69dcf5fd",
+    "mtime": 1792344767.8417833,
+    "seen": 1792345112.665292,
+    "ast_hash": "c6066831a83232433a97ef9c3fcf5f9e",
     "semantic_hash": ""
   },
   "packages/crypto/src/index.ts": {
-    "mtime": 1792343604.066861,
-    "seen": 1792344423.573442,
-    "ast_hash": "d93fd6a041fed7d6e5888dde03f54799",
+    "mtime": 1792344740.7157784,
+    "seen": 1792345112.665293,
+    "ast_hash": "15c742fef379080a55e8a0bca74dec9a",
     "semantic_hash": ""
   },
   "packages/crypto/src/kdf.ts": {
@@ -612,9 +612,9 @@
     "semantic_hash": ""
   },
   "phases/01-phase1-eligibility-identity-and-access.md": {
-    "mtime": 1792341899.856179,
-    "seen": 1792344423.573518,
-    "ast_hash": "ecb9415eb433322914c726b7a1a1439d",
+    "mtime": 1792345105.160489,
+    "seen": 1792345112.666604,
+    "ast_hash": "86d022a11da4e071135825ba7a6e9eb8",
     "semantic_hash": ""
   },
   "phases/02-phase2-e2ee-and-durable-messaging.md": {
@@ -693,6 +693,24 @@
     "mtime": 1792343911.7589417,
     "seen": 1792344423.573529,
     "ast_hash": "0c945a972f5c47585ae8ee5af8e02280",
+    "semantic_hash": ""
+  },
+  "apps/server/src/core/middleware/auth-guard.ts": {
+    "mtime": 1792345034.1658661,
+    "seen": 1792345112.664719,
+    "ast_hash": "6865a7c44eddb539a1195742d3ecacac",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/auth/phase1.test.ts": {
+    "mtime": 1792344976.6866317,
+    "seen": 1792345112.66481,
+    "ast_hash": "42248d7d152cc7b2f44ab5342328b7e7",
+    "semantic_hash": ""
+  },
+  "packages/crypto/src/jwt.ts": {
+    "mtime": 1792344734.2621057,
+    "seen": 1792345112.6652942,
+    "ast_hash": "c79615613dc4becb8093aa5a1b80eb20",
     "semantic_hash": ""
   }
 }

@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>chat-app — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 1228 nodes, 1493 edges, 70 communities. Commit: unknown</p>
+<p class="subtitle">Generated from graphify knowledge graph: 1252 nodes, 1607 edges, 66 communities. Commit: 2b27163</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -71,8 +71,8 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     <a href="#serve-api">Serving API</a>
     <a href="#security-global">Security &amp; Global Graph</a>
     <a href="#tests-fixtures">Tests &amp; Fixtures</a>
+    <a href="#apps-server-packages">Apps Server Packages</a>
     <a href="#apps-server-features">Apps Server Features</a>
-    <a href="#apps-server-database">Apps Server Database</a>
     <a href="#idea-examplesmd-agents">Idea Examplesmd Agents</a>
     <a href="#groups-membership-historical">Groups Membership Historical</a>
     <a href="#refinement-criteriamd-agents">Refinement Criteriamd Agents</a>
@@ -88,7 +88,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    BUILD_GRAPH_321CBB04("Graph Build<br/><small>277 nodes</small>")
+    BUILD_GRAPH_321CBB04("Graph Build<br/><small>318 nodes</small>")
     class BUILD_GRAPH_321CBB04 module;
     OUTPUTS_DOCS_ED82387C("Outputs &amp; Docs<br/><small>59 nodes</small>")
     class OUTPUTS_DOCS_ED82387C module;
@@ -100,12 +100,12 @@ flowchart LR
     class SERVE_API_35EC8E86 module;
     SECURITY_GLOBAL_5B9C6A04("Security &amp; Global Graph<br/><small>44 nodes</small>")
     class SECURITY_GLOBAL_5B9C6A04 module;
-    TESTS_FIXTURES_B84B1DCC("Tests &amp; Fixtures<br/><small>43 nodes</small>")
+    TESTS_FIXTURES_B84B1DCC("Tests &amp; Fixtures<br/><small>35 nodes</small>")
     class TESTS_FIXTURES_B84B1DCC module;
-    APPS_SERVER_FEATURES_6E2C986B("Apps Server Features<br/><small>89 nodes</small>")
+    APPS_SERVER_PACKAGES_DD49C8F9("Apps Server Packages<br/><small>93 nodes</small>")
+    class APPS_SERVER_PACKAGES_DD49C8F9 module;
+    APPS_SERVER_FEATURES_6E2C986B("Apps Server Features<br/><small>24 nodes</small>")
     class APPS_SERVER_FEATURES_6E2C986B module;
-    APPS_SERVER_DATABASE_57962FF5("Apps Server Database<br/><small>30 nodes</small>")
-    class APPS_SERVER_DATABASE_57962FF5 module;
     IDEA_EXAMPLESMD_AGENTS_E2F86D54("Idea Examplesmd Agents<br/><small>18 nodes</small>")
     class IDEA_EXAMPLESMD_AGENTS_E2F86D54 module;
     GROUPS_MEMBERSHIP_HISTORICAL_A8631955("Groups Membership Historical<br/><small>13 nodes</small>")
@@ -116,20 +116,20 @@ flowchart LR
     class DEVICE_REALTIME_DELIVERY_3DD9A4CE module;
     ATTACHMENTS_PHASE6_LINKSMD_FEE6F1BA("Attachments Phase6 Linksmd<br/><small>12 nodes</small>")
     class ATTACHMENTS_PHASE6_LINKSMD_FEE6F1BA module;
-    OTHER_D0941E68("Other<br/><small>101 nodes</small>")
+    OTHER_D0941E68("Other<br/><small>94 nodes</small>")
     class OTHER_D0941E68 module;
-    APPS_SERVER_FEATURES_6E2C986B -->|imports x12| APPS_SERVER_DATABASE_57962FF5
-    BUILD_GRAPH_321CBB04 -->|imports x10| APPS_SERVER_FEATURES_6E2C986B
-    TESTS_FIXTURES_B84B1DCC -->|imports x9| BUILD_GRAPH_321CBB04
-    APPS_SERVER_FEATURES_6E2C986B -->|contains x9| OTHER_D0941E68
-    OUTPUTS_DOCS_ED82387C -->|imports x8| APPS_SERVER_FEATURES_6E2C986B
-    BUILD_GRAPH_321CBB04 -->|imports x8| OTHER_D0941E68
-    OTHER_D0941E68 -->|imports x6| APPS_SERVER_FEATURES_6E2C986B
-    BUILD_GRAPH_321CBB04 -->|imports x5| TESTS_FIXTURES_B84B1DCC
-    OUTPUTS_DOCS_ED82387C -->|imports x4| BUILD_GRAPH_321CBB04
-    TESTS_FIXTURES_B84B1DCC -->|imports x4| APPS_SERVER_DATABASE_57962FF5
-    TESTS_FIXTURES_B84B1DCC -->|calls x3| APPS_SERVER_FEATURES_6E2C986B
-    APPS_SERVER_DATABASE_57962FF5 -->|contains x3| APPS_SERVER_FEATURES_6E2C986B
+    BUILD_GRAPH_321CBB04 -->|imports x26| APPS_SERVER_PACKAGES_DD49C8F9
+    APPS_SERVER_PACKAGES_DD49C8F9 -->|imports x19| BUILD_GRAPH_321CBB04
+    APPS_SERVER_PACKAGES_DD49C8F9 -->|imports x12| APPS_SERVER_FEATURES_6E2C986B
+    OUTPUTS_DOCS_ED82387C -->|imports x8| APPS_SERVER_PACKAGES_DD49C8F9
+    APPS_SERVER_FEATURES_6E2C986B -->|imports x8| BUILD_GRAPH_321CBB04
+    APPS_SERVER_PACKAGES_DD49C8F9 -->|imports x7| OTHER_D0941E68
+    OUTPUTS_DOCS_ED82387C -->|imports x6| BUILD_GRAPH_321CBB04
+    APPS_SERVER_PACKAGES_DD49C8F9 -->|contains x2| OUTPUTS_DOCS_ED82387C
+    BUILD_GRAPH_321CBB04 -->|imports x2| APPS_SERVER_FEATURES_6E2C986B
+    CLI_SKILLS_9964CBB8 -->|references x2| BUILD_GRAPH_321CBB04
+    BUILD_GRAPH_321CBB04 -->|contains| OTHER_D0941E68
+    APPS_SERVER_FEATURES_6E2C986B -->|imports| APPS_SERVER_PACKAGES_DD49C8F9
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -146,42 +146,42 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Graph Build</td><td>277</td><td><code>3, 20, 23, 24, 27, 30, 34, 35, 38, 41, 42, 43, 49, 56, 59, 60, 61, 63, 65, 68</code></td></tr><tr><td>Outputs &amp; Docs</td><td>59</td><td><code>4, 18</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>446</td><td><code>5, 8, 10, 9, 11, 13, 14, 15, 16, 17, 21, 22, 25, 26, 29, 31, 32, 33, 36, 37, 54</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>23</td><td><code>19</code></td></tr><tr><td>Serving API</td><td>49</td><td><code>12, 45, 47</code></td></tr><tr><td>Security &amp; Global Graph</td><td>44</td><td><code>2</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>43</td><td><code>6, 57, 69</code></td></tr><tr><td>Apps Server Features</td><td>89</td><td><code>1</code></td></tr><tr><td>Apps Server Database</td><td>30</td><td><code>7</code></td></tr><tr><td>Idea Examplesmd Agents</td><td>18</td><td><code>28</code></td></tr><tr><td>Groups Membership Historical</td><td>13</td><td><code>39</code></td></tr><tr><td>Refinement Criteriamd Agents</td><td>12</td><td><code>40</code></td></tr><tr><td>Device Realtime Delivery</td><td>12</td><td><code>44</code></td></tr><tr><td>Attachments Phase6 Linksmd</td><td>12</td><td><code>46</code></td></tr><tr><td>Other</td><td>101</td><td><code>48, 50, 51, 52, 53, 55, 58, 62, 64, 66, 67, 0</code></td></tr>
+      <tr><td>Graph Build</td><td>318</td><td><code>38, 3, 20, 23, 24, 27, 30, 34, 35, 41, 43, 56, 59, 60, 61, 63, 65, 68</code></td></tr><tr><td>Outputs &amp; Docs</td><td>59</td><td><code>4, 18</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>446</td><td><code>5, 8, 10, 9, 11, 13, 14, 15, 16, 17, 21, 22, 25, 26, 29, 31, 32, 33, 36, 37, 54</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>23</td><td><code>19</code></td></tr><tr><td>Serving API</td><td>49</td><td><code>12, 45, 47</code></td></tr><tr><td>Security &amp; Global Graph</td><td>44</td><td><code>2</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>35</td><td><code>6, 69</code></td></tr><tr><td>Apps Server Packages</td><td>93</td><td><code>1</code></td></tr><tr><td>Apps Server Features</td><td>24</td><td><code>7</code></td></tr><tr><td>Idea Examplesmd Agents</td><td>18</td><td><code>28</code></td></tr><tr><td>Groups Membership Historical</td><td>13</td><td><code>39</code></td></tr><tr><td>Refinement Criteriamd Agents</td><td>12</td><td><code>40</code></td></tr><tr><td>Device Realtime Delivery</td><td>12</td><td><code>44</code></td></tr><tr><td>Attachments Phase6 Linksmd</td><td>12</td><td><code>46</code></td></tr><tr><td>Other</td><td>94</td><td><code>48, 50, 51, 52, 53, 55, 62, 64, 42, 67, 0</code></td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Core Flow</h4>
-    <div class="arrow-chain">CLI &amp; Skill Installers -&gt; Tests &amp; Fixtures -&gt; Graph Build -&gt; Apps Server Features -&gt; Apps Server Database -&gt; Outputs &amp; Docs -&gt; Ingestion &amp; Updates</div>
+    <div class="arrow-chain">CLI &amp; Skill Installers -&gt; Graph Build -&gt; Apps Server Packages -&gt; Apps Server Features -&gt; Outputs &amp; Docs -&gt; Ingestion &amp; Updates -&gt; Serving API</div>
   </div>
 </div>
 <div class="grid">
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>1228 nodes · 1493 edges · 70 communities (67 shown, 3 thin omitted)</li>
-      <li>Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 31 edges (avg confidence: 0.93)</li>
+      <li>1252 nodes · 1607 edges · 66 communities (63 shown, 3 thin omitted)</li>
+      <li>Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 33 edges (avg confidence: 0.93)</li>
       <li>Token cost: 0 input · 0 output</li>
       <li>1. `B. Shared Contracts (`@chat/types`)` - 21 edges</li>
-      <li>2. `Code Review and Quality` - 19 edges</li>
-      <li>3. `DomainError` - 17 edges</li>
+      <li>2. `DomainError` - 20 edges</li>
+      <li>3. `Code Review and Quality` - 19 edges</li>
     </ul>
   </div>
 </div>
 <hr>
 <!-- ====== 2. Graph Build ====== -->
 <h2 id="build-graph">2. Graph Build</h2>
-<p>Graph Build groups implementation around packagejson, apps, packages, server, mostly in apps/server/package.json, package.json, packages/database/package.json. This section covers 277 nodes and 323 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Graph Build groups implementation around packagejson, apps, packages, server, mostly in apps/server/package.json, package.json, packages/database/package.json. This section covers 318 nodes and 435 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Graph Build (277 nodes, 323 edges)
-    subgraph build_graph_src_crypto_session_manager_ts_143529b7["src/crypto/session-manager.ts"]
-        apps_mobile_src_crypto_session_manager_004e00bb("session-manager.ts")
-        apps_mobile_src_crypto_session_manager_clientses_d2c87abc("clientSessionManager<br/><small>src/crypto/session-manager.ts</small>")
-        apps_mobile_src_crypto_session_manager_clientses_50ea6850("establishSession()<br/><small>src/crypto/session-manager.ts</small>")
-        apps_mobile_src_crypto_session_manager_clientses_ec577572("encryptForDevice()<br/><small>src/crypto/session-manager.ts</small>")
-        apps_mobile_src_crypto_session_manager_clientses_2cfffe47("decryptFromDevice()<br/><small>src/crypto/session-manager.ts</small>")
+    %% Section: Graph Build (318 nodes, 435 edges)
+    subgraph build_graph_features_auth_auth_controller_ts_0f51fe45["features/auth/auth.controller.ts"]
+        apps_server_src_features_auth_auth_controller_au_b7e12b95("authController<br/><small>features/auth/auth.controller.ts</small>")
+        apps_server_src_features_auth_auth_controller_au_9e4270db("verifySession()<br/><small>features/auth/auth.controller.ts</small>")
+        apps_server_src_features_auth_auth_controller_au_afbf055c("suspendUser()<br/><small>features/auth/auth.controller.ts</small>")
+        apps_server_src_features_auth_auth_controller_au_1000838d("constructor()<br/><small>features/auth/auth.controller.ts</small>")
+        apps_server_src_features_auth_auth_controller_au_4608a382("getMe()<br/><small>features/auth/auth.controller.ts</small>")
     end
     subgraph build_graph_core_database_unit_of_work_ts_687da461["core/database/unit-of-work.ts"]
         apps_server_src_core_database_unit_of_work_unito_0ad353f3("UnitOfWork<br/><small>core/database/unit-of-work.ts</small>")
@@ -189,56 +189,48 @@ flowchart LR
         apps_server_src_core_database_unit_of_work_unito_e24d2409("client()<br/><small>core/database/unit-of-work.ts</small>")
         apps_server_src_core_database_unit_of_work_unito_356924e3("constructor()<br/><small>core/database/unit-of-work.ts</small>")
     end
-    subgraph build_graph_crypto_src_aes_gcm_ts_a05b57c4["crypto/src/aes-gcm.ts"]
-        packages_crypto_src_aes_gcm_decryptaesgcm_6783e219("decryptAesGcm()<br/><small>crypto/src/aes-gcm.ts</small>")
-        packages_crypto_src_aes_gcm_encryptaesgcm_a2306d3c("encryptAesGcm()<br/><small>crypto/src/aes-gcm.ts</small>")
+    subgraph build_graph_features_presence_presence_controlle_1cb8e323["features/presence/presence.controller.ts"]
+        apps_server_src_features_presence_presence_contr_eaceee26("presenceController<br/><small>features/presence/presence.controller.ts</small>")
+        apps_server_src_features_presence_presence_contr_ab864f6a("constructor()<br/><small>features/presence/presence.controller.ts</small>")
+        apps_server_src_features_presence_presence_contr_395471fc("getPresence()<br/><small>features/presence/presence.controller.ts</small>")
     end
-    subgraph build_graph_crypto_src_kdf_ts_7ac822c8["crypto/src/kdf.ts"]
-        packages_crypto_src_kdf_derivehkdf_cd813682("deriveHkdf()<br/><small>crypto/src/kdf.ts</small>")
-        packages_crypto_src_kdf_hkdfasync_6094c60d("hkdfAsync<br/><small>crypto/src/kdf.ts</small>")
-    end
-    apps_mobile_package_357e1cf2("mobile/package.json")
     apps_server_package_57c9c05e("server/package.json")
     packages_crypto_src_crypto_test_66188a8a("crypto.test.ts")
-    packages_crypto_src_vault_23715910("vault.ts")
+    apps_server_src_features_auth_phase1_test_57386f76("phase1.test.ts")
     apps_server_src_app_dba88d8b("app.ts")
+    apps_server_src_index_44575e5d("index.ts")
+    apps_server_src_server_test_1e5df020("server.test.ts")
     apps_server_src_core_database_unit_of_work_unito_0ad353f3 -->|method| apps_server_src_core_database_unit_of_work_unito_aa420422
     apps_server_src_core_database_unit_of_work_unito_0ad353f3 -->|method| apps_server_src_core_database_unit_of_work_unito_e24d2409
     apps_server_src_core_database_unit_of_work_unito_0ad353f3 -->|method| apps_server_src_core_database_unit_of_work_unito_356924e3
-    apps_mobile_src_crypto_session_manager_clientses_d2c87abc -->|method| apps_mobile_src_crypto_session_manager_clientses_50ea6850
-    apps_mobile_src_crypto_session_manager_clientses_d2c87abc -->|method| apps_mobile_src_crypto_session_manager_clientses_ec577572
-    apps_mobile_src_crypto_session_manager_clientses_d2c87abc -->|method| apps_mobile_src_crypto_session_manager_clientses_2cfffe47
-    apps_mobile_src_crypto_session_manager_clientses_2cfffe47 -->|calls| packages_crypto_src_aes_gcm_decryptaesgcm_6783e219
-    apps_mobile_src_crypto_session_manager_clientses_ec577572 -->|calls| apps_mobile_src_crypto_session_manager_clientses_50ea6850
-    apps_mobile_src_crypto_session_manager_clientses_ec577572 -->|calls| packages_crypto_src_aes_gcm_encryptaesgcm_a2306d3c
-    packages_crypto_src_kdf_derivehkdf_cd813682 -->|calls| packages_crypto_src_kdf_hkdfasync_6094c60d
-    apps_mobile_src_crypto_session_manager_004e00bb -->|imports| packages_crypto_src_aes_gcm_decryptaesgcm_6783e219
-    apps_mobile_src_crypto_session_manager_004e00bb -->|imports| packages_crypto_src_aes_gcm_encryptaesgcm_a2306d3c
-    packages_crypto_src_crypto_test_66188a8a -->|imports| packages_crypto_src_kdf_derivehkdf_cd813682
-    packages_crypto_src_crypto_test_66188a8a -->|imports| packages_crypto_src_aes_gcm_decryptaesgcm_6783e219
-    packages_crypto_src_crypto_test_66188a8a -->|imports| packages_crypto_src_aes_gcm_encryptaesgcm_a2306d3c
-    packages_crypto_src_crypto_test_66188a8a -->|imports| packages_crypto_src_vault_23715910
-    packages_crypto_src_vault_23715910 -->|imports| packages_crypto_src_aes_gcm_decryptaesgcm_6783e219
-    packages_crypto_src_vault_23715910 -->|imports| packages_crypto_src_aes_gcm_encryptaesgcm_a2306d3c
-    %% Omitted for readability: 259 nodes, 0 edges
-    class apps_mobile_src_crypto_session_manager_004e00bb module;
-    class apps_mobile_src_crypto_session_manager_clientses_d2c87abc entry;
-    class apps_mobile_src_crypto_session_manager_clientses_50ea6850 function;
-    class apps_mobile_src_crypto_session_manager_clientses_ec577572 function;
-    class apps_mobile_src_crypto_session_manager_clientses_2cfffe47 function;
+    apps_server_src_features_auth_auth_controller_au_b7e12b95 -->|method| apps_server_src_features_auth_auth_controller_au_9e4270db
+    apps_server_src_features_auth_auth_controller_au_b7e12b95 -->|method| apps_server_src_features_auth_auth_controller_au_afbf055c
+    apps_server_src_features_auth_auth_controller_au_b7e12b95 -->|method| apps_server_src_features_auth_auth_controller_au_1000838d
+    apps_server_src_features_auth_auth_controller_au_b7e12b95 -->|method| apps_server_src_features_auth_auth_controller_au_4608a382
+    apps_server_src_features_presence_presence_contr_eaceee26 -->|method| apps_server_src_features_presence_presence_contr_ab864f6a
+    apps_server_src_features_presence_presence_contr_eaceee26 -->|method| apps_server_src_features_presence_presence_contr_395471fc
+    apps_server_src_features_auth_phase1_test_57386f76 -->|imports| apps_server_src_app_dba88d8b
+    apps_server_src_index_44575e5d -->|imports| apps_server_src_app_dba88d8b
+    apps_server_src_server_test_1e5df020 -->|imports| apps_server_src_app_dba88d8b
+    %% Omitted for readability: 300 nodes, 0 edges
+    class apps_server_src_features_auth_auth_controller_au_b7e12b95 function;
+    class apps_server_src_features_auth_auth_controller_au_9e4270db function;
+    class apps_server_src_features_auth_auth_controller_au_afbf055c function;
+    class apps_server_src_features_auth_auth_controller_au_1000838d function;
+    class apps_server_src_features_auth_auth_controller_au_4608a382 function;
     class apps_server_src_core_database_unit_of_work_unito_0ad353f3 klass;
     class apps_server_src_core_database_unit_of_work_unito_aa420422 function;
     class apps_server_src_core_database_unit_of_work_unito_e24d2409 entry;
     class apps_server_src_core_database_unit_of_work_unito_356924e3 function;
-    class packages_crypto_src_aes_gcm_decryptaesgcm_6783e219 function;
-    class packages_crypto_src_aes_gcm_encryptaesgcm_a2306d3c function;
-    class packages_crypto_src_kdf_derivehkdf_cd813682 function;
-    class packages_crypto_src_kdf_hkdfasync_6094c60d async;
-    class apps_mobile_package_357e1cf2 function;
+    class apps_server_src_features_presence_presence_contr_eaceee26 function;
+    class apps_server_src_features_presence_presence_contr_ab864f6a function;
+    class apps_server_src_features_presence_presence_contr_395471fc function;
     class apps_server_package_57c9c05e function;
     class packages_crypto_src_crypto_test_66188a8a test;
-    class packages_crypto_src_vault_23715910 module;
+    class apps_server_src_features_auth_phase1_test_57386f76 test;
     class apps_server_src_app_dba88d8b module;
+    class apps_server_src_index_44575e5d module;
+    class apps_server_src_server_test_1e5df020 test;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -262,243 +254,243 @@ flowchart LR
 </tr>
 <tr>
   <td>1</td>
-  <td><code>clientSessionManager</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
-  <td><code>useMessageSend.ts</code><br><small style="color:var(--muted)">chat/hooks/useMessageSend.ts</small></td>
-  <td><code>decryptFromDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small><br><code>encryptForDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small><br><code>establishSession()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td>clientSessionManager node in src/crypto/session-manager.ts.</td>
+  <td><code>authController</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>auth.routes.ts</code><br><small style="color:var(--muted)">features/auth/auth.routes.ts</small></td>
+  <td><code>constructor()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small><br><code>getMe()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small><br><code>suspendUser()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small><br>+1 more</td>
+  <td>authController node in features/auth/auth.controller.ts.</td>
 </tr>
 <tr>
   <td>2</td>
-  <td><code>DeviceSession</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>DeviceSession node in src/crypto/session-manager.ts.</td>
+  <td><code>presenceController</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>presence.routes.ts</code><br><small style="color:var(--muted)">features/presence/presence.routes.ts</small></td>
+  <td><code>constructor()</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small><br><code>getPresence()</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
+  <td>presenceController node in features/presence/presence.controller.ts.</td>
 </tr>
 <tr>
   <td>3</td>
-  <td><code>EncryptedPayload</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td><code>session-manager.ts</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>EncryptedPayload node in crypto/src/aes-gcm.ts.</td>
+  <td><code>presenceService</code><br><small style="color:var(--muted)">features/presence/presence.service.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>presence.controller.ts</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
+  <td><code>getUserPresence()</code><br><small style="color:var(--muted)">features/presence/presence.service.ts</small><br><code>setPresence()</code><br><small style="color:var(--muted)">features/presence/presence.service.ts</small></td>
+  <td>presenceService node in features/presence/presence.service.ts.</td>
 </tr>
 <tr>
   <td>4</td>
-  <td><code>KeyPairPem</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>KeyPairPem node in crypto/src/keypair.ts.</td>
+  <td><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>index.ts</code><br><small style="color:var(--muted)">server/src/index.ts</small><br><code>main()</code><br><small style="color:var(--muted)">server/src/index.ts</small><br><code>phase1.test.ts</code><br><small style="color:var(--muted)">features/auth/phase1.test.ts</small><br>+1 more</td>
+  <td><code>authRoutes()</code><br><small style="color:var(--muted)">features/auth/auth.routes.ts</small><br><code>conversationsRoutes()</code><br><small style="color:var(--muted)">features/conversations/conversations.routes.ts</small><br><code>getRedisClient()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small><br>+4 more</td>
+  <td>buildApp() node in server/src/app.ts.</td>
 </tr>
 <tr>
   <td>5</td>
-  <td><code>EncryptedModerationEnvelope</code><br><small style="color:var(--muted)">crypto/src/moderation.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>EncryptedModerationEnvelope node in crypto/src/moderation.ts.</td>
+  <td><code>authenticateAndCheckEligibility()</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>auth.routes.ts</code><br><small style="color:var(--muted)">features/auth/auth.routes.ts</small><br><code>authRoutes()</code><br><small style="color:var(--muted)">features/auth/auth.routes.ts</small><br><code>conversations.routes.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.routes.ts</small><br>+1 more</td>
+  <td><code>getRedisClient()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small><br><code>verifyJwt()</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
+  <td>authenticateAndCheckEligibility() node in core/middleware/auth-guard.ts.</td>
 </tr>
 <tr>
   <td>6</td>
-  <td><code>ModerationReportPayload</code><br><small style="color:var(--muted)">crypto/src/moderation.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
+  <td><code>closeRedisConnections()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>index.ts</code><br><small style="color:var(--muted)">server/src/index.ts</small><br><code>main()</code><br><small style="color:var(--muted)">server/src/index.ts</small><br><code>phase1.test.ts</code><br><small style="color:var(--muted)">features/auth/phase1.test.ts</small><br>+1 more</td>
   <td>No direct outbound edge</td>
-  <td>ModerationReportPayload node in crypto/src/moderation.ts.</td>
+  <td>closeRedisConnections() node in core/redis/redis-client.ts.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>EncryptedKeyVaultDto</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>getRedisClient()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>auth-guard.ts</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small><br><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br>+6 more</td>
   <td>No direct outbound edge</td>
-  <td>EncryptedKeyVaultDto node in crypto/src/vault.ts.</td>
+  <td>getRedisClient() node in core/redis/redis-client.ts.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>.decryptFromDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
+  <td><code>getRedisSubscriber()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>clientSessionManager</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td><code>decryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td>.decryptFromDevice() node in src/crypto/session-manager.ts.</td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>getRedisSubscriber() node in core/redis/redis-client.ts.</td>
 </tr>
 <tr>
   <td>9</td>
-  <td><code>.encryptForDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
+  <td><code>.constructor()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>clientSessionManager</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td><code>encryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small><br><code>establishSession()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td>.encryptForDevice() node in src/crypto/session-manager.ts.</td>
+  <td><code>authController</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
+  <td>No direct outbound edge</td>
+  <td>.constructor() node in features/auth/auth.controller.ts.</td>
 </tr>
 <tr>
   <td>10</td>
-  <td><code>.establishSession()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
+  <td><code>.getMe()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>clientSessionManager</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small><br><code>encryptForDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
+  <td><code>authController</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.establishSession() node in src/crypto/session-manager.ts.</td>
+  <td>.getMe() node in features/auth/auth.controller.ts.</td>
 </tr>
 <tr>
   <td>11</td>
-  <td><code>decryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
+  <td><code>.suspendUser()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>decryptFromDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small><br><code>decryptKeyVault()</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small><br>+4 more</td>
+  <td><code>authController</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>decryptAesGcm() node in crypto/src/aes-gcm.ts.</td>
+  <td>.suspendUser() node in features/auth/auth.controller.ts.</td>
 </tr>
 <tr>
   <td>12</td>
-  <td><code>encryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
+  <td><code>.verifySession()</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>encryptForDevice()</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small><br><code>encryptForModeration()</code><br><small style="color:var(--muted)">crypto/src/moderation.ts</small><br>+4 more</td>
+  <td><code>authController</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>encryptAesGcm() node in crypto/src/aes-gcm.ts.</td>
+  <td>.verifySession() node in features/auth/auth.controller.ts.</td>
 </tr>
 <tr>
   <td>13</td>
-  <td><code>packEncryptedBuffer()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>packEncryptedBuffer() node in crypto/src/aes-gcm.ts.</td>
+  <td><code>authRoutes()</code><br><small style="color:var(--muted)">features/auth/auth.routes.ts</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
+  <td><code>authenticateAndCheckEligibility()</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small></td>
+  <td>authRoutes() node in features/auth/auth.routes.ts.</td>
 </tr>
 <tr>
   <td>14</td>
-  <td><code>unpackEncryptedBuffer()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>unpackEncryptedBuffer() node in crypto/src/aes-gcm.ts.</td>
+  <td><code>conversationsRoutes()</code><br><small style="color:var(--muted)">features/conversations/conversations.routes.ts</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
+  <td><code>authenticateAndCheckEligibility()</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small></td>
+  <td>conversationsRoutes() node in features/conversations/conversations.routes.ts.</td>
 </tr>
 <tr>
   <td>15</td>
-  <td><code>deriveHkdf()</code><br><small style="color:var(--muted)">crypto/src/kdf.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td><code>hkdfAsync</code><br><small style="color:var(--muted)">crypto/src/kdf.ts</small></td>
-  <td>deriveHkdf() node in crypto/src/kdf.ts.</td>
+  <td><code>messagesRoutes()</code><br><small style="color:var(--muted)">features/messages/messages.routes.ts</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
+  <td>No direct outbound edge</td>
+  <td>messagesRoutes() node in features/messages/messages.routes.ts.</td>
 </tr>
 <tr>
   <td>16</td>
-  <td><code>deriveKeyScrypt()</code><br><small style="color:var(--muted)">crypto/src/kdf.ts</small></td>
+  <td><code>.constructor()</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>decryptKeyVault()</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small><br><code>encryptKeyVault()</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small><br>+1 more</td>
+  <td><code>presenceController</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>deriveKeyScrypt() node in crypto/src/kdf.ts.</td>
+  <td>.constructor() node in features/presence/presence.controller.ts.</td>
 </tr>
 <tr>
   <td>17</td>
-  <td><code>computeSharedSecret()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small></td>
+  <td><code>.getPresence()</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>session-manager.ts</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
+  <td><code>presenceController</code><br><small style="color:var(--muted)">features/presence/presence.controller.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>computeSharedSecret() node in crypto/src/keypair.ts.</td>
+  <td>.getPresence() node in features/presence/presence.controller.ts.</td>
 </tr>
 <tr>
   <td>18</td>
-  <td><code>generateEd25519KeyPair()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
+  <td><code>presenceRoutes()</code><br><small style="color:var(--muted)">features/presence/presence.routes.ts</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>generateEd25519KeyPair() node in crypto/src/keypair.ts.</td>
+  <td>presenceRoutes() node in features/presence/presence.routes.ts.</td>
 </tr>
 <tr>
   <td>19</td>
-  <td><code>generateX25519KeyPair()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small></td>
+  <td><code>.setPresence()</code><br><small style="color:var(--muted)">features/presence/presence.service.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>session-manager.ts</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>generateX25519KeyPair() node in crypto/src/keypair.ts.</td>
+  <td><code>presenceService</code><br><small style="color:var(--muted)">features/presence/presence.service.ts</small></td>
+  <td><code>getRedisClient()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small></td>
+  <td>.setPresence() node in features/presence/presence.service.ts.</td>
 </tr>
 <tr>
   <td>20</td>
-  <td><code>signEd25519()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
+  <td><code>receiptsRoutes()</code><br><small style="color:var(--muted)">features/receipts/receipts.routes.ts</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>signEd25519() node in crypto/src/keypair.ts.</td>
+  <td>receiptsRoutes() node in features/receipts/receipts.routes.ts.</td>
 </tr>
 <tr>
   <td>21</td>
-  <td><code>verifyEd25519()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">server/src/index.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>verifyEd25519() node in crypto/src/keypair.ts.</td>
+  <td>External entry / no inbound edge</td>
+  <td><code>buildApp()</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>closeRedisConnections()</code><br><small style="color:var(--muted)">core/redis/redis-client.ts</small></td>
+  <td>main() node in server/src/index.ts.</td>
 </tr>
 <tr>
   <td>22</td>
-  <td><code>decryptModerationReport()</code><br><small style="color:var(--muted)">crypto/src/moderation.ts</small></td>
+  <td><code>verifyJwt()</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td><code>decryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td>decryptModerationReport() node in crypto/src/moderation.ts.</td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>auth-guard.ts</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small><br><code>authenticateAndCheckEligibility()</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small><br>+2 more</td>
+  <td><code>base64UrlDecode()</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
+  <td>verifyJwt() node in crypto/src/jwt.ts.</td>
 </tr>
 <tr>
   <td>23</td>
-  <td><code>encryptForModeration()</code><br><small style="color:var(--muted)">crypto/src/moderation.ts</small></td>
+  <td><code>server/package.json</code><br><small style="color:var(--muted)">apps/server/package.json</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td><code>encryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td>encryptForModeration() node in crypto/src/moderation.ts.</td>
+  <td>External entry / no inbound edge</td>
+  <td><code>@chat/crypto</code><br><small style="color:var(--muted)">apps/server/package.json</small><br><code>@chat/database</code><br><small style="color:var(--muted)">apps/server/package.json</small><br><code>@chat/types</code><br><small style="color:var(--muted)">apps/server/package.json</small><br>+12 more</td>
+  <td>server/package.json node in apps/server/package.json.</td>
 </tr>
 <tr>
   <td>24</td>
-  <td><code>decryptKeyVault()</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small></td>
+  <td><code>description</code><br><small style="color:var(--muted)">apps/server/package.json</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td><code>decryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small><br><code>deriveKeyScrypt()</code><br><small style="color:var(--muted)">crypto/src/kdf.ts</small></td>
-  <td>decryptKeyVault() node in crypto/src/vault.ts.</td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>description node in apps/server/package.json.</td>
 </tr>
 <tr>
   <td>25</td>
-  <td><code>encryptKeyVault()</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small></td>
+  <td><code>main</code><br><small style="color:var(--muted)">apps/server/package.json</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td><code>deriveKeyScrypt()</code><br><small style="color:var(--muted)">crypto/src/kdf.ts</small><br><code>encryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td>encryptKeyVault() node in crypto/src/vault.ts.</td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>main node in apps/server/package.json.</td>
 </tr>
 <tr>
   <td>26</td>
-  <td><code>session-manager.ts</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>useMessageSend.ts</code><br><small style="color:var(--muted)">chat/hooks/useMessageSend.ts</small></td>
-  <td><code>computeSharedSecret()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small><br><code>decryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small><br><code>encryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small><br>+4 more</td>
-  <td>Module file in src/crypto/session-manager.ts.</td>
+  <td><code>name</code><br><small style="color:var(--muted)">apps/server/package.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>name node in apps/server/package.json.</td>
 </tr>
 <tr>
   <td>27</td>
-  <td><code>aes-gcm.ts</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>moderation.ts</code><br><small style="color:var(--muted)">crypto/src/moderation.ts</small><br><code>vault.ts</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small></td>
-  <td><code>ref_node_crypto</code></td>
-  <td>Module file in crypto/src/aes-gcm.ts.</td>
+  <td><code>type</code><br><small style="color:var(--muted)">apps/server/package.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>type node in apps/server/package.json.</td>
 </tr>
 <tr>
   <td>28</td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small></td>
-  <td><span class="tag tag-func">Test</span></td>
+  <td><code>version</code><br><small style="color:var(--muted)">apps/server/package.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>aes-gcm.ts</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small><br><code>computeSharedSecret()</code><br><small style="color:var(--muted)">crypto/src/keypair.ts</small><br><code>decryptAesGcm()</code><br><small style="color:var(--muted)">crypto/src/aes-gcm.ts</small><br>+21 more</td>
-  <td>Module file in crypto/src/crypto.test.ts.</td>
+  <td>No direct outbound edge</td>
+  <td>version node in apps/server/package.json.</td>
 </tr>
 <tr>
   <td>29</td>
-  <td><code>crypto/src/index.ts</code><br><small style="color:var(--muted)">crypto/src/index.ts</small></td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
-  <td><code>session-manager.ts</code><br><small style="color:var(--muted)">src/crypto/session-manager.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>Module file in crypto/src/index.ts.</td>
+  <td><code>index.ts</code><br><small style="color:var(--muted)">server/src/index.ts</small><br><code>phase1.test.ts</code><br><small style="color:var(--muted)">features/auth/phase1.test.ts</small><br><code>server.test.ts</code><br><small style="color:var(--muted)">server/src/server.test.ts</small></td>
+  <td><code>@fastify/cors</code><br><small style="color:var(--muted)">apps/server/package.json</small><br><code>@fastify/helmet</code><br><small style="color:var(--muted)">apps/server/package.json</small><br><code>@fastify/rate-limit</code><br><small style="color:var(--muted)">apps/server/package.json</small><br>+22 more</td>
+  <td>Module file in server/src/app.ts.</td>
 </tr>
 <tr>
   <td>30</td>
-  <td><code>kdf.ts</code><br><small style="color:var(--muted)">crypto/src/kdf.ts</small></td>
+  <td><code>env.ts</code><br><small style="color:var(--muted)">src/config/env.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
-  <td><code>crypto.test.ts</code><br><small style="color:var(--muted)">crypto/src/crypto.test.ts</small><br><code>vault.ts</code><br><small style="color:var(--muted)">crypto/src/vault.ts</small></td>
-  <td><code>ref_node_crypto</code><br><code>ref_node_util</code></td>
-  <td>Module file in crypto/src/kdf.ts.</td>
+  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>auth-guard.ts</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small><br><code>index.ts</code><br><small style="color:var(--muted)">server/src/index.ts</small><br>+2 more</td>
+  <td><code>dotenv</code><br><small style="color:var(--muted)">apps/server/package.json</small><br><code>ref_node_path</code><br><code>ref_node_url</code><br>+1 more</td>
+  <td>Module file in src/config/env.ts.</td>
 </tr>
 </table>
 
@@ -507,19 +499,19 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>apps/server/package.json</code></td><td>43 nodes</td></tr>
+      <tr><td><code>apps/server/package.json</code></td><td>44 nodes</td></tr>
 <tr><td><code>package.json</code></td><td>23 nodes</td></tr>
 <tr><td><code>packages/database/package.json</code></td><td>22 nodes</td></tr>
 <tr><td><code>apps/mobile/package.json</code></td><td>19 nodes</td></tr>
+<tr><td><code>packages/crypto/package.json</code></td><td>18 nodes</td></tr>
 <tr><td><code>tsconfig.base.json</code></td><td>18 nodes</td></tr>
 <tr><td><code>phases/10-architecture-tech-stack-and-monorepo.md</code></td><td>17 nodes</td></tr>
-<tr><td><code>packages/crypto/package.json</code></td><td>15 nodes</td></tr>
 <tr><td><code>turbo.json</code></td><td>15 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x205, imports x58, imports x32, calls x10. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x218, imports x91, imports x75, calls x17. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -2192,18 +2184,26 @@ flowchart LR
 
 <!-- ====== 8. Tests & Fixtures ====== -->
 <h2 id="tests-fixtures">8. Tests &amp; Fixtures</h2>
-<p>Tests &amp; Fixtures groups implementation around test, driven, development, skillmd, mostly in skills/test-driven-development/SKILL.md, load-tests/scenarios/message-throughput.js, server/src/index.ts. This section covers 43 nodes and 43 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Tests &amp; Fixtures groups implementation around test, driven, development, skillmd, mostly in skills/test-driven-development/SKILL.md, load-tests/scenarios/message-throughput.js. This section covers 35 nodes and 33 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Tests &amp; Fixtures (43 nodes, 43 edges)
+    %% Section: Tests &amp; Fixtures (35 nodes, 33 edges)
     subgraph tests_fixtures_skills_test_driven_development_SK_ec8a3677["skills/test-driven-development/SKILL.md"]
         agents_skills_test_driven_development_skill_brow_08ca1dcb("Browser Testing with DevTools<br/><small>skills/test-driven-development/SKILL.md</small>")
         agents_skills_test_driven_development_skill_comm_b4ea7e9c("Common Rationalizations<br/><small>skills/test-driven-development/SKILL.md</small>")
         agents_skills_test_driven_development_skill_damp_18bee2cc("DAMP Over DRY in Tests<br/><small>skills/test-driven-development/SKILL.md</small>")
         agents_skills_test_driven_development_skill_deci_f68e2cf8("Decision Guide<br/><small>skills/test-driven-development/SKILL.md</small>")
         agents_skills_test_driven_development_skill_disc_e9594a7a("Discover the Stack First<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_name_691d537f("Name Tests Descriptively<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_one_580d99ac("One Assertion Per Concept<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_over_d745f1e7("Overview<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_pref_ad9ca8f5("Prefer Real Implementations Over Mocks<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_red_0478e577("Red Flags<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_secu_bf2a318b("Security Boundaries<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_see_06821681("See Also<br/><small>skills/test-driven-development/SKILL.md</small>")
+        agents_skills_test_driven_development_skill_step_f4748f70("Step 1: RED — Write a Failing Test<br/><small>skills/test-driven-development/SKILL.md</small>")
     end
     subgraph tests_fixtures_load_tests_scenarios_message_thro_31170b31["load-tests/scenarios/message-throughput.js"]
         load_tests_scenarios_message_throughput_7f6d35cf("message-throughput.js")
@@ -2211,47 +2211,27 @@ flowchart LR
         load_tests_scenarios_message_throughput_messagel_5567225c("messageLatency<br/><small>load-tests/scenarios/message-throughput.js</small>")
         load_tests_scenarios_message_throughput_options_8b7354cb("options<br/><small>load-tests/scenarios/message-throughput.js</small>")
     end
-    subgraph tests_fixtures_External_generated_473753cb["External / generated"]
-        ref_node_test_8d892955("ref_node_test")
-        ref_node_assert_d11c978e("ref_node_assert")
-        ref_k6_a956c54a("ref_k6")
-    end
-    subgraph tests_fixtures_server_src_index_ts_8054ae55["server/src/index.ts"]
-        apps_server_src_index_44575e5d("index.ts")
-        apps_server_src_index_main_c1936343("main()<br/><small>server/src/index.ts</small>")
-    end
-    apps_server_src_core_redis_redis_client_closered_6011213b("closeRedisConnections()<br/><small>core/redis/redis-client.ts</small>")
-    apps_server_src_features_auth_auth_routes_authro_75674395("authRoutes()<br/><small>features/auth/auth.routes.ts</small>")
-    apps_server_src_app_buildapp_9c2c1761("buildApp()<br/><small>server/src/app.ts</small>")
-    apps_server_src_server_test_1e5df020("server.test.ts")
-    apps_server_src_index_main_c1936343 -->|calls| apps_server_src_core_redis_redis_client_closered_6011213b
-    apps_server_src_index_main_c1936343 -->|calls| apps_server_src_app_buildapp_9c2c1761
-    apps_server_src_index_44575e5d -->|imports| apps_server_src_app_buildapp_9c2c1761
-    apps_server_src_index_44575e5d -->|imports| apps_server_src_core_redis_redis_client_closered_6011213b
-    apps_server_src_server_test_1e5df020 -->|imports| apps_server_src_app_buildapp_9c2c1761
-    apps_server_src_server_test_1e5df020 -->|imports| apps_server_src_core_redis_redis_client_closered_6011213b
-    apps_server_src_server_test_1e5df020 -->|imports| ref_node_test_8d892955
-    apps_server_src_server_test_1e5df020 -->|imports| ref_node_assert_d11c978e
+    ref_k6_a956c54a("ref_k6")
     load_tests_scenarios_message_throughput_7f6d35cf -->|imports| ref_k6_a956c54a
-    %% Omitted for readability: 25 nodes, 0 edges
+    %% Omitted for readability: 17 nodes, 0 edges
     class agents_skills_test_driven_development_skill_brow_08ca1dcb concept;
     class agents_skills_test_driven_development_skill_comm_b4ea7e9c concept;
     class agents_skills_test_driven_development_skill_damp_18bee2cc concept;
     class agents_skills_test_driven_development_skill_deci_f68e2cf8 concept;
     class agents_skills_test_driven_development_skill_disc_e9594a7a concept;
+    class agents_skills_test_driven_development_skill_name_691d537f concept;
+    class agents_skills_test_driven_development_skill_one_580d99ac concept;
+    class agents_skills_test_driven_development_skill_over_d745f1e7 concept;
+    class agents_skills_test_driven_development_skill_pref_ad9ca8f5 concept;
+    class agents_skills_test_driven_development_skill_red_0478e577 concept;
+    class agents_skills_test_driven_development_skill_secu_bf2a318b concept;
+    class agents_skills_test_driven_development_skill_see_06821681 concept;
+    class agents_skills_test_driven_development_skill_step_f4748f70 concept;
     class load_tests_scenarios_message_throughput_7f6d35cf test;
     class load_tests_scenarios_message_throughput_errorrat_c34e1f50 test;
     class load_tests_scenarios_message_throughput_messagel_5567225c test;
     class load_tests_scenarios_message_throughput_options_8b7354cb test;
-    class ref_node_test_8d892955 function;
-    class ref_node_assert_d11c978e async;
     class ref_k6_a956c54a function;
-    class apps_server_src_index_44575e5d module;
-    class apps_server_src_index_main_c1936343 function;
-    class apps_server_src_core_redis_redis_client_closered_6011213b function;
-    class apps_server_src_features_auth_auth_routes_authro_75674395 api;
-    class apps_server_src_app_buildapp_9c2c1761 function;
-    class apps_server_src_server_test_1e5df020 test;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -2522,78 +2502,74 @@ flowchart LR
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>skills/test-driven-development/SKILL.md</code></td><td>30 nodes</td></tr>
 <tr><td><code>load-tests/scenarios/message-throughput.js</code></td><td>4 nodes</td></tr>
-<tr><td><code>server/src/index.ts</code></td><td>2 nodes</td></tr>
-<tr><td><code>server/src/app.ts</code></td><td>1 nodes</td></tr>
-<tr><td><code>core/redis/redis-client.ts</code></td><td>1 nodes</td></tr>
-<tr><td><code>features/auth/auth.routes.ts</code></td><td>1 nodes</td></tr>
-<tr><td><code>server/src/server.test.ts</code></td><td>1 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x33, imports x4, imports x3, calls x2. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x32, imports x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
-<!-- ====== 9. Apps Server Features ====== -->
-<h2 id="apps-server-features">9. Apps Server Features</h2>
-<p>Apps Server Features groups implementation around apps, server, features, types, mostly in core/errors/domain-error.ts, types/src/auth.types.ts, types/src/conversation.types.ts. This section covers 89 nodes and 216 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<!-- ====== 9. Apps Server Packages ====== -->
+<h2 id="apps-server-packages">9. Apps Server Packages</h2>
+<p>Apps Server Packages groups implementation around apps, server, packages, features, mostly in core/errors/domain-error.ts, types/src/auth.types.ts, types/src/conversation.types.ts. This section covers 93 nodes and 249 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Apps Server Features (89 nodes, 216 edges)
-    subgraph apps_server_features_features_conversations_conv_41880fc6["features/conversations/conversations.service.ts"]
-        apps_server_src_features_conversations_conversat_fafba56e("conversations.service.ts")
-        apps_server_src_features_conversations_conversat_31a4e3b5("conversationsService<br/><small>features/conversations/conversations.service.ts</small>")
-        apps_server_src_features_conversations_conversat_7181752b("constructor()<br/><small>features/conversations/conversations.service.ts</small>")
-        apps_server_src_features_conversations_conversat_46906de5("listUserConversations()<br/><small>features/conversations/conversations.service.ts</small>")
-        apps_server_src_features_conversations_conversat_29841753("getConversation()<br/><small>features/conversations/conversations.service.ts</small>")
-    end
-    subgraph apps_server_features_features_messages_messages_04254259["features/messages/messages.service.ts"]
-        apps_server_src_features_messages_messages_servi_76f9b9fd("messages.service.ts")
-        apps_server_src_features_messages_messages_servi_cc79d4e5("messagesService<br/><small>features/messages/messages.service.ts</small>")
-        apps_server_src_features_messages_messages_servi_a7a482a2("constructor()<br/><small>features/messages/messages.service.ts</small>")
-        apps_server_src_features_messages_messages_servi_d5bddd50("sendMessage()<br/><small>features/messages/messages.service.ts</small>")
-    end
-    subgraph apps_server_features_features_auth_auth_service_5076eb6a["features/auth/auth.service.ts"]
+    %% Section: Apps Server Packages (93 nodes, 249 edges)
+    subgraph apps_server_packages_features_auth_auth_service_ceed13bf["features/auth/auth.service.ts"]
         apps_server_src_features_auth_auth_service_28b13c3d("auth.service.ts")
         apps_server_src_features_auth_auth_service_auths_2e600313("authService<br/><small>features/auth/auth.service.ts</small>")
         apps_server_src_features_auth_auth_service_auths_d9094d2e("getSession()<br/><small>features/auth/auth.service.ts</small>")
+        apps_server_src_features_auth_auth_service_auths_c1308670("verifySession()<br/><small>features/auth/auth.service.ts</small>")
+        apps_server_src_features_auth_auth_service_auths_2641c607("suspendUser()<br/><small>features/auth/auth.service.ts</small>")
     end
-    subgraph apps_server_features_features_receipts_receipts_75aa5060["features/receipts/receipts.service.ts"]
+    subgraph apps_server_packages_features_conversations_conv_18e4a772["features/conversations/conversations.service.ts"]
+        apps_server_src_features_conversations_conversat_fafba56e("conversations.service.ts")
+        apps_server_src_features_conversations_conversat_31a4e3b5("conversationsService<br/><small>features/conversations/conversations.service.ts</small>")
+        apps_server_src_features_conversations_conversat_46906de5("listUserConversations()<br/><small>features/conversations/conversations.service.ts</small>")
+        apps_server_src_features_conversations_conversat_29841753("getConversation()<br/><small>features/conversations/conversations.service.ts</small>")
+        apps_server_src_features_conversations_conversat_2595d021("createDirectConversation()<br/><small>features/conversations/conversations.service.ts</small>")
+    end
+    subgraph apps_server_packages_features_messages_messages_5d10e331["features/messages/messages.service.ts"]
+        apps_server_src_features_messages_messages_servi_76f9b9fd("messages.service.ts")
+        apps_server_src_features_messages_messages_servi_cc79d4e5("messagesService<br/><small>features/messages/messages.service.ts</small>")
+        apps_server_src_features_messages_messages_servi_d5bddd50("sendMessage()<br/><small>features/messages/messages.service.ts</small>")
+    end
+    subgraph apps_server_packages_features_receipts_receipts_1a7835e4["features/receipts/receipts.service.ts"]
         apps_server_src_features_receipts_receipts_servi_08954b52("receipts.service.ts")
         apps_server_src_features_receipts_receipts_servi_be77bcd0("receiptsService<br/><small>features/receipts/receipts.service.ts</small>")
         apps_server_src_features_receipts_receipts_servi_c13af5ff("updateReceipt()<br/><small>features/receipts/receipts.service.ts</small>")
     end
-    apps_server_src_features_conversations_conversat_057183e9("conversationsController<br/><small>features/conversations/conversations.controller.ts</small>")
     apps_server_src_features_presence_presence_servi_098a200a("presence.service.ts")
     packages_types_src_websocket_events_types_8aed3e3e("websocket-events.types.ts")
     apps_server_src_features_auth_auth_service_auths_2e600313 -->|method| apps_server_src_features_auth_auth_service_auths_d9094d2e
-    apps_server_src_features_conversations_conversat_31a4e3b5 -->|method| apps_server_src_features_conversations_conversat_7181752b
+    apps_server_src_features_auth_auth_service_auths_2e600313 -->|method| apps_server_src_features_auth_auth_service_auths_c1308670
+    apps_server_src_features_auth_auth_service_auths_2e600313 -->|method| apps_server_src_features_auth_auth_service_auths_2641c607
     apps_server_src_features_conversations_conversat_31a4e3b5 -->|method| apps_server_src_features_conversations_conversat_46906de5
     apps_server_src_features_conversations_conversat_31a4e3b5 -->|method| apps_server_src_features_conversations_conversat_29841753
-    apps_server_src_features_messages_messages_servi_cc79d4e5 -->|method| apps_server_src_features_messages_messages_servi_a7a482a2
+    apps_server_src_features_conversations_conversat_31a4e3b5 -->|method| apps_server_src_features_conversations_conversat_2595d021
     apps_server_src_features_messages_messages_servi_cc79d4e5 -->|method| apps_server_src_features_messages_messages_servi_d5bddd50
     apps_server_src_features_receipts_receipts_servi_be77bcd0 -->|method| apps_server_src_features_receipts_receipts_servi_c13af5ff
-    %% Omitted for readability: 71 nodes, 0 edges
-    class apps_server_src_features_conversations_conversat_fafba56e module;
-    class apps_server_src_features_conversations_conversat_31a4e3b5 async;
-    class apps_server_src_features_conversations_conversat_7181752b function;
-    class apps_server_src_features_conversations_conversat_46906de5 function;
-    class apps_server_src_features_conversations_conversat_29841753 function;
-    class apps_server_src_features_messages_messages_servi_76f9b9fd module;
-    class apps_server_src_features_messages_messages_servi_cc79d4e5 async;
-    class apps_server_src_features_messages_messages_servi_a7a482a2 function;
-    class apps_server_src_features_messages_messages_servi_d5bddd50 function;
+    %% Omitted for readability: 75 nodes, 0 edges
     class apps_server_src_features_auth_auth_service_28b13c3d module;
     class apps_server_src_features_auth_auth_service_auths_2e600313 function;
     class apps_server_src_features_auth_auth_service_auths_d9094d2e function;
+    class apps_server_src_features_auth_auth_service_auths_c1308670 function;
+    class apps_server_src_features_auth_auth_service_auths_2641c607 function;
+    class apps_server_src_features_conversations_conversat_fafba56e module;
+    class apps_server_src_features_conversations_conversat_31a4e3b5 async;
+    class apps_server_src_features_conversations_conversat_46906de5 function;
+    class apps_server_src_features_conversations_conversat_29841753 function;
+    class apps_server_src_features_conversations_conversat_2595d021 function;
+    class apps_server_src_features_messages_messages_servi_76f9b9fd module;
+    class apps_server_src_features_messages_messages_servi_cc79d4e5 async;
+    class apps_server_src_features_messages_messages_servi_d5bddd50 function;
     class apps_server_src_features_receipts_receipts_servi_08954b52 module;
     class apps_server_src_features_receipts_receipts_servi_be77bcd0 async;
     class apps_server_src_features_receipts_receipts_servi_c13af5ff function;
-    class apps_server_src_features_conversations_conversat_057183e9 function;
     class apps_server_src_features_presence_presence_servi_098a200a module;
     class packages_types_src_websocket_events_types_8aed3e3e module;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
@@ -2622,15 +2598,15 @@ flowchart LR
   <td><code>authService</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>auth.controller.ts</code><br><small style="color:var(--muted)">features/auth/auth.controller.ts</small></td>
-  <td><code>constructor()</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>getSession()</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
+  <td><code>constructor()</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>getSession()</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>suspendUser()</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br>+1 more</td>
   <td>authService node in features/auth/auth.service.ts.</td>
 </tr>
 <tr>
   <td>2</td>
   <td><code>conversationsService</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small></td>
   <td><span class="tag tag-async">Async</span></td>
-  <td><code>conversations.controller.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small></td>
-  <td><code>constructor()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>getConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>listUserConversations()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small></td>
+  <td><code>conversations.controller.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small><br><code>phase1.test.ts</code><br><small style="color:var(--muted)">features/auth/phase1.test.ts</small></td>
+  <td><code>constructor()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>createDirectConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>getConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br>+1 more</td>
   <td>conversationsService node in features/conversations/conversations.service.ts.</td>
 </tr>
 <tr>
@@ -2654,7 +2630,7 @@ flowchart LR
   <td><code>conversationsController</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>conversations.routes.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.routes.ts</small></td>
-  <td><code>constructor()</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small><br><code>getOne()</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small><br><code>list()</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small></td>
+  <td><code>constructor()</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small><br><code>createDirect()</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small><br><code>getOne()</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small><br>+1 more</td>
   <td>conversationsController node in features/conversations/conversations.controller.ts.</td>
 </tr>
 <tr>
@@ -2693,7 +2669,7 @@ flowchart LR
   <td>10</td>
   <td><code>ForbiddenError</code><br><small style="color:var(--muted)">core/errors/domain-error.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>getConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small><br>+1 more</td>
+  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>getConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br>+3 more</td>
   <td>No direct outbound edge</td>
   <td>ForbiddenError node in core/errors/domain-error.ts.</td>
 </tr>
@@ -2709,7 +2685,7 @@ flowchart LR
   <td>12</td>
   <td><code>NotFoundError</code><br><small style="color:var(--muted)">core/errors/domain-error.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>getConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br>+5 more</td>
+  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>createDirectConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br>+8 more</td>
   <td>No direct outbound edge</td>
   <td>NotFoundError node in core/errors/domain-error.ts.</td>
 </tr>
@@ -2725,12 +2701,20 @@ flowchart LR
   <td>14</td>
   <td><code>ValidationError</code><br><small style="color:var(--muted)">core/errors/domain-error.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>createDirectConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small></td>
   <td>No direct outbound edge</td>
   <td>ValidationError node in core/errors/domain-error.ts.</td>
 </tr>
 <tr>
   <td>15</td>
+  <td><code>FastifyRequest</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>FastifyRequest node in core/middleware/auth-guard.ts.</td>
+</tr>
+<tr>
+  <td>16</td>
   <td><code>Result</code><br><small style="color:var(--muted)">core/result/result.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small><br>+2 more</td>
@@ -2738,7 +2722,7 @@ flowchart LR
   <td>Result node in core/result/result.ts.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>17</td>
   <td><code>ActiveSession</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2746,31 +2730,31 @@ flowchart LR
   <td>ActiveSession node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>17</td>
-  <td><code>conversationsRepository</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small></td>
-  <td><code>findById()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>getUserConversations()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
-  <td>conversationsRepository node in features/conversations/conversations.repository.ts.</td>
-</tr>
-<tr>
   <td>18</td>
-  <td><code>messagesRepository</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td><code>receiptsRepository</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small><br><code>receipts.service.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
-  <td><code>findByClientMsgId()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small><br><code>findById()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small><br><code>getMessagesAfterSeq()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small><br>+1 more</td>
-  <td>messagesRepository node in features/messages/messages.repository.ts.</td>
+  <td><code>receipts.service.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
+  <td><code>getMessageReceipts()</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small><br><code>upsertReceipt()</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
+  <td>receiptsRepository node in features/receipts/receipts.repository.ts.</td>
 </tr>
 <tr>
   <td>19</td>
+  <td><code>JwtClaims</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>JwtClaims node in crypto/src/jwt.ts.</td>
+</tr>
+<tr>
+  <td>20</td>
   <td><code>DevicePlatform</code><br><small style="color:var(--muted)">types/src/auth.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
+  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>jwt.ts</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
   <td>No direct outbound edge</td>
   <td>DevicePlatform node in types/src/auth.types.ts.</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>21</td>
   <td><code>DeviceStatus</code><br><small style="color:var(--muted)">types/src/auth.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2778,15 +2762,15 @@ flowchart LR
   <td>DeviceStatus node in types/src/auth.types.ts.</td>
 </tr>
 <tr>
-  <td>21</td>
+  <td>22</td>
   <td><code>EnrollDeviceRequestDTO</code><br><small style="color:var(--muted)">types/src/auth.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
   <td>No direct outbound edge</td>
   <td>EnrollDeviceRequestDTO node in types/src/auth.types.ts.</td>
 </tr>
 <tr>
-  <td>22</td>
+  <td>23</td>
   <td><code>PrekeyBundleDTO</code><br><small style="color:var(--muted)">types/src/auth.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2794,23 +2778,23 @@ flowchart LR
   <td>PrekeyBundleDTO node in types/src/auth.types.ts.</td>
 </tr>
 <tr>
-  <td>23</td>
+  <td>24</td>
   <td><code>UserSessionPayload</code><br><small style="color:var(--muted)">types/src/auth.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
+  <td><code>auth-guard.ts</code><br><small style="color:var(--muted)">core/middleware/auth-guard.ts</small><br><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>jwt.ts</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
   <td>No direct outbound edge</td>
   <td>UserSessionPayload node in types/src/auth.types.ts.</td>
 </tr>
 <tr>
-  <td>24</td>
+  <td>25</td>
   <td><code>UserStatus</code><br><small style="color:var(--muted)">types/src/auth.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small><br><code>jwt.ts</code><br><small style="color:var(--muted)">crypto/src/jwt.ts</small></td>
   <td>No direct outbound edge</td>
   <td>UserStatus node in types/src/auth.types.ts.</td>
 </tr>
 <tr>
-  <td>25</td>
+  <td>26</td>
   <td><code>AddGroupMemberDTO</code><br><small style="color:var(--muted)">types/src/conversation.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2818,7 +2802,7 @@ flowchart LR
   <td>AddGroupMemberDTO node in types/src/conversation.types.ts.</td>
 </tr>
 <tr>
-  <td>26</td>
+  <td>27</td>
   <td><code>ConversationSummaryDTO</code><br><small style="color:var(--muted)">types/src/conversation.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small></td>
@@ -2826,7 +2810,7 @@ flowchart LR
   <td>ConversationSummaryDTO node in types/src/conversation.types.ts.</td>
 </tr>
 <tr>
-  <td>27</td>
+  <td>28</td>
   <td><code>ConversationType</code><br><small style="color:var(--muted)">types/src/conversation.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2834,28 +2818,20 @@ flowchart LR
   <td>ConversationType node in types/src/conversation.types.ts.</td>
 </tr>
 <tr>
-  <td>28</td>
+  <td>29</td>
   <td><code>CreateDirectConversationDTO</code><br><small style="color:var(--muted)">types/src/conversation.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>conversations.controller.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.controller.ts</small></td>
   <td>No direct outbound edge</td>
   <td>CreateDirectConversationDTO node in types/src/conversation.types.ts.</td>
 </tr>
 <tr>
-  <td>29</td>
+  <td>30</td>
   <td><code>CreateGroupConversationDTO</code><br><small style="color:var(--muted)">types/src/conversation.types.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>CreateGroupConversationDTO node in types/src/conversation.types.ts.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>MemberRole</code><br><small style="color:var(--muted)">types/src/conversation.types.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>MemberRole node in types/src/conversation.types.ts.</td>
 </tr>
 </table>
 
@@ -2867,91 +2843,90 @@ flowchart LR
       <tr><td><code>core/errors/domain-error.ts</code></td><td>9 nodes</td></tr>
 <tr><td><code>types/src/auth.types.ts</code></td><td>7 nodes</td></tr>
 <tr><td><code>types/src/conversation.types.ts</code></td><td>7 nodes</td></tr>
+<tr><td><code>features/conversations/conversations.controller.ts</code></td><td>6 nodes</td></tr>
+<tr><td><code>crypto/src/jwt.ts</code></td><td>6 nodes</td></tr>
 <tr><td><code>types/src/receipt.types.ts</code></td><td>6 nodes</td></tr>
-<tr><td><code>features/conversations/conversations.controller.ts</code></td><td>5 nodes</td></tr>
+<tr><td><code>features/auth/auth.service.ts</code></td><td>5 nodes</td></tr>
 <tr><td><code>features/conversations/conversations.service.ts</code></td><td>5 nodes</td></tr>
-<tr><td><code>features/messages/messages.repository.ts</code></td><td>5 nodes</td></tr>
-<tr><td><code>types/src/message.types.ts</code></td><td>5 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: imports x51, contains x44, references x43, imports x27. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: imports x56, references x52, contains x48, imports x30. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
-<!-- ====== 10. Apps Server Database ====== -->
-<h2 id="apps-server-database">10. Apps Server Database</h2>
-<p>Apps Server Database groups implementation around apps, server, database, features, mostly in features/auth/auth.repository.ts, features/receipts/receipts.repository.ts, core/database/unit-of-work.ts. This section covers 30 nodes and 38 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<!-- ====== 10. Apps Server Features ====== -->
+<h2 id="apps-server-features">10. Apps Server Features</h2>
+<p>Apps Server Features groups implementation around apps, server, features, database, mostly in features/messages/messages.repository.ts, features/conversations/conversations.repository.ts, core/database/unit-of-work.ts. This section covers 24 nodes and 29 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Apps Server Database (30 nodes, 38 edges)
-    subgraph apps_server_database_features_auth_auth_reposito_ca4e9008["features/auth/auth.repository.ts"]
-        apps_server_src_features_auth_auth_repository_8bf38bc8("auth.repository.ts")
-        apps_server_src_features_auth_auth_repository_au_d6cd2827("authRepository<br/><small>features/auth/auth.repository.ts</small>")
-        apps_server_src_features_auth_auth_repository_au_584c3b31("findUserById()<br/><small>features/auth/auth.repository.ts</small>")
-        apps_server_src_features_auth_auth_repository_au_0ee75543("findDeviceById()<br/><small>features/auth/auth.repository.ts</small>")
-        apps_server_src_features_auth_auth_repository_au_c6b17333("updateDeviceLastActive()<br/><small>features/auth/auth.repository.ts</small>")
-        apps_server_src_features_auth_auth_repository_au_13565ebf("findUserByUsername()<br/><small>features/auth/auth.repository.ts</small>")
+    %% Section: Apps Server Features (24 nodes, 29 edges)
+    subgraph apps_server_features_features_conversations_conv_3082fa47["features/conversations/conversations.repository.ts"]
+        apps_server_src_features_conversations_conversat_c6f47ee9("conversations.repository.ts")
+        apps_server_src_features_conversations_conversat_3371d6b2("conversationsRepository<br/><small>features/conversations/conversations.repository.ts</small>")
+        apps_server_src_features_conversations_conversat_39234147("getOrCreateDirectConversation()<br/><small>features/conversations/conversations.repository.ts</small>")
+        apps_server_src_features_conversations_conversat_d7cbe31f("findById()<br/><small>features/conversations/conversations.repository.ts</small>")
+        apps_server_src_features_conversations_conversat_ba25a289("getUserConversations()<br/><small>features/conversations/conversations.repository.ts</small>")
+        apps_server_src_features_conversations_conversat_7ed7caa1("computeDirectPairHash()<br/><small>features/conversations/conversations.repository.ts</small>")
     end
-    subgraph apps_server_database_features_receipts_receipts_e4829deb["features/receipts/receipts.repository.ts"]
-        apps_server_src_features_receipts_receipts_repos_07189bc1("receipts.repository.ts")
-        apps_server_src_features_receipts_receipts_repos_95a05f34("receiptsRepository<br/><small>features/receipts/receipts.repository.ts</small>")
-        apps_server_src_features_receipts_receipts_repos_27652082("getMessageReceipts()<br/><small>features/receipts/receipts.repository.ts</small>")
-        apps_server_src_features_receipts_receipts_repos_dcfc13a5("upsertReceipt()<br/><small>features/receipts/receipts.repository.ts</small>")
+    subgraph apps_server_features_features_messages_messages_32da93a0["features/messages/messages.repository.ts"]
+        apps_server_src_features_messages_messages_repos_515b6ab9("messages.repository.ts")
+        apps_server_src_features_messages_messages_repos_fa53399b("messagesRepository<br/><small>features/messages/messages.repository.ts</small>")
+        apps_server_src_features_messages_messages_repos_1dbcb392("findById()<br/><small>features/messages/messages.repository.ts</small>")
+        apps_server_src_features_messages_messages_repos_8f6a22fd("findByClientMsgId()<br/><small>features/messages/messages.repository.ts</small>")
+        apps_server_src_features_messages_messages_repos_ad65e6bb("persistMessage()<br/><small>features/messages/messages.repository.ts</small>")
+        apps_server_src_features_messages_messages_repos_0747d87c("getMessagesAfterSeq()<br/><small>features/messages/messages.repository.ts</small>")
     end
-    subgraph apps_server_database_External_generated_4159e7f3["External / generated"]
+    subgraph apps_server_features_External_generated_837e10fe["External / generated"]
         packages_database_src_index_prismaclient_923b07ae("src index prismaclient")
-        packages_database_src_index_device_8202a4fd("src index device")
-        packages_database_src_index_user_6a227c73("src index user")
+        packages_database_src_index_conversation_e12cf464("src index conversation")
+        packages_database_src_index_conversationmember_18d110c2("src index conversationmember")
     end
-    apps_server_src_core_database_unit_of_work_967347c8("unit-of-work.ts")
-    packages_database_src_client_prisma_b08baaa4("prisma<br/><small>database/src/client.ts</small>")
-    packages_database_src_index_730690d6("index.ts")
-    apps_server_src_features_conversations_conversat_c6f47ee9("conversations.repository.ts")
-    apps_server_src_features_messages_messages_repos_515b6ab9("messages.repository.ts")
-    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_584c3b31
-    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_0ee75543
-    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_c6b17333
-    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_13565ebf
-    apps_server_src_features_receipts_receipts_repos_95a05f34 -->|method| apps_server_src_features_receipts_receipts_repos_27652082
-    apps_server_src_features_receipts_receipts_repos_95a05f34 -->|method| apps_server_src_features_receipts_receipts_repos_dcfc13a5
-    apps_server_src_core_database_unit_of_work_967347c8 -->|imports| packages_database_src_client_prisma_b08baaa4
+    subgraph apps_server_features_core_database_unit_of_work_e605c84f["core/database/unit-of-work.ts"]
+        apps_server_src_core_database_unit_of_work_967347c8("unit-of-work.ts")
+        apps_server_src_core_database_unit_of_work_trans_4ca519bb("TransactionClient<br/><small>core/database/unit-of-work.ts</small>")
+        apps_server_src_core_database_unit_of_work_uow_1526c830("uow<br/><small>core/database/unit-of-work.ts</small>")
+    end
+    apps_server_src_features_conversations_conversat_3371d6b2 -->|method| apps_server_src_features_conversations_conversat_d7cbe31f
+    apps_server_src_features_conversations_conversat_3371d6b2 -->|method| apps_server_src_features_conversations_conversat_ba25a289
+    apps_server_src_features_conversations_conversat_3371d6b2 -->|method| apps_server_src_features_conversations_conversat_39234147
+    apps_server_src_features_messages_messages_repos_fa53399b -->|method| apps_server_src_features_messages_messages_repos_1dbcb392
+    apps_server_src_features_messages_messages_repos_fa53399b -->|method| apps_server_src_features_messages_messages_repos_8f6a22fd
+    apps_server_src_features_messages_messages_repos_fa53399b -->|method| apps_server_src_features_messages_messages_repos_ad65e6bb
+    apps_server_src_features_messages_messages_repos_fa53399b -->|method| apps_server_src_features_messages_messages_repos_0747d87c
+    apps_server_src_features_conversations_conversat_39234147 -->|calls| apps_server_src_features_conversations_conversat_7ed7caa1
     apps_server_src_core_database_unit_of_work_967347c8 -->|imports| packages_database_src_index_prismaclient_923b07ae
-    apps_server_src_core_database_unit_of_work_967347c8 -->|imports| packages_database_src_index_730690d6
-    apps_server_src_features_auth_auth_repository_8bf38bc8 -->|imports| packages_database_src_client_prisma_b08baaa4
-    apps_server_src_features_auth_auth_repository_8bf38bc8 -->|imports| packages_database_src_index_device_8202a4fd
-    apps_server_src_features_auth_auth_repository_8bf38bc8 -->|imports| packages_database_src_index_user_6a227c73
-    apps_server_src_features_auth_auth_repository_8bf38bc8 -->|imports| packages_database_src_index_730690d6
-    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| packages_database_src_client_prisma_b08baaa4
-    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| packages_database_src_index_730690d6
-    apps_server_src_features_messages_messages_repos_515b6ab9 -->|imports| packages_database_src_client_prisma_b08baaa4
-    apps_server_src_features_messages_messages_repos_515b6ab9 -->|imports| packages_database_src_index_730690d6
+    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| packages_database_src_index_conversation_e12cf464
+    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| packages_database_src_index_conversationmember_18d110c2
+    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| apps_server_src_core_database_unit_of_work_trans_4ca519bb
+    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| apps_server_src_core_database_unit_of_work_uow_1526c830
+    apps_server_src_features_conversations_conversat_c6f47ee9 -->|imports| apps_server_src_core_database_unit_of_work_967347c8
+    apps_server_src_features_messages_messages_repos_515b6ab9 -->|imports| apps_server_src_core_database_unit_of_work_trans_4ca519bb
+    apps_server_src_features_messages_messages_repos_515b6ab9 -->|imports| apps_server_src_core_database_unit_of_work_uow_1526c830
     apps_server_src_features_messages_messages_repos_515b6ab9 -->|imports| apps_server_src_core_database_unit_of_work_967347c8
-    apps_server_src_features_receipts_receipts_repos_07189bc1 -->|imports| packages_database_src_client_prisma_b08baaa4
-    apps_server_src_features_receipts_receipts_repos_07189bc1 -->|imports| packages_database_src_index_730690d6
-    %% Omitted for readability: 12 nodes, 0 edges
-    class apps_server_src_features_auth_auth_repository_8bf38bc8 module;
-    class apps_server_src_features_auth_auth_repository_au_d6cd2827 function;
-    class apps_server_src_features_auth_auth_repository_au_584c3b31 function;
-    class apps_server_src_features_auth_auth_repository_au_0ee75543 function;
-    class apps_server_src_features_auth_auth_repository_au_c6b17333 function;
-    class apps_server_src_features_auth_auth_repository_au_13565ebf function;
-    class apps_server_src_features_receipts_receipts_repos_07189bc1 module;
-    class apps_server_src_features_receipts_receipts_repos_95a05f34 function;
-    class apps_server_src_features_receipts_receipts_repos_27652082 function;
-    class apps_server_src_features_receipts_receipts_repos_dcfc13a5 function;
-    class packages_database_src_index_prismaclient_923b07ae entry;
-    class packages_database_src_index_device_8202a4fd function;
-    class packages_database_src_index_user_6a227c73 function;
-    class apps_server_src_core_database_unit_of_work_967347c8 module;
-    class packages_database_src_client_prisma_b08baaa4 function;
-    class packages_database_src_index_730690d6 module;
+    %% Omitted for readability: 6 nodes, 0 edges
     class apps_server_src_features_conversations_conversat_c6f47ee9 module;
+    class apps_server_src_features_conversations_conversat_3371d6b2 function;
+    class apps_server_src_features_conversations_conversat_39234147 function;
+    class apps_server_src_features_conversations_conversat_d7cbe31f function;
+    class apps_server_src_features_conversations_conversat_ba25a289 function;
+    class apps_server_src_features_conversations_conversat_7ed7caa1 function;
     class apps_server_src_features_messages_messages_repos_515b6ab9 module;
+    class apps_server_src_features_messages_messages_repos_fa53399b function;
+    class apps_server_src_features_messages_messages_repos_1dbcb392 function;
+    class apps_server_src_features_messages_messages_repos_8f6a22fd entry;
+    class apps_server_src_features_messages_messages_repos_ad65e6bb function;
+    class apps_server_src_features_messages_messages_repos_0747d87c function;
+    class packages_database_src_index_prismaclient_923b07ae entry;
+    class packages_database_src_index_conversation_e12cf464 function;
+    class packages_database_src_index_conversationmember_18d110c2 function;
+    class apps_server_src_core_database_unit_of_work_967347c8 module;
+    class apps_server_src_core_database_unit_of_work_trans_4ca519bb entry;
+    class apps_server_src_core_database_unit_of_work_uow_1526c830 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -2977,17 +2952,17 @@ flowchart LR
   <td>1</td>
   <td><code>TransactionClient</code><br><small style="color:var(--muted)">core/database/unit-of-work.ts</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
-  <td><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td>No direct outbound edge</td>
   <td>TransactionClient node in core/database/unit-of-work.ts.</td>
 </tr>
 <tr>
   <td>2</td>
-  <td><code>authRepository</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>conversationsRepository</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
-  <td><code>findDeviceById()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small><br><code>findUserById()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small><br><code>findUserByUsername()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small><br>+1 more</td>
-  <td>authRepository node in features/auth/auth.repository.ts.</td>
+  <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small></td>
+  <td><code>findById()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>getOrCreateDirectConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>getUserConversations()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
+  <td>conversationsRepository node in features/conversations/conversations.repository.ts.</td>
 </tr>
 <tr>
   <td>3</td>
@@ -2999,11 +2974,11 @@ flowchart LR
 </tr>
 <tr>
   <td>4</td>
-  <td><code>receiptsRepository</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
+  <td><code>messagesRepository</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>receipts.service.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
-  <td><code>getMessageReceipts()</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small><br><code>upsertReceipt()</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
-  <td>receiptsRepository node in features/receipts/receipts.repository.ts.</td>
+  <td><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small><br><code>receipts.service.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
+  <td><code>findByClientMsgId()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small><br><code>findById()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small><br><code>getMessagesAfterSeq()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small><br>+1 more</td>
+  <td>messagesRepository node in features/messages/messages.repository.ts.</td>
 </tr>
 <tr>
   <td>5</td>
@@ -3015,102 +2990,110 @@ flowchart LR
 </tr>
 <tr>
   <td>6</td>
-  <td><code>.findDeviceById()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>computeDirectPairHash()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>authRepository</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>getOrCreateDirectConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>phase1.test.ts</code><br><small style="color:var(--muted)">features/auth/phase1.test.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.findDeviceById() node in features/auth/auth.repository.ts.</td>
+  <td>Caches analysis results or computes cache keys.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>.findUserById()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>.findById()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>authRepository</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>conversationsRepository</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.findUserById() node in features/auth/auth.repository.ts.</td>
+  <td>.findById() node in features/conversations/conversations.repository.ts.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>.findUserByUsername()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>.getOrCreateDirectConversation()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>authRepository</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>.findUserByUsername() node in features/auth/auth.repository.ts.</td>
+  <td><code>conversationsRepository</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
+  <td><code>computeDirectPairHash()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
+  <td>.getOrCreateDirectConversation() node in features/conversations/conversations.repository.ts.</td>
 </tr>
 <tr>
   <td>9</td>
-  <td><code>.updateDeviceLastActive()</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>.getUserConversations()</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>authRepository</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
+  <td><code>conversationsRepository</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.updateDeviceLastActive() node in features/auth/auth.repository.ts.</td>
+  <td>.getUserConversations() node in features/conversations/conversations.repository.ts.</td>
 </tr>
 <tr>
   <td>10</td>
-  <td><code>.constructor()</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
+  <td><code>.constructor()</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>authService</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
+  <td><code>conversationsService</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.constructor() node in features/auth/auth.service.ts.</td>
+  <td>.constructor() node in features/conversations/conversations.service.ts.</td>
 </tr>
 <tr>
   <td>11</td>
-  <td><code>.getMessageReceipts()</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>receiptsRepository</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
+  <td><code>.findByClientMsgId()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>messagesRepository</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.getMessageReceipts() node in features/receipts/receipts.repository.ts.</td>
+  <td>.findByClientMsgId() node in features/messages/messages.repository.ts.</td>
 </tr>
 <tr>
   <td>12</td>
-  <td><code>.upsertReceipt()</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
+  <td><code>.findById()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>receiptsRepository</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
+  <td><code>messagesRepository</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.upsertReceipt() node in features/receipts/receipts.repository.ts.</td>
+  <td>.findById() node in features/messages/messages.repository.ts.</td>
 </tr>
 <tr>
   <td>13</td>
-  <td><code>.constructor()</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
+  <td><code>.getMessagesAfterSeq()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>receiptsService</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
+  <td><code>messagesRepository</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td>No direct outbound edge</td>
-  <td>.constructor() node in features/receipts/receipts.service.ts.</td>
+  <td>.getMessagesAfterSeq() node in features/messages/messages.repository.ts.</td>
 </tr>
 <tr>
   <td>14</td>
+  <td><code>.persistMessage()</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>messagesRepository</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td>No direct outbound edge</td>
+  <td>.persistMessage() node in features/messages/messages.repository.ts.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>.constructor()</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>messagesService</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small></td>
+  <td>No direct outbound edge</td>
+  <td>.constructor() node in features/messages/messages.service.ts.</td>
+</tr>
+<tr>
+  <td>16</td>
   <td><code>unit-of-work.ts</code><br><small style="color:var(--muted)">core/database/unit-of-work.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
-  <td><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td><code>index.ts</code><br><small style="color:var(--muted)">database/src/index.ts</small><br><code>prisma</code><br><small style="color:var(--muted)">database/src/client.ts</small><br><code>src index prismaclient</code></td>
   <td>Module file in core/database/unit-of-work.ts.</td>
 </tr>
 <tr>
-  <td>15</td>
+  <td>17</td>
   <td><code>uow</code><br><small style="color:var(--muted)">core/database/unit-of-work.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
+  <td><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td>No direct outbound edge</td>
   <td>uow node in core/database/unit-of-work.ts.</td>
 </tr>
 <tr>
-  <td>16</td>
-  <td><code>auth.repository.ts</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>auth.service.ts</code><br><small style="color:var(--muted)">features/auth/auth.service.ts</small></td>
-  <td><code>index.ts</code><br><small style="color:var(--muted)">database/src/index.ts</small><br><code>prisma</code><br><small style="color:var(--muted)">database/src/client.ts</small><br><code>src index device</code><br>+1 more</td>
-  <td>Module file in features/auth/auth.repository.ts.</td>
-</tr>
-<tr>
-  <td>17</td>
+  <td>18</td>
   <td><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
-  <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small></td>
-  <td><code>index.ts</code><br><small style="color:var(--muted)">database/src/index.ts</small><br><code>prisma</code><br><small style="color:var(--muted)">database/src/client.ts</small><br><code>src index conversation</code><br>+1 more</td>
+  <td><code>conversations.service.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.service.ts</small><br><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small><br><code>phase1.test.ts</code><br><small style="color:var(--muted)">features/auth/phase1.test.ts</small></td>
+  <td><code>index.ts</code><br><small style="color:var(--muted)">database/src/index.ts</small><br><code>prisma</code><br><small style="color:var(--muted)">database/src/client.ts</small><br><code>ref_node_crypto</code><br>+5 more</td>
   <td>Module file in features/conversations/conversations.repository.ts.</td>
 </tr>
 <tr>
-  <td>18</td>
+  <td>19</td>
   <td><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
   <td><code>messages.service.ts</code><br><small style="color:var(--muted)">features/messages/messages.service.ts</small><br><code>receipts.service.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
@@ -3118,39 +3101,7 @@ flowchart LR
   <td>Module file in features/messages/messages.repository.ts.</td>
 </tr>
 <tr>
-  <td>19</td>
-  <td><code>receipts.repository.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>receipts.service.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.service.ts</small></td>
-  <td><code>index.ts</code><br><small style="color:var(--muted)">database/src/index.ts</small><br><code>prisma</code><br><small style="color:var(--muted)">database/src/client.ts</small><br><code>src index messagereceipt</code></td>
-  <td>Module file in features/receipts/receipts.repository.ts.</td>
-</tr>
-<tr>
   <td>20</td>
-  <td><code>client.ts</code><br><small style="color:var(--muted)">database/src/client.ts</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>@prisma/client</code><br><small style="color:var(--muted)">packages/database/package.json</small></td>
-  <td>Module file in database/src/client.ts.</td>
-</tr>
-<tr>
-  <td>21</td>
-  <td><code>prisma</code><br><small style="color:var(--muted)">database/src/client.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>auth.repository.ts</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small><br><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br>+5 more</td>
-  <td>No direct outbound edge</td>
-  <td>prisma node in database/src/client.ts.</td>
-</tr>
-<tr>
-  <td>22</td>
-  <td><code>database/src/index.ts</code><br><small style="color:var(--muted)">database/src/index.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>app.ts</code><br><small style="color:var(--muted)">server/src/app.ts</small><br><code>auth.repository.ts</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small><br><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small><br>+5 more</td>
-  <td>No direct outbound edge</td>
-  <td>Module file in database/src/index.ts.</td>
-</tr>
-<tr>
-  <td>23</td>
   <td><code>packages_database_src_index_conversation</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
@@ -3158,7 +3109,7 @@ flowchart LR
   <td>packages_database_src_index_conversation node in project.</td>
 </tr>
 <tr>
-  <td>24</td>
+  <td>21</td>
   <td><code>packages_database_src_index_conversationmember</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>conversations.repository.ts</code><br><small style="color:var(--muted)">features/conversations/conversations.repository.ts</small></td>
@@ -3166,15 +3117,7 @@ flowchart LR
   <td>packages_database_src_index_conversationmember node in project.</td>
 </tr>
 <tr>
-  <td>25</td>
-  <td><code>packages_database_src_index_device</code><br><small style="color:var(--muted)"></small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>auth.repository.ts</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>packages_database_src_index_device node in project.</td>
-</tr>
-<tr>
-  <td>26</td>
+  <td>22</td>
   <td><code>packages_database_src_index_message</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
@@ -3182,15 +3125,7 @@ flowchart LR
   <td>packages_database_src_index_message node in project.</td>
 </tr>
 <tr>
-  <td>27</td>
-  <td><code>packages_database_src_index_messagereceipt</code><br><small style="color:var(--muted)"></small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>receipts.repository.ts</code><br><small style="color:var(--muted)">features/receipts/receipts.repository.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>packages_database_src_index_messagereceipt node in project.</td>
-</tr>
-<tr>
-  <td>28</td>
+  <td>23</td>
   <td><code>packages_database_src_index_messagetype</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>messages.repository.ts</code><br><small style="color:var(--muted)">features/messages/messages.repository.ts</small></td>
@@ -3198,20 +3133,12 @@ flowchart LR
   <td>packages_database_src_index_messagetype node in project.</td>
 </tr>
 <tr>
-  <td>29</td>
+  <td>24</td>
   <td><code>packages_database_src_index_prismaclient</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td><code>unit-of-work.ts</code><br><small style="color:var(--muted)">core/database/unit-of-work.ts</small></td>
   <td>No direct outbound edge</td>
   <td>packages_database_src_index_prismaclient node in project.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>packages_database_src_index_user</code><br><small style="color:var(--muted)"></small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>auth.repository.ts</code><br><small style="color:var(--muted)">features/auth/auth.repository.ts</small></td>
-  <td>No direct outbound edge</td>
-  <td>packages_database_src_index_user node in project.</td>
 </tr>
 </table>
 
@@ -3220,19 +3147,17 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>features/auth/auth.repository.ts</code></td><td>6 nodes</td></tr>
-<tr><td><code>features/receipts/receipts.repository.ts</code></td><td>4 nodes</td></tr>
+      <tr><td><code>features/messages/messages.repository.ts</code></td><td>7 nodes</td></tr>
+<tr><td><code>features/conversations/conversations.repository.ts</code></td><td>6 nodes</td></tr>
 <tr><td><code>core/database/unit-of-work.ts</code></td><td>3 nodes</td></tr>
-<tr><td><code>features/messages/messages.repository.ts</code></td><td>2 nodes</td></tr>
-<tr><td><code>database/src/client.ts</code></td><td>2 nodes</td></tr>
-<tr><td><code>features/auth/auth.service.ts</code></td><td>1 nodes</td></tr>
-<tr><td><code>features/conversations/conversations.repository.ts</code></td><td>1 nodes</td></tr>
-<tr><td><code>features/receipts/receipts.service.ts</code></td><td>1 nodes</td></tr>
+<tr><td><code>features/conversations/conversations.service.ts</code></td><td>1 nodes</td></tr>
+<tr><td><code>features/messages/messages.service.ts</code></td><td>1 nodes</td></tr>
+<tr><td><code>types/src/message.types.ts</code></td><td>1 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: imports x16, method x6, imports x6, contains x6. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: imports x10, method x7, contains x6, references x3. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -4201,40 +4126,35 @@ flowchart LR
 
 <!-- ====== 16. Other ====== -->
 <h2 id="other">16. Other</h2>
-<p>Other groups implementation around phases, server, apps, phase, mostly in phases/08-phase8-privacy-reporting-and-data-lifecycle.md, phases/01-phase1-eligibility-identity-and-access.md, phases/02-phase2-e2ee-and-durable-messaging.md. This section covers 101 nodes and 99 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Other groups implementation around phases, server, phase, data, mostly in phases/08-phase8-privacy-reporting-and-data-lifecycle.md, core/websocket/gateway.ts, phases/01-phase1-eligibility-identity-and-access.md. This section covers 94 nodes and 88 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Other (101 nodes, 99 edges)
+    %% Section: Other (94 nodes, 88 edges)
     subgraph other_core_websocket_gateway_ts_efd7150e["core/websocket/gateway.ts"]
         apps_server_src_core_websocket_gateway_websocket_b3ecf2e8("WebSocketGateway<br/><small>core/websocket/gateway.ts</small>")
+        apps_server_src_core_websocket_gateway_websocket_ac7ad0bf("closeUserConnections()<br/><small>core/websocket/gateway.ts</small>")
+        apps_server_src_core_websocket_gateway_websocket_824abcec("constructor()<br/><small>core/websocket/gateway.ts</small>")
+        apps_server_src_core_websocket_gateway_websocket_28b1d9bf("register()<br/><small>core/websocket/gateway.ts</small>")
+        apps_server_src_core_websocket_gateway_websocket_5f24a840("sendToUserAllDevices()<br/><small>core/websocket/gateway.ts</small>")
+        apps_server_src_core_websocket_gateway_websocket_c1a0bf0c("getConnectedDevicesCount()<br/><small>core/websocket/gateway.ts</small>")
         apps_server_src_core_websocket_gateway_websocket_bfe875ae("isUserOnline()<br/><small>core/websocket/gateway.ts</small>")
         apps_server_src_core_websocket_gateway_websocket_698002ca("startHeartbeat()<br/><small>core/websocket/gateway.ts</small>")
         apps_server_src_core_websocket_gateway_websocket_c25ff6e6("destroy()<br/><small>core/websocket/gateway.ts</small>")
-        apps_server_src_core_websocket_gateway_websocket_824abcec("constructor()<br/><small>core/websocket/gateway.ts</small>")
-        apps_server_src_core_websocket_gateway_websocket_28b1d9bf("register()<br/><small>core/websocket/gateway.ts</small>")
         apps_server_src_core_websocket_gateway_websocket_f6255c54("unregister()<br/><small>core/websocket/gateway.ts</small>")
         apps_server_src_core_websocket_gateway_websocket_c02c1afd("sendToDevice()<br/><small>core/websocket/gateway.ts</small>")
-        apps_server_src_core_websocket_gateway_websocket_5f24a840("sendToUserAllDevices()<br/><small>core/websocket/gateway.ts</small>")
     end
-    subgraph other_features_presence_presence_controller_ts_51e4628e["features/presence/presence.controller.ts"]
-        apps_server_src_features_presence_presence_contr_0d7e0c33("presence.controller.ts")
-        apps_server_src_features_presence_presence_contr_eaceee26("presenceController<br/><small>features/presence/presence.controller.ts</small>")
-        apps_server_src_features_presence_presence_contr_ab864f6a("constructor()<br/><small>features/presence/presence.controller.ts</small>")
-        apps_server_src_features_presence_presence_contr_395471fc("getPresence()<br/><small>features/presence/presence.controller.ts</small>")
+    subgraph other_features_auth_auth_repository_ts_e1f54391["features/auth/auth.repository.ts"]
+        apps_server_src_features_auth_auth_repository_au_d6cd2827("authRepository<br/><small>features/auth/auth.repository.ts</small>")
+        apps_server_src_features_auth_auth_repository_au_584c3b31("findUserById()<br/><small>features/auth/auth.repository.ts</small>")
+        apps_server_src_features_auth_auth_repository_au_0ee75543("findDeviceById()<br/><small>features/auth/auth.repository.ts</small>")
+        apps_server_src_features_auth_auth_repository_au_c6b17333("updateDeviceLastActive()<br/><small>features/auth/auth.repository.ts</small>")
+        apps_server_src_features_auth_auth_repository_au_13565ebf("findUserByUsername()<br/><small>features/auth/auth.repository.ts</small>")
     end
-    subgraph other_features_auth_auth_controller_ts_45620746["features/auth/auth.controller.ts"]
-        apps_server_src_features_auth_auth_controller_au_b7e12b95("authController<br/><small>features/auth/auth.controller.ts</small>")
-        apps_server_src_features_auth_auth_controller_au_1000838d("constructor()<br/><small>features/auth/auth.controller.ts</small>")
-        apps_server_src_features_auth_auth_controller_au_4608a382("getMe()<br/><small>features/auth/auth.controller.ts</small>")
-    end
-    apps_server_src_features_auth_auth_routes_25341c4c("auth.routes.ts")
-    apps_server_src_features_presence_presence_route_14e14c0b("presence.routes.ts")
-    apps_server_src_features_auth_auth_controller_au_b7e12b95 -->|method| apps_server_src_features_auth_auth_controller_au_1000838d
-    apps_server_src_features_auth_auth_controller_au_b7e12b95 -->|method| apps_server_src_features_auth_auth_controller_au_4608a382
-    apps_server_src_features_presence_presence_contr_eaceee26 -->|method| apps_server_src_features_presence_presence_contr_ab864f6a
-    apps_server_src_features_presence_presence_contr_eaceee26 -->|method| apps_server_src_features_presence_presence_contr_395471fc
+    apps_server_src_features_auth_auth_service_auths_e7274fdc("constructor()<br/><small>features/auth/auth.service.ts</small>")
+    agents_skills_idea_refine_scripts_idea_refine_0b3e7959("idea-refine.sh")
+    apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_c1a0bf0c
     apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_bfe875ae
     apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_698002ca
     apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_c25ff6e6
@@ -4243,31 +4163,34 @@ flowchart LR
     apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_f6255c54
     apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_c02c1afd
     apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_5f24a840
+    apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 -->|method| apps_server_src_core_websocket_gateway_websocket_ac7ad0bf
+    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_584c3b31
+    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_0ee75543
+    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_c6b17333
+    apps_server_src_features_auth_auth_repository_au_d6cd2827 -->|method| apps_server_src_features_auth_auth_repository_au_13565ebf
+    apps_server_src_core_websocket_gateway_websocket_ac7ad0bf -->|calls| apps_server_src_core_websocket_gateway_websocket_f6255c54
     apps_server_src_core_websocket_gateway_websocket_824abcec -->|calls| apps_server_src_core_websocket_gateway_websocket_698002ca
     apps_server_src_core_websocket_gateway_websocket_28b1d9bf -->|calls| apps_server_src_core_websocket_gateway_websocket_f6255c54
     apps_server_src_core_websocket_gateway_websocket_5f24a840 -->|calls| apps_server_src_core_websocket_gateway_websocket_c02c1afd
-    apps_server_src_features_presence_presence_route_14e14c0b -->|imports| apps_server_src_features_presence_presence_contr_eaceee26
-    apps_server_src_features_presence_presence_route_14e14c0b -->|imports| apps_server_src_features_presence_presence_contr_0d7e0c33
-    apps_server_src_features_auth_auth_routes_25341c4c -->|imports| apps_server_src_features_auth_auth_controller_au_b7e12b95
-    %% Omitted for readability: 83 nodes, 0 edges
+    %% Omitted for readability: 76 nodes, 0 edges
     class apps_server_src_core_websocket_gateway_websocket_b3ecf2e8 klass;
+    class apps_server_src_core_websocket_gateway_websocket_ac7ad0bf function;
+    class apps_server_src_core_websocket_gateway_websocket_824abcec function;
+    class apps_server_src_core_websocket_gateway_websocket_28b1d9bf function;
+    class apps_server_src_core_websocket_gateway_websocket_5f24a840 function;
+    class apps_server_src_core_websocket_gateway_websocket_c1a0bf0c function;
     class apps_server_src_core_websocket_gateway_websocket_bfe875ae function;
     class apps_server_src_core_websocket_gateway_websocket_698002ca function;
     class apps_server_src_core_websocket_gateway_websocket_c25ff6e6 function;
-    class apps_server_src_core_websocket_gateway_websocket_824abcec function;
-    class apps_server_src_core_websocket_gateway_websocket_28b1d9bf function;
     class apps_server_src_core_websocket_gateway_websocket_f6255c54 function;
     class apps_server_src_core_websocket_gateway_websocket_c02c1afd function;
-    class apps_server_src_core_websocket_gateway_websocket_5f24a840 function;
-    class apps_server_src_features_presence_presence_contr_0d7e0c33 module;
-    class apps_server_src_features_presence_presence_contr_eaceee26 function;
-    class apps_server_src_features_presence_presence_contr_ab864f6a function;
-    class apps_server_src_features_presence_presence_contr_395471fc function;
-    class apps_server_src_features_auth_auth_controller_au_b7e12b95 function;
-    class apps_server_src_features_auth_auth_controller_au_1000838d function;
-    class apps_server_src_features_auth_auth_controller_au_4608a382 function;
-    class apps_server_src_features_auth_auth_routes_25341c4c api;
-    class apps_server_src_features_presence_presence_route_14e14c0b api;
+    class apps_server_src_features_auth_auth_repository_au_d6cd2827 function;
+    class apps_server_src_features_auth_auth_repository_au_584c3b31 function;
+    class apps_server_src_features_auth_auth_repository_au_0ee75543 function;
+    class apps_server_src_features_auth_auth_repository_au_c6b17333 function;
+    class apps_server_src_features_auth_auth_repository_au_13565ebf function;
+    class apps_server_src_features_auth_auth_service_auths_e7274fdc function;
+    class agents_skills_idea_refine_scripts_idea_refine_0b3e7959 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -4390,7 +4313,7 @@ flowchart LR
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>constructor()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>destroy()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>getConnectedDevicesCount()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br>+6 more</td>
+  <td><code>closeUserConnections()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>constructor()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>destroy()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br>+7 more</td>
   <td>WebSocketGateway node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
@@ -4403,6 +4326,14 @@ flowchart LR
 </tr>
 <tr>
   <td>15</td>
+  <td><code>.closeUserConnections()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
+  <td><code>unregister()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
+  <td>.closeUserConnections() node in core/websocket/gateway.ts.</td>
+</tr>
+<tr>
+  <td>16</td>
   <td><code>.constructor()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4410,7 +4341,7 @@ flowchart LR
   <td>.constructor() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>17</td>
   <td><code>.destroy()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4418,7 +4349,7 @@ flowchart LR
   <td>.destroy() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>17</td>
+  <td>18</td>
   <td><code>.getConnectedDevicesCount()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4426,7 +4357,7 @@ flowchart LR
   <td>.getConnectedDevicesCount() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>18</td>
+  <td>19</td>
   <td><code>.isUserOnline()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4434,7 +4365,7 @@ flowchart LR
   <td>.isUserOnline() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>19</td>
+  <td>20</td>
   <td><code>.register()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4442,7 +4373,7 @@ flowchart LR
   <td>.register() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>21</td>
   <td><code>.sendToDevice()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>sendToUserAllDevices()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4450,7 +4381,7 @@ flowchart LR
   <td>.sendToDevice() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>21</td>
+  <td>22</td>
   <td><code>.sendToUserAllDevices()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4458,7 +4389,7 @@ flowchart LR
   <td>.sendToUserAllDevices() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>22</td>
+  <td>23</td>
   <td><code>.startHeartbeat()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>constructor()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
@@ -4466,15 +4397,15 @@ flowchart LR
   <td>.startHeartbeat() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>23</td>
+  <td>24</td>
   <td><code>.unregister()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>register()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
+  <td><code>closeUserConnections()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>register()</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small><br><code>WebSocketGateway</code><br><small style="color:var(--muted)">core/websocket/gateway.ts</small></td>
   <td>No direct outbound edge</td>
   <td>.unregister() node in core/websocket/gateway.ts.</td>
 </tr>
 <tr>
-  <td>24</td>
+  <td>25</td>
   <td><code>01-phase1-eligibility-identity-and-access.md</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -4482,7 +4413,7 @@ flowchart LR
   <td>Documentation node describing 01-phase1-eligibility-identity-and-access.md.</td>
 </tr>
 <tr>
-  <td>25</td>
+  <td>26</td>
   <td><code>01 — Phase 1: Eligibility, Identity, and Access</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -4490,7 +4421,7 @@ flowchart LR
   <td>Documentation node describing 01 — Phase 1: Eligibility, Identity, and Access.</td>
 </tr>
 <tr>
-  <td>26</td>
+  <td>27</td>
   <td><code>1. Scope &amp; Ownership</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -4498,7 +4429,7 @@ flowchart LR
   <td>Documentation node describing 1. Scope &amp; Ownership.</td>
 </tr>
 <tr>
-  <td>27</td>
+  <td>28</td>
   <td><code>2. Requirements Traceability</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -4506,7 +4437,7 @@ flowchart LR
   <td>Documentation node describing 2. Requirements Traceability.</td>
 </tr>
 <tr>
-  <td>28</td>
+  <td>29</td>
   <td><code>3. Server Data Models (PostgreSQL DDL)</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -4514,20 +4445,12 @@ flowchart LR
   <td>Documentation node describing 3. Server Data Models (PostgreSQL DDL).</td>
 </tr>
 <tr>
-  <td>29</td>
+  <td>30</td>
   <td><code>4. Client ↔ Server Workflows &amp; Protocols</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>Documentation node describing 4. Client ↔ Server Workflows &amp; Protocols.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>5. Phase 1 AI Implementation Tasks</code><br><small style="color:var(--muted)">phases/01-phase1-eligibility-identity-and-access.md</small></td>
-  <td><span class="tag tag-func">Concept</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Documentation node describing 5. Phase 1 AI Implementation Tasks.</td>
 </tr>
 </table>
 
@@ -4537,10 +4460,10 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>phases/08-phase8-privacy-reporting-and-data-lifecycle.md</code></td><td>12 nodes</td></tr>
+<tr><td><code>core/websocket/gateway.ts</code></td><td>11 nodes</td></tr>
 <tr><td><code>phases/01-phase1-eligibility-identity-and-access.md</code></td><td>11 nodes</td></tr>
 <tr><td><code>phases/02-phase2-e2ee-and-durable-messaging.md</code></td><td>11 nodes</td></tr>
 <tr><td><code>phases/09-phase9-non-functional-acceptance-and-release.md</code></td><td>11 nodes</td></tr>
-<tr><td><code>core/websocket/gateway.ts</code></td><td>10 nodes</td></tr>
 <tr><td><code>skills/idea-refine/frameworks.md</code></td><td>9 nodes</td></tr>
 <tr><td><code>types/src/attachment.types.ts</code></td><td>7 nodes</td></tr>
 <tr><td><code>phases/00-phase0-requirements-and-approvals.md</code></td><td>7 nodes</td></tr>
@@ -4548,7 +4471,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x70, method x14, imports x6, calls x3. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x67, method x14, calls x4, references x3. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -4559,18 +4482,18 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>1228</td></tr>
-      <tr><td>Edges</td><td>1493</td></tr>
+      <tr><td>Nodes</td><td>1252</td></tr>
+      <tr><td>Edges</td><td>1607</td></tr>
       <tr><td>Hyperedges</td><td>0</td></tr>
-      <tr><td>Communities</td><td>70</td></tr>
+      <tr><td>Communities</td><td>66</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>1462</td></tr>
-      <tr><td>INFERRED</td><td>31</td></tr>
+      <tr><td>EXTRACTED</td><td>1574</td></tr>
+      <tr><td>INFERRED</td><td>33</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
   </div>
@@ -4578,7 +4501,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>chat-app — Architecture Documentation</p>
-  <p>Generated: 2026-10-18 17:27 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-10-18 17:38 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->

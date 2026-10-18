@@ -239,6 +239,10 @@ importers:
         version: 5.9.3
 
   packages/crypto:
+    dependencies:
+      '@chat/types':
+        specifier: workspace:*
+        version: link:../types
     devDependencies:
       '@types/node':
         specifier: ^22.13.10

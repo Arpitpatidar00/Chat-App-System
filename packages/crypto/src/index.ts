@@ -3,3 +3,4 @@ export * from './keypair.js';
 export * from './kdf.js';
 export * from './vault.js';
 export * from './moderation.js';
+export * from './jwt.js';
