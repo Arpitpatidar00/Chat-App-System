@@ -6,7 +6,7 @@
   "4": "useMessageSend.ts",
   "5": "Code Review and Quality",
   "6": "Test-Driven Development",
-  "7": "conversations.repository.ts",
+  "7": "prisma",
   "8": "Context Engineering",
   "9": "Git Workflow and Versioning",
   "10": "Optimization Patterns",
@@ -41,7 +41,6 @@
   "39": "04 — Phase 4: Groups, Membership, and Historical Access",
   "40": "Refinement & Evaluation Criteria",
   "41": "dependencies",
-  "42": "authRepository",
   "43": "types/package.json",
   "44": "03 — Phase 3: Realtime Delivery, Receipts, and Device Sync",
   "45": "05 — Phase 5: Message Actions and Conversation Controls",
@@ -63,6 +62,5 @@
   "64": "00 — Phase 0: Requirements, Product Decisions & Engineering Baseline",
   "65": "scripts",
   "67": "Chat System — AI Agent Implementation & Phase Registry",
-  "68": "devDependencies",
   "69": "message-throughput.js"
 }

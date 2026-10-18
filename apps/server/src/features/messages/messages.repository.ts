@@ -34,35 +34,45 @@ export class MessagesRepository {
   }
 
   public async persistMessage(params: CreateMessageParams): Promise<Message> {
-    return uow.runInTransaction(async (tx: TransactionClient) => {
-      // 1. Atomically increment conversation last_seq_id
-      const updatedConv = await tx.conversation.update({
-        where: { id: params.conversationId },
-        data: {
-          lastSeqId: { increment: 1 },
-        },
-        select: { lastSeqId: true },
+    try {
+      return await uow.runInTransaction(async (tx: TransactionClient) => {
+        // 1. Atomically increment conversation last_seq_id
+        const updatedConv = await tx.conversation.update({
+          where: { id: params.conversationId },
+          data: {
+            lastSeqId: { increment: 1 },
+          },
+          select: { lastSeqId: true },
+        });
+
+        const seqId = updatedConv.lastSeqId;
+
+        // 2. Commit message with allocated monotonic sequence ID
+        const message = await tx.message.create({
+          data: {
+            id: params.id,
+            clientMsgId: params.clientMsgId,
+            conversationId: params.conversationId,
+            senderId: params.senderId,
+            senderDeviceId: params.senderDeviceId,
+            seqId,
+            msgType: params.msgType,
+            encryptedPayloads: params.encryptedPayloads as any,
+            isTombstoned: false,
+          },
+        });
+
+        return message;
       });
-
-      const seqId = updatedConv.lastSeqId;
-
-      // 2. Commit message with allocated monotonic sequence ID
-      const message = await tx.message.create({
-        data: {
-          id: params.id,
-          clientMsgId: params.clientMsgId,
-          conversationId: params.conversationId,
-          senderId: params.senderId,
-          senderDeviceId: params.senderDeviceId,
-          seqId,
-          msgType: params.msgType,
-          encryptedPayloads: params.encryptedPayloads as any,
-          isTombstoned: false,
-        },
-      });
-
-      return message;
-    });
+    } catch (err: any) {
+      if (err.code === 'P2002') {
+        const existing = await this.findByClientMsgId(params.senderDeviceId, params.clientMsgId);
+        if (existing) {
+          return existing;
+        }
+      }
+      throw err;
+    }
   }
 
   public async getMessagesAfterSeq(

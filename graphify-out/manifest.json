@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792344932.5716105,
-    "seen": 1792345112.66463,
-    "ast_hash": "af4ae7568105e124e1b3e2ca25c7a204",
+    "mtime": 1792345347.3375542,
+    "seen": 1792345758.4797592,
+    "ast_hash": "55ff7a21e3634edcd02d15c991ac05f2",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -168,27 +168,27 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.controller.ts": {
-    "mtime": 1792344036.875687,
-    "seen": 1792344423.5734248,
-    "ast_hash": "2c027774db686c3c22999b4f7030a293",
+    "mtime": 1792345312.753931,
+    "seen": 1792345758.480195,
+    "ast_hash": "7e4b477bbc6ba4bfb642aa353d969b3f",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.repository.ts": {
-    "mtime": 1792344020.1510153,
-    "seen": 1792344423.573426,
-    "ast_hash": "8c274d576c7bf7f4bf010eaf6aebbbc0",
+    "mtime": 1792345281.757272,
+    "seen": 1792345758.480196,
+    "ast_hash": "0a3d1ddda05e499c37a76aa539367618",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.routes.ts": {
-    "mtime": 1792343822.4962986,
-    "seen": 1792344423.573427,
-    "ast_hash": "8e5a362b0da2e578fb8669fae51e1415",
+    "mtime": 1792345320.3608463,
+    "seen": 1792345758.4801972,
+    "ast_hash": "897d8ec5cdad94e6cc3128c6ef8218e9",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.service.ts": {
-    "mtime": 1792344029.9642696,
-    "seen": 1792344423.573428,
-    "ast_hash": "5dde94642cbca7504413e3b9fe2d0624",
+    "mtime": 1792345297.8075266,
+    "seen": 1792345758.480198,
+    "ast_hash": "2defa2f32a9e82d7e8164c1b2b620d6a",
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.controller.ts": {
@@ -306,9 +306,9 @@
     "semantic_hash": ""
   },
   "packages/crypto/src/vault.ts": {
-    "mtime": 1792343592.9083788,
-    "seen": 1792344423.5734458,
-    "ast_hash": "66a4d0a18ba5d92884cc44e074c599b5",
+    "mtime": 1792345562.0445027,
+    "seen": 1792345758.480688,
+    "ast_hash": "079bdafb616d89e5efa2b016993e9e93",
     "semantic_hash": ""
   },
   "packages/crypto/tsconfig.json": {
@@ -618,9 +618,9 @@
     "semantic_hash": ""
   },
   "phases/02-phase2-e2ee-and-durable-messaging.md": {
-    "mtime": 1792341925.4738312,
-    "seen": 1792344423.573518,
-    "ast_hash": "56629e3b8727e8726a624658b8e4bf09",
+    "mtime": 1792345750.822413,
+    "seen": 1792345758.48192,
+    "ast_hash": "aea926f6252136fda5d1db58ed467a03",
     "semantic_hash": ""
   },
   "phases/03-phase3-realtime-delivery-receipts-and-device-sync.md": {
@@ -711,6 +711,36 @@
     "mtime": 1792344734.2621057,
     "seen": 1792345112.6652942,
     "ast_hash": "c79615613dc4becb8093aa5a1b80eb20",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/devices/devices.controller.ts": {
+    "mtime": 1792345249.3854983,
+    "seen": 1792345758.480191,
+    "ast_hash": "057d710d25c0c88860927ba05e54fe57",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/devices/devices.repository.ts": {
+    "mtime": 1792345381.479804,
+    "seen": 1792345758.480192,
+    "ast_hash": "68de8943ba81a3c93a8daa8aac7628f0",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/devices/devices.routes.ts": {
+    "mtime": 1792345257.5326385,
+    "seen": 1792345758.4801931,
+    "ast_hash": "86e1ef7c3ccd9d3cb09c0dbb31de7dd3",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/devices/devices.service.ts": {
+    "mtime": 1792345237.7278037,
+    "seen": 1792345758.480194,
+    "ast_hash": "de058b9d78836f32e3040d853c09045e",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/messages/phase2.test.ts": {
+    "mtime": 1792345610.2591684,
+    "seen": 1792345758.4801989,
+    "ast_hash": "99f3cd2c361f9d09d624b514482f396c",
     "semantic_hash": ""
   }
 }

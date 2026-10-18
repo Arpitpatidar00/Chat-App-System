@@ -85,6 +85,44 @@ export class MessagesService {
       status: 'SENT',
     });
   }
+
+  /**
+   * P2-T07: Reconnect Retrieval & Offline Retention (FR-022, FR-024).
+   * Returns messages strictly ordered by seq_id ASC where seq_id > lastKnownSeqId.
+   */
+  public async syncMessages(
+    conversationId: string,
+    userId: string,
+    lastKnownSeqId: bigint,
+    limit = 50
+  ): Promise<Result<MessageDTO[], DomainError>> {
+    const conv = await this.convRepo.findById(conversationId);
+    if (!conv) {
+      return err(new NotFoundError(`Conversation ${conversationId} not found`));
+    }
+
+    const isMember = conv.members.some((m) => m.userId === userId && m.removedAtSeqId === null);
+    if (!isMember) {
+      return err(new ForbiddenError('You are not an active member of this conversation'));
+    }
+
+    const messages = await this.repo.getMessagesAfterSeq(conversationId, lastKnownSeqId, limit);
+
+    const dtos: MessageDTO[] = messages.map((m) => ({
+      id: m.id,
+      conversationId: m.conversationId,
+      seqId: m.seqId.toString(),
+      senderId: m.senderId,
+      senderDeviceId: m.senderDeviceId,
+      clientMsgId: m.clientMsgId,
+      msgType: m.msgType as any,
+      encryptedPayloads: m.encryptedPayloads as unknown as EncryptedPayloads,
+      createdAt: m.createdAt.toISOString(),
+      isTombstoned: m.isTombstoned,
+    }));
+
+    return ok(dtos);
+  }
 }
 
 export const messagesService = new MessagesService();

@@ -15,6 +15,8 @@ import { conversationsRoutes } from './features/conversations/conversations.rout
 import { messagesRoutes } from './features/messages/messages.routes.js';
 import { receiptsRoutes } from './features/receipts/receipts.routes.js';
 import { presenceRoutes } from './features/presence/presence.routes.js';
+import { devicesRoutes } from './features/devices/devices.routes.js';
+import { messagesService } from './features/messages/messages.service.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({
@@ -106,10 +108,29 @@ export async function buildApp(): Promise<FastifyInstance> {
     wsGateway.register(userId, deviceId, socket);
     req.log.info({ userId, deviceId }, 'WebSocket client connected');
 
-    socket.on('message', (data: any) => {
+    socket.on('message', async (data: any) => {
       try {
         const payload = JSON.parse(data.toString());
-        req.log.debug({ userId, deviceId, eventType: payload.eventType }, 'WS payload received');
+
+        // P2-T03: Inbound WebSocket MSG_SEND ingestion & immediate MSG_ACK
+        if (payload.action === 'MSG_SEND') {
+          const ackResult = await messagesService.sendMessage(userId, deviceId, payload);
+          if (ackResult.success) {
+            socket.send(JSON.stringify(ackResult.data));
+          } else {
+            socket.send(
+              JSON.stringify({
+                error: {
+                  code: ackResult.error.errorCode,
+                  message: ackResult.error.message,
+                },
+              })
+            );
+          }
+          return;
+        }
+
+        req.log.debug({ userId, deviceId, action: payload.action }, 'WS frame received');
       } catch {
         socket.send(JSON.stringify({ error: 'INVALID_JSON_FRAME' }));
       }
@@ -118,6 +139,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   // Feature REST API Routes
   await app.register(authRoutes, { prefix: '/api/v1/auth' });
+  await app.register(devicesRoutes, { prefix: '/api/v1' });
   await app.register(conversationsRoutes, { prefix: '/api/v1/conversations' });
   await app.register(messagesRoutes, { prefix: '/api/v1/messages' });
   await app.register(receiptsRoutes, { prefix: '/api/v1/receipts' });

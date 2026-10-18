@@ -1,13 +1,16 @@
 import { randomBytes } from 'node:crypto';
-import { encryptAesGcm, decryptAesGcm } from './aes-gcm.js';
+import {
+  encryptAesGcm,
+  decryptAesGcm,
+  packEncryptedBuffer,
+  unpackEncryptedBuffer,
+} from './aes-gcm.js';
 import { deriveKeyScrypt } from './kdf.js';
 
 export interface EncryptedKeyVaultDto {
   version: number;
-  salt: string; // hex
-  iv: string; // hex
-  tag: string; // hex
-  ciphertext: string; // hex
+  salt: string; // base64
+  encryptedVaultBlob: string; // base64 packed (IV 12B + Tag 16B + Ciphertext)
 }
 
 /**
@@ -22,13 +25,12 @@ export async function encryptKeyVault(
 
   const serialized = Buffer.from(JSON.stringify(payload), 'utf8');
   const encrypted = encryptAesGcm(serialized, derivedKey);
+  const packed = packEncryptedBuffer(encrypted);
 
   return {
     version: 1,
-    salt: salt.toString('hex'),
-    iv: encrypted.iv.toString('hex'),
-    tag: encrypted.tag.toString('hex'),
-    ciphertext: encrypted.ciphertext.toString('hex'),
+    salt: salt.toString('base64'),
+    encryptedVaultBlob: packed.toString('base64'),
   };
 }
 
@@ -36,16 +38,16 @@ export async function encryptKeyVault(
  * Decrypts user key vault using user passphrase.
  */
 export async function decryptKeyVault<T = Record<string, unknown>>(
-  vault: EncryptedKeyVaultDto,
+  vault: { version?: number; salt: string; encryptedVaultBlob: string },
   passphrase: string
 ): Promise<T> {
-  const salt = Buffer.from(vault.salt, 'hex');
-  const iv = Buffer.from(vault.iv, 'hex');
-  const tag = Buffer.from(vault.tag, 'hex');
-  const ciphertext = Buffer.from(vault.ciphertext, 'hex');
+  const salt = Buffer.from(vault.salt, 'base64');
+  const packed = Buffer.from(vault.encryptedVaultBlob, 'base64');
+  const { iv, tag, ciphertext } = unpackEncryptedBuffer(packed);
 
   const derivedKey = await deriveKeyScrypt(passphrase, salt, 32);
   const decryptedBuf = decryptAesGcm(ciphertext, derivedKey, iv, tag);
 
   return JSON.parse(decryptedBuf.toString('utf8')) as T;
 }
+
