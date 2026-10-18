@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # Ephemeral session cache, presence aggregator & pub/sub bus
+  redis:
+    image: redis:7-alpine
+    container_name: chat_redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "512mb", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Node.js API & WebSocket Gateway Server
+  api:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    container_name: chat_api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=${DATABASE_URL}
+      - DIRECT_URL=${DIRECT_URL}
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - AWS_REGION=${AWS_REGION:-ap-south-1}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET:-chat-app-e2ee-attachments}
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # k6 Load & Chaos Testing Harness
+  k6:
+    image: grafana/k6:latest
+    container_name: chat_k6
+    volumes:
+      - ./load-tests:/scripts
+    environment:
+      - TARGET_URL=http://api:3000
+      - WS_URL=ws://api:3000/ws
+    profiles:
+      - testing
+
+volumes:
+  redis_data:
