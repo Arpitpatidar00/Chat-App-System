@@ -1,0 +1,23 @@
+{
+  "communities": {
+    "0": [
+      "agents_skills_idea_refine_scripts_idea_refine",
+      "agents_skills_idea_refine_scripts_idea_refine_sh__entry"
+    ]
+  },
+  "cohesion": {
+    "0": 1.0
+  },
+  "gods": [
+    {
+      "id": "agents_skills_idea_refine_scripts_idea_refine_sh__entry",
+      "label": "idea-refine.sh script",
+      "degree": 1
+    }
+  ],
+  "surprises": [],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}
