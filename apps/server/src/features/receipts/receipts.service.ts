@@ -92,6 +92,25 @@ export class ReceiptsService {
       }))
     );
   }
+
+  /**
+   * P4-T07: Group Individual Reader Attribution (FR-036).
+   */
+  public async getGroupReaders(
+    messageId: string
+  ): Promise<Result<{ userId: string; username: string; readAt: string }[], DomainError>> {
+    const receipts = await this.repo.getReceiptsForMessage(messageId);
+    const readers = receipts
+      .filter((r) => r.status === 3 && r.readAt !== null)
+      .map((r) => ({
+        userId: r.userId,
+        username: (r as any).user?.username ?? '',
+        readAt: r.readAt!.toISOString(),
+      }));
+
+    return ok(readers);
+  }
 }
 
 export const receiptsService = new ReceiptsService();
+

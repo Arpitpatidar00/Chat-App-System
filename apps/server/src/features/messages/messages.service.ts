@@ -101,12 +101,19 @@ export class MessagesService {
       return err(new NotFoundError(`Conversation ${conversationId} not found`));
     }
 
-    const isMember = conv.members.some((m) => m.userId === userId && m.removedAtSeqId === null);
-    if (!isMember) {
+    const member = conv.members.find((m) => m.userId === userId && m.removedAtSeqId === null);
+    if (!member) {
       return err(new ForbiddenError('You are not an active member of this conversation'));
     }
 
-    const messages = await this.repo.getMessagesAfterSeq(conversationId, lastKnownSeqId, limit);
+    // P4-T03: Bounded Pre-Join History & Forward Secrecy Check (FR-013, FR-081, NFR-036)
+    const messages = await this.repo.getMessagesBounded(
+      conversationId,
+      lastKnownSeqId,
+      member.historyFloorSeqId,
+      member.removedAtSeqId,
+      limit
+    );
 
     const dtos: MessageDTO[] = messages.map((m) => ({
       id: m.id,
@@ -123,6 +130,7 @@ export class MessagesService {
 
     return ok(dtos);
   }
+
 }
 
 export const messagesService = new MessagesService();

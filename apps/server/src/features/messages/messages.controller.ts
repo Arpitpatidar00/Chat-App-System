@@ -56,6 +56,22 @@ export class MessagesController {
 
     return reply.status(200).send({ data: result.data });
   }
+
+  public async getReceipts(
+    request: FastifyRequest<{ Params: { id: string } }>,
+    reply: FastifyReply
+  ) {
+    const { receiptsService } = await import('../receipts/receipts.service.js');
+    const result = await receiptsService.getGroupReaders(request.params.id);
+    if (!result.success) {
+      return reply.status(result.error.statusCode).send({
+        error: { code: result.error.errorCode, message: result.error.message },
+      });
+    }
+
+    return reply.status(200).send({ data: result.data });
+  }
 }
 
 export const messagesController = new MessagesController();
+

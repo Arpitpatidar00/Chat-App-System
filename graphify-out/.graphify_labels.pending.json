@@ -37,10 +37,10 @@
   "35": "tasks",
   "36": "Spec-Driven Development",
   "37": "Source-Driven Development",
-  "38": "server/package.json",
+  "38": "env.ts",
   "39": "04 — Phase 4: Groups, Membership, and Historical Access",
   "40": "Refinement & Evaluation Criteria",
-  "41": "dependencies",
+  "41": "server/package.json",
   "42": "phase3.test.ts",
   "43": "types/package.json",
   "44": "03 — Phase 3: Realtime Delivery, Receipts, and Device Sync",
@@ -64,9 +64,11 @@
   "62": "attachment.types.ts",
   "63": "types/tsconfig.json",
   "64": "00 — Phase 0: Requirements, Product Decisions & Engineering Baseline",
-  "65": "receipts.routes.ts",
+  "65": "receipts.service.ts",
   "66": "authRepository",
   "67": "Chat System — AI Agent Implementation & Phase Registry",
-  "68": "devDependencies",
-  "69": "message-throughput.js"
+  "68": "conversationsController",
+  "69": "message-throughput.js",
+  "70": "messagesService",
+  "71": "authController"
 }

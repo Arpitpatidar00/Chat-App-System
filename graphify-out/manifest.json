@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/core/errors/domain-error.ts": {
-    "mtime": 1792343719.096599,
-    "seen": 1792344423.5734131,
-    "ast_hash": "4826a0940310034df898d157ea299f4e",
+    "mtime": 1792346798.2474272,
+    "seen": 1792347137.0164878,
+    "ast_hash": "3c38a39b6de5c2be734fbdb63b1d3414",
     "semantic_hash": ""
   },
   "apps/server/src/core/redis/redis-client.ts": {
@@ -144,51 +144,51 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.controller.ts": {
-    "mtime": 1792344871.7677224,
-    "seen": 1792345112.664812,
-    "ast_hash": "f8c90555308e8c8d52aab3f2becf988c",
+    "mtime": 1792346688.4899905,
+    "seen": 1792347137.0167391,
+    "ast_hash": "f8baf0cb9c61735ecf3b65215d4b0a9f",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.repository.ts": {
-    "mtime": 1792344835.2864695,
-    "seen": 1792345112.664813,
-    "ast_hash": "018328e6dd66078e3935a25c639af850",
+    "mtime": 1792346628.2405243,
+    "seen": 1792347137.01674,
+    "ast_hash": "0eda5a414876e144fb756b264dfac664",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.routes.ts": {
-    "mtime": 1792344878.9492989,
-    "seen": 1792345112.664814,
-    "ast_hash": "d9e1a39eb579a7b12b7b615fad263a5f",
+    "mtime": 1792346700.884092,
+    "seen": 1792347137.016741,
+    "ast_hash": "e27bbf09525e17850463c8fdb698a489",
     "semantic_hash": ""
   },
   "apps/server/src/features/conversations/conversations.service.ts": {
-    "mtime": 1792344857.7444055,
-    "seen": 1792345112.6648152,
-    "ast_hash": "1110225c76b9dbc4aabb3a0b027058a1",
+    "mtime": 1792346823.6696894,
+    "seen": 1792347137.016742,
+    "ast_hash": "b3aeb755a49abbd5a7364ea8bd1cbf46",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.controller.ts": {
-    "mtime": 1792345312.753931,
-    "seen": 1792345758.480195,
-    "ast_hash": "7e4b477bbc6ba4bfb642aa353d969b3f",
+    "mtime": 1792346766.9667091,
+    "seen": 1792347137.0168571,
+    "ast_hash": "345a8be6730edcc1fae38f4d9592bb49",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.repository.ts": {
-    "mtime": 1792345281.757272,
-    "seen": 1792345758.480196,
-    "ast_hash": "0a3d1ddda05e499c37a76aa539367618",
+    "mtime": 1792346721.237005,
+    "seen": 1792347137.016858,
+    "ast_hash": "8a8a571105e4a7308a435046ae251174",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.routes.ts": {
-    "mtime": 1792345320.3608463,
-    "seen": 1792345758.4801972,
-    "ast_hash": "897d8ec5cdad94e6cc3128c6ef8218e9",
+    "mtime": 1792346779.4884036,
+    "seen": 1792347137.0168588,
+    "ast_hash": "bb238530c9cfba3feaea2fb58fa9c0e0",
     "semantic_hash": ""
   },
   "apps/server/src/features/messages/messages.service.ts": {
-    "mtime": 1792345297.8075266,
-    "seen": 1792345758.480198,
-    "ast_hash": "2defa2f32a9e82d7e8164c1b2b620d6a",
+    "mtime": 1792346730.6742203,
+    "seen": 1792347137.0168588,
+    "ast_hash": "10e172d5a7052c31b3d2ba79d5986362",
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.controller.ts": {
@@ -228,9 +228,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/receipts.service.ts": {
-    "mtime": 1792346034.08632,
-    "seen": 1792346441.242495,
-    "ast_hash": "da84141dec7e756427f4311d1fcb8772",
+    "mtime": 1792346753.8731265,
+    "seen": 1792347137.017083,
+    "ast_hash": "30a75078e01617e57f44fe2762f2feaa",
     "semantic_hash": ""
   },
   "apps/server/src/index.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "packages/types/src/conversation.types.ts": {
-    "mtime": 1792343281.225517,
-    "seen": 1792344423.5734541,
-    "ast_hash": "323eb6ce5c909b5826848da332ee9515",
+    "mtime": 1792346595.1699326,
+    "seen": 1792347137.017587,
+    "ast_hash": "58f90ddf7a973e029fe104cba11e108e",
     "semantic_hash": ""
   },
   "packages/types/src/index.ts": {
@@ -630,9 +630,9 @@
     "semantic_hash": ""
   },
   "phases/04-phase4-groups-membership-and-historical-access.md": {
-    "mtime": 1792341970.3282166,
-    "seen": 1792344423.57352,
-    "ast_hash": "5f079d73bb1147719c66ed43b9e8b57f",
+    "mtime": 1792347126.1588871,
+    "seen": 1792347137.018688,
+    "ast_hash": "8d0cea6fe1720e41d9e4d892df50edfd",
     "semantic_hash": ""
   },
   "phases/05-phase5-message-actions-and-conversation-controls.md": {
@@ -750,9 +750,15 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/phase3.test.ts": {
-    "mtime": 1792346335.5682006,
-    "seen": 1792346441.2424908,
-    "ast_hash": "afa0f143d14098bdd7d01edd726166df",
+    "mtime": 1792346979.7122993,
+    "seen": 1792347137.016999,
+    "ast_hash": "b198fbdce5c39e830e8d31dbdbce90fa",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/conversations/phase4.test.ts": {
+    "mtime": 1792346864.2421002,
+    "seen": 1792347137.016743,
+    "ast_hash": "37598d12f223d2e3c5c363805b759ce9",
     "semantic_hash": ""
   }
 }

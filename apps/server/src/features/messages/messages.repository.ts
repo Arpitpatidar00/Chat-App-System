@@ -91,6 +91,33 @@ export class MessagesRepository {
       },
     });
   }
+
+  /**
+   * P4-T03: Bounded Pre-Join History & Forward Secrecy Retrieval (FR-013, FR-081, NFR-036).
+   */
+  public async getMessagesBounded(
+    conversationId: string,
+    afterSeqId: bigint,
+    floorSeqId: bigint,
+    ceilingSeqId: bigint | null,
+    limit = 50
+  ): Promise<Message[]> {
+    const effectiveFloor = afterSeqId >= floorSeqId ? afterSeqId : floorSeqId - 1n;
+    return prisma.message.findMany({
+      where: {
+        conversationId,
+        seqId: {
+          gt: effectiveFloor,
+          ...(ceilingSeqId !== null ? { lte: ceilingSeqId } : {}),
+        },
+      },
+      take: limit,
+      orderBy: {
+        seqId: 'asc',
+      },
+    });
+  }
 }
 
 export const messagesRepository = new MessagesRepository();
+

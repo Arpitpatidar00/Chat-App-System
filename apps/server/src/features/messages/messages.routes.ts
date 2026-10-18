@@ -7,4 +7,6 @@ export const messagesRoutes: FastifyPluginAsync = async (fastify) => {
 
   fastify.post('/', (req, rep) => messagesController.send(req as any, rep));
   fastify.get('/sync', (req, rep) => messagesController.sync(req as any, rep));
+  fastify.get('/:id/receipts', (req, rep) => messagesController.getReceipts(req as any, rep));
 };
+

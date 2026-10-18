@@ -25,3 +25,21 @@ export interface AddGroupMemberDTO {
   userId: string;
   encryptedHistoryPackage?: string;
 }
+
+export interface UploadHistoryPackageDTO {
+  recipientUserId: string;
+  fromSeqId: string;
+  toSeqId: string;
+  encryptedHistoryKeyBundle: string; // base64
+}
+
+export interface GroupHistoryPackageDTO {
+  id: string;
+  conversationId: string;
+  recipientUserId: string;
+  fromSeqId: string;
+  toSeqId: string;
+  encryptedHistoryKeyBundle: string; // base64
+  createdAt: string;
+}
+

@@ -34,7 +34,13 @@ export class ValidationError extends DomainError {
   public readonly errorCode = 'VALIDATION_FAILED';
 }
 
+export class GroupLimitExceededError extends DomainError {
+  public readonly statusCode = 400;
+  public readonly errorCode = 'GROUP_LIMIT_EXCEEDED';
+}
+
 export class InternalServerError extends DomainError {
   public readonly statusCode = 500;
   public readonly errorCode = 'INTERNAL_SERVER_ERROR';
 }
+
