@@ -5,7 +5,7 @@
 - **Owner Role:** Sync & Groups Agent / Messaging Agent
 - **Reviewer Role:** QA & Reliability Agent
 - **Prerequisite:** Phase 2 (`02-phase2-e2ee-and-durable-messaging.md`)
-- **Status:** READY
+- **Status:** COMPLETED & SIGNED OFF
 
 ---
 
@@ -81,22 +81,24 @@ CREATE INDEX idx_receipts_conv_user ON message_receipts(conversation_id, user_id
 
 ## 5. Phase 3 AI Implementation Tasks
 
-- [ ] **P3-T01: Realtime Fan-Out Dispatcher:** Implement Redis Pub/Sub routing delivering incoming messages to all connected devices of members (`p95 ≤ 1s`).
-- [ ] **P3-T02: Monotonic Receipt State Machine:** Implement `RECEIPT_ACK` and `READ_UP_TO` endpoints enforcing monotonic progression `1 (SENT) → 2 (DELIVERED) → 3 (READ)`.
-- [ ] **P3-T03: Multi-Device Unread Count Synchronization:** Broadcast `SELF_READ_SYNC` frames clearing badges across secondary enrolled devices.
-- [ ] **P3-T04: Redis Presence Aggregator & Dead-Socket Reaper:** Implement 20s heartbeat updater and 45s reaper transitioning dead sockets to `OFFLINE`.
-- [ ] **P3-T05: Presence Privacy Filter:** Enforce user visibility preferences (`EVERYONE`, `CONTACTS`, `NOBODY`) and blocklist checks.
-- [ ] **P3-T06: Typing Indicator TTL Broadcast:** Implement 5s auto-expiring typing broadcast with client-side 3s debounce limiter.
-- [ ] **P3-T07: Edge-Case Test Suite:** Author automated tests for delayed delivery acks, out-of-order events, and unclean socket drops.
+- [x] **P3-T01: Realtime Fan-Out Dispatcher:** Implement Redis Pub/Sub routing delivering incoming messages to all connected devices of members (`p95 ≤ 1s`).
+- [x] **P3-T02: Monotonic Receipt State Machine:** Implement `RECEIPT_ACK` and `READ_UP_TO` endpoints enforcing monotonic progression `1 (SENT) → 2 (DELIVERED) → 3 (READ)`.
+- [x] **P3-T03: Multi-Device Unread Count Synchronization:** Broadcast `SELF_READ_SYNC` frames clearing badges across secondary enrolled devices.
+- [x] **P3-T04: Redis Presence Aggregator & Dead-Socket Reaper:** Implement 20s heartbeat updater and 45s reaper transitioning dead sockets to `OFFLINE`.
+- [x] **P3-T05: Presence Privacy Filter:** Enforce user visibility preferences (`EVERYONE`, `CONTACTS`, `NOBODY`) and blocklist checks.
+- [x] **P3-T06: Typing Indicator TTL Broadcast:** Implement 5s auto-expiring typing broadcast with client-side 3s debounce limiter.
+- [x] **P3-T07: Edge-Case Test Suite:** Author automated tests for delayed delivery acks, out-of-order events, and unclean socket drops.
 
 ---
 
 ## 6. Phase 3 End-to-End (E2E) Acceptance Test Suite
 
-| Test ID | Scenario Description | Expected Outcome | Target FR / NFR |
-| :--- | :--- | :--- | :--- |
-| **E2E-3.1** | **Live Delivery Latency Benchmark** | Measure live WebSocket delivery across 100 connected recipients. | `T(Recipient WS Receive) - T(Server Accept)` passes `p95 ≤ 1.0s` and `p99 ≤ 3.0s`. | `NFR-006`, `NFR-007` |
-| **E2E-3.2** | **Receipt Monotonicity Under Out-of-Order Packets** | Mark message M as `READ` on Device B1. Inject delayed `DELIVERED` ack for M from Device B2 5 seconds later. | Database receipt status remains `3 (READ)`; status is never downgraded. | `FR-038`, `NFR-033` |
-| **E2E-3.3** | **Multi-Device Unread Clearing** | Send 5 messages to User B. User B reads chat on Phone (Device B1). | Desktop (Device B2) unread badge clears immediately upon receiving `SELF_READ_SYNC`. | `FR-035`, `FR-037` |
-| **E2E-3.4** | **Ungraceful Socket Drop Detection** | Connect User A on 2 devices. Kill Device A1 interface without TCP FIN. | User A remains `ONLINE` via Device A2. Kill Device A2; User A flips to `OFFLINE` within ≤ 45s. | `FR-041`, `FR-042` |
-| **E2E-3.5** | **Typing Expiration Without Clean Stop** | Send `TYPING_START` without follow-up messages or `TYPING_STOP`. | Typing status in recipient UI automatically expires and disappears after 5 seconds. | `FR-044`, `NFR-034` |
+| Test ID | Scenario Description | Expected Outcome | Target FR / NFR | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **E2E-3.1** | **Live Delivery Latency Benchmark** | Measure live WebSocket delivery across 100 connected recipients. | `T(Recipient WS Receive) - T(Server Accept)` passes `p95 ≤ 1.0s` and `p99 ≤ 3.0s`. | `NFR-006`, `NFR-007` | **PASS** |
+| **E2E-3.2** | **Receipt Monotonicity Under Out-of-Order Packets** | Mark message M as `READ` on Device B1. Inject delayed `DELIVERED` ack for M from Device B2 5 seconds later. | Database receipt status remains `3 (READ)`; status is never downgraded. | `FR-038`, `NFR-033` | **PASS** |
+| **E2E-3.3** | **Multi-Device Unread Clearing** | Send 5 messages to User B. User B reads chat on Phone (Device B1). | Desktop (Device B2) unread badge clears immediately upon receiving `SELF_READ_SYNC`. | `FR-035`, `FR-037` | **PASS** |
+| **E2E-3.4** | **Ungraceful Socket Drop Detection** | Connect User A on 2 devices. Kill Device A1 interface without TCP FIN. | User A remains `ONLINE` via Device A2. Kill Device A2; User A flips to `OFFLINE` within ≤ 45s. | `FR-041`, `FR-042` | **PASS** |
+| **E2E-3.5** | **Typing Expiration Without Clean Stop** | Send `TYPING_START` without follow-up messages or `TYPING_STOP`. | Typing status in recipient UI automatically expires and disappears after 5 seconds. | `FR-044`, `NFR-034` | **PASS** |
+| **E2E-3.6** | **Presence Privacy Filters** | Target sets privacy to NOBODY, BLOCKED, or CONTACTS. | Requester visibility matches strict permissions; zero metadata leaks. | `NFR-030` | **PASS** |
+

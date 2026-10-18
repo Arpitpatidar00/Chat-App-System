@@ -7,6 +7,7 @@ export interface ActiveSession {
   socket: WebSocket;
   isAlive: boolean;
   connectedAt: Date;
+  lastHeartbeatAt: number;
 }
 
 export class WebSocketGateway {
@@ -14,6 +15,8 @@ export class WebSocketGateway {
   private readonly sessions = new Map<string, ActiveSession>();
   // User to set of deviceIds mapping
   private readonly userDevices = new Map<string, Set<string>>();
+  // User to last seen timestamp
+  private readonly userLastSeen = new Map<string, Date>();
   private heartbeatInterval: NodeJS.Timeout | null = null;
 
   constructor() {
@@ -35,6 +38,7 @@ export class WebSocketGateway {
       socket,
       isAlive: true,
       connectedAt: new Date(),
+      lastHeartbeatAt: Date.now(),
     };
 
     this.sessions.set(sessionKey, session);
@@ -48,6 +52,7 @@ export class WebSocketGateway {
       const s = this.sessions.get(sessionKey);
       if (s) {
         s.isAlive = true;
+        s.lastHeartbeatAt = Date.now();
       }
     });
 
@@ -69,7 +74,17 @@ export class WebSocketGateway {
       devices.delete(deviceId);
       if (devices.size === 0) {
         this.userDevices.delete(userId);
+        this.userLastSeen.set(userId, new Date());
       }
+    }
+  }
+
+  public recordHeartbeat(userId: string, deviceId: string): void {
+    const sessionKey = `${userId}:${deviceId}`;
+    const session = this.sessions.get(sessionKey);
+    if (session) {
+      session.isAlive = true;
+      session.lastHeartbeatAt = Date.now();
     }
   }
 
@@ -91,6 +106,25 @@ export class WebSocketGateway {
     for (const deviceId of devices) {
       if (this.sendToDevice(userId, deviceId, payload)) {
         deliveredCount++;
+      }
+    }
+    return deliveredCount;
+  }
+
+  public sendToUserOtherDevices(
+    userId: string,
+    excludeDeviceId: string,
+    payload: OutboundWSFrame
+  ): number {
+    const devices = this.userDevices.get(userId);
+    if (!devices) return 0;
+
+    let deliveredCount = 0;
+    for (const deviceId of devices) {
+      if (deviceId !== excludeDeviceId) {
+        if (this.sendToDevice(userId, deviceId, payload)) {
+          deliveredCount++;
+        }
       }
     }
     return deliveredCount;
@@ -121,10 +155,30 @@ export class WebSocketGateway {
     return this.sessions.size;
   }
 
-  public isUserOnline(userId: string): boolean {
+  public getUserConnectedDevices(userId: string): string[] {
     const devices = this.userDevices.get(userId);
-    return !!devices && devices.size > 0;
+    return devices ? Array.from(devices) : [];
   }
+
+  public isUserOnline(userId: string, maxHeartbeatAgeMs: number = 45000): boolean {
+    const devices = this.userDevices.get(userId);
+    if (!devices || devices.size === 0) return false;
+
+    const cutoff = Date.now() - maxHeartbeatAgeMs;
+    for (const deviceId of devices) {
+      const session = this.sessions.get(`${userId}:${deviceId}`);
+      if (session && session.lastHeartbeatAt >= cutoff) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public getLastSeen(userId: string): Date | null {
+    return this.userLastSeen.get(userId) ?? null;
+  }
+
 
   private startHeartbeat(): void {
     this.heartbeatInterval = setInterval(() => {

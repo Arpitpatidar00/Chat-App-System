@@ -1,53 +1,96 @@
 import { receiptsRepository, type ReceiptsRepository } from './receipts.repository.js';
-import { messagesRepository } from '../messages/messages.repository.js';
 import { wsGateway } from '../../core/websocket/gateway.js';
 import { ok, err, type Result } from '../../core/result/result.js';
 import { NotFoundError, type DomainError } from '../../core/errors/domain-error.js';
-import { RECEIPT_STATUS, type ReceiptAckDTO } from '@chat/types';
+
+export interface ReceiptDto {
+  conversationId: string;
+  messageId: string;
+  userId: string;
+  status: number;
+  deliveredAt: string | null;
+  readAt: string | null;
+}
 
 export class ReceiptsService {
-  constructor(
-    private readonly repo: ReceiptsRepository = receiptsRepository,
-    private readonly msgRepo = messagesRepository
-  ) {}
+  constructor(private readonly repo: ReceiptsRepository = receiptsRepository) {}
 
-  public async updateReceipt(
+  /**
+   * P3-T02: Processes RECEIPT_ACK from recipient device (status 2 = DELIVERED).
+   * Monotonically records delivered status and notifies sender devices.
+   */
+  public async handleReceiptAck(
     userId: string,
-    dto: ReceiptAckDTO
-  ): Promise<Result<{ status: number }, DomainError>> {
-    const message = await this.msgRepo.findById(dto.messageId);
-    if (!message) {
-      return err(new NotFoundError(`Message ${dto.messageId} not found`));
+    _deviceId: string,
+    messageId: string
+  ): Promise<Result<ReceiptDto, DomainError>> {
+    const updated = await this.repo.markDelivered(messageId, userId);
+    if (!updated) {
+      return err(new NotFoundError(`Message ${messageId} not found`));
     }
 
-    // Check existing receipts for this user to enforce monotonicity (DEC-09)
-    const existing = await this.repo.getMessageReceipts(dto.messageId);
-    const userReceipt = existing.find((r) => r.userId === userId);
+    const dto: ReceiptDto = {
+      conversationId: updated.conversationId,
+      messageId: updated.messageId,
+      userId: updated.userId,
+      status: updated.status,
+      deliveredAt: updated.deliveredAt?.toISOString() ?? null,
+      readAt: updated.readAt?.toISOString() ?? null,
+    };
 
-    if (userReceipt) {
-      // Monotonic guard: late delivery acks never downgrade a READ receipt (3)
-      if (dto.status <= userReceipt.status) {
-        return ok({ status: userReceipt.status });
-      }
+    // Notify the message sender via WebSocket
+    const message = await this.repo.getMessageById(messageId);
+    if (message) {
+      wsGateway.sendToUserAllDevices(message.senderId, {
+        action: 'RECEIPT_EVENT',
+        messageId,
+        userId,
+        status: updated.status,
+        timestamp: updated.deliveredAt?.toISOString() ?? new Date().toISOString(),
+      });
     }
 
-    await this.repo.upsertReceipt({
-      conversationId: message.conversationId,
-      messageId: dto.messageId,
-      userId,
-      status: dto.status,
+    return ok(dto);
+  }
+
+  /**
+   * P3-T02 & P3-T03: Processes READ_UP_TO from reader device (status 3 = READ).
+   * Monotonically records read status up to maxSeqId and broadcasts SELF_READ_SYNC
+   * to reader's other devices to instantly clear unread badges.
+   */
+  public async handleReadUpTo(
+    userId: string,
+    deviceId: string,
+    conversationId: string,
+    maxSeqId: string
+  ): Promise<Result<{ affected: number }, DomainError>> {
+    const seq = BigInt(maxSeqId);
+    const affected = await this.repo.markReadUpTo(conversationId, userId, seq);
+
+    // P3-T03: Fan out SELF_READ_SYNC to reader's OTHER enrolled devices
+    wsGateway.sendToUserOtherDevices(userId, deviceId, {
+      action: 'SELF_READ_SYNC',
+      conversationId,
+      maxSeqId,
     });
 
-    // Notify message sender via WebSocket
-    wsGateway.sendToUserAllDevices(message.senderId, {
-      action: 'RECEIPT_EVENT',
-      messageId: dto.messageId,
-      userId,
-      status: dto.status,
-      timestamp: new Date().toISOString(),
-    });
+    return ok({ affected });
+  }
 
-    return ok({ status: dto.status });
+  public async getReceiptsForMessage(
+    messageId: string
+  ): Promise<Result<ReceiptDto[], DomainError>> {
+    const receipts = await this.repo.getReceiptsForMessage(messageId);
+    return ok(
+      receipts.map((r) => ({
+        conversationId: r.conversationId,
+        messageId: r.messageId,
+        userId: r.userId,
+        status: r.status,
+        deliveredAt: r.deliveredAt?.toISOString() ?? null,
+        readAt: r.readAt?.toISOString() ?? null,
+      }))
+    );
   }
 }
 

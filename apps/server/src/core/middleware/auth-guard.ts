@@ -92,3 +92,5 @@ export async function authenticateAndCheckEligibility(
     platform: claims.platform,
   };
 }
+
+export const requireAuth = authenticateAndCheckEligibility;

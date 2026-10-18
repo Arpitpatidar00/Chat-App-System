@@ -72,15 +72,15 @@
     "semantic_hash": ""
   },
   "apps/server/package.json": {
-    "mtime": 1792344156.8224826,
-    "seen": 1792344423.57341,
-    "ast_hash": "7ad560959ce2b5a6e6e6f4dead33be40",
+    "mtime": 1792346211.2095847,
+    "seen": 1792346441.241847,
+    "ast_hash": "82b6c697b0ecc71fe52442daba85831a",
     "semantic_hash": ""
   },
   "apps/server/src/app.ts": {
-    "mtime": 1792345347.3375542,
-    "seen": 1792345758.4797592,
-    "ast_hash": "55ff7a21e3634edcd02d15c991ac05f2",
+    "mtime": 1792346152.8268542,
+    "seen": 1792346441.241848,
+    "ast_hash": "36dc0e23340234edb60edbd618fee921",
     "semantic_hash": ""
   },
   "apps/server/src/config/env.ts": {
@@ -114,9 +114,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/core/websocket/gateway.ts": {
-    "mtime": 1792344818.235771,
-    "seen": 1792345112.664777,
-    "ast_hash": "ebb6882194a3e0aadb28fbf161e27ccd",
+    "mtime": 1792346022.960475,
+    "seen": 1792346441.241987,
+    "ast_hash": "242aca5109ecc6fea0789f1e6e122cd0",
     "semantic_hash": ""
   },
   "apps/server/src/features/auth/auth.controller.ts": {
@@ -192,45 +192,45 @@
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.controller.ts": {
-    "mtime": 1792344073.6471162,
-    "seen": 1792344423.573429,
-    "ast_hash": "f41f73bf57b80845713cb4748db1f4be",
+    "mtime": 1792346088.1293101,
+    "seen": 1792346441.242487,
+    "ast_hash": "a43116340580d4b494e00dcd63a2d12a",
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.routes.ts": {
-    "mtime": 1792343869.2319307,
-    "seen": 1792344423.573429,
-    "ast_hash": "73207573422808c545a59b11c1415a47",
+    "mtime": 1792346094.2965755,
+    "seen": 1792346441.242489,
+    "ast_hash": "bdbb89a9b0800f17e632377de25f9e75",
     "semantic_hash": ""
   },
   "apps/server/src/features/presence/presence.service.ts": {
-    "mtime": 1792344065.9213352,
-    "seen": 1792344423.57343,
-    "ast_hash": "5dd4a03c3946f7c9d1330bc1aa3899b0",
+    "mtime": 1792346080.0051062,
+    "seen": 1792346441.24249,
+    "ast_hash": "d4df21ba02b10c18d26e14405851e04e",
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/receipts.controller.ts": {
-    "mtime": 1792344058.4401228,
-    "seen": 1792344423.573431,
-    "ast_hash": "ab11fa106b48e24aedae2345bae2a7ec",
+    "mtime": 1792346043.266992,
+    "seen": 1792346441.242492,
+    "ast_hash": "09874d8729b2bb8d67845a99c47cac0c",
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/receipts.repository.ts": {
-    "mtime": 1792344045.0527022,
-    "seen": 1792344423.573432,
-    "ast_hash": "96e1f9f61fb93b1504c59fa0c638172f",
+    "mtime": 1792345993.064666,
+    "seen": 1792346441.242493,
+    "ast_hash": "69e819e84ba4e7fc92fc19e7ca7257b3",
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/receipts.routes.ts": {
-    "mtime": 1792343851.1023805,
-    "seen": 1792344423.5734332,
-    "ast_hash": "edd0d2fbce02a969ce2264e275a7cb75",
+    "mtime": 1792346050.5377223,
+    "seen": 1792346441.2424939,
+    "ast_hash": "bb853b5dd631d570e1e490d3c4c037ad",
     "semantic_hash": ""
   },
   "apps/server/src/features/receipts/receipts.service.ts": {
-    "mtime": 1792344051.6762471,
-    "seen": 1792344423.573434,
-    "ast_hash": "2b913307d5dd7aaeeaaed9568d5ba08b",
+    "mtime": 1792346034.08632,
+    "seen": 1792346441.242495,
+    "ast_hash": "da84141dec7e756427f4311d1fcb8772",
     "semantic_hash": ""
   },
   "apps/server/src/index.ts": {
@@ -624,9 +624,9 @@
     "semantic_hash": ""
   },
   "phases/03-phase3-realtime-delivery-receipts-and-device-sync.md": {
-    "mtime": 1792341948.1757114,
-    "seen": 1792344423.573519,
-    "ast_hash": "41f69e0f391e76cd621c8432ca38ad1f",
+    "mtime": 1792346433.128524,
+    "seen": 1792346441.244056,
+    "ast_hash": "09bc880fb0125a322c603ca4f39b4703",
     "semantic_hash": ""
   },
   "phases/04-phase4-groups-membership-and-historical-access.md": {
@@ -696,9 +696,9 @@
     "semantic_hash": ""
   },
   "apps/server/src/core/middleware/auth-guard.ts": {
-    "mtime": 1792345034.1658661,
-    "seen": 1792345112.664719,
-    "ast_hash": "6865a7c44eddb539a1195742d3ecacac",
+    "mtime": 1792346180.189953,
+    "seen": 1792346441.241931,
+    "ast_hash": "3518986414f9adf229e4aadebdd01d33",
     "semantic_hash": ""
   },
   "apps/server/src/features/auth/phase1.test.ts": {
@@ -741,6 +741,18 @@
     "mtime": 1792345610.2591684,
     "seen": 1792345758.4801989,
     "ast_hash": "99f3cd2c361f9d09d624b514482f396c",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/presence/presence.repository.ts": {
+    "mtime": 1792346316.0846207,
+    "seen": 1792346441.2424881,
+    "ast_hash": "c6828a4cf225a6e22b7280c83321a4ac",
+    "semantic_hash": ""
+  },
+  "apps/server/src/features/receipts/phase3.test.ts": {
+    "mtime": 1792346335.5682006,
+    "seen": 1792346441.2424908,
+    "ast_hash": "afa0f143d14098bdd7d01edd726166df",
     "semantic_hash": ""
   }
 }
