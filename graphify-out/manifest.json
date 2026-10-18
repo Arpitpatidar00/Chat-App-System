@@ -12,9 +12,9 @@
     "semantic_hash": "dfb2e5e6ed8660058984a5e30bb1caa4"
   },
   "apps/mobile/package.json": {
-    "mtime": 1792349163.0465455,
-    "seen": 1792349578.851653,
-    "ast_hash": "12019a5c545d12fc0060ce471df5b701",
+    "mtime": 1792352189.4209998,
+    "seen": 1792352270.800971,
+    "ast_hash": "a9e31b69f18b154dde02f55711de5756",
     "semantic_hash": ""
   },
   "apps/mobile/src/crypto/session-manager.ts": {
@@ -24,21 +24,21 @@
     "semantic_hash": ""
   },
   "apps/mobile/src/index.ts": {
-    "mtime": 1792348901.372893,
-    "seen": 1792349578.85169,
-    "ast_hash": "39666050562bffd1303f168c304629e4",
+    "mtime": 1792352135.8743799,
+    "seen": 1792352270.8010612,
+    "ast_hash": "d04b03c107663183e378a963cae65107",
     "semantic_hash": ""
   },
   "apps/mobile/src/screens/chat/ChatScreen.tsx": {
-    "mtime": 1792344309.6722388,
-    "seen": 1792344423.573403,
-    "ast_hash": "701872c632cff758b858b3f341eb1b13",
+    "mtime": 1792352124.955093,
+    "seen": 1792352270.8010619,
+    "ast_hash": "a7118f86a5ed240a30ba467cd888e4fc",
     "semantic_hash": ""
   },
   "apps/mobile/src/screens/chat/components/MessageBubble.tsx": {
-    "mtime": 1792344293.1234095,
-    "seen": 1792344423.5734038,
-    "ast_hash": "8c490d798e8c10bf95d162d029dde4a4",
+    "mtime": 1792352056.788682,
+    "seen": 1792352270.8010712,
+    "ast_hash": "54ec3fc2cebab19cfaf6552e52937e5d",
     "semantic_hash": ""
   },
   "apps/mobile/src/screens/chat/components/ReceiptIcon.tsx": {
@@ -993,6 +993,126 @@
     "mtime": 1792351021.4938254,
     "seen": 1792351618.0659862,
     "ast_hash": "07228411800066086f47d34b3f8fa4f9",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/chat-components.test.ts": {
+    "mtime": 1792352165.0200796,
+    "seen": 1792352270.8010628,
+    "ast_hash": "ab7e364119b321d793b671042301b731",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/AttachmentPickerButton.tsx": {
+    "mtime": 1792352087.365984,
+    "seen": 1792352270.801064,
+    "ast_hash": "51f476b7081092d9ab8d61870a277a75",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/ConversationHeader.tsx": {
+    "mtime": 1792352012.5850503,
+    "seen": 1792352270.801065,
+    "ast_hash": "60147da6318083db48c17c48f50bc893",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/ConversationView.tsx": {
+    "mtime": 1792352114.4223707,
+    "seen": 1792352270.801066,
+    "ast_hash": "519377f3f96554c1b381e88572d8dd04",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/EncryptedTextInput.tsx": {
+    "mtime": 1792352094.2150424,
+    "seen": 1792352270.801067,
+    "ast_hash": "1e63c0aec94a0a6982d466b474dcf4ac",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/MessageActionBar.tsx": {
+    "mtime": 1792352064.6242683,
+    "seen": 1792352270.80107,
+    "ast_hash": "188abd439d823c347202f724ff4f754b",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/MessageContent.tsx": {
+    "mtime": 1792352031.864374,
+    "seen": 1792352270.8010721,
+    "ast_hash": "65ba45a99d19131d44b200051e692228",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/MessageFlatList.tsx": {
+    "mtime": 1792352077.5322905,
+    "seen": 1792352270.8010728,
+    "ast_hash": "e652ba3fa76b8ad7d59f5ff74f50752c",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/MessageInputBar.tsx": {
+    "mtime": 1792352108.187849,
+    "seen": 1792352270.801074,
+    "ast_hash": "1ac7a101c27439d466296d6cda337346",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/MessageItem.tsx": {
+    "mtime": 1792352071.3050306,
+    "seen": 1792352270.801075,
+    "ast_hash": "9d9ca7b18ae6819a8c3258d6e6ce5051",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/MessageMetadata.tsx": {
+    "mtime": 1792352040.9265575,
+    "seen": 1792352270.801076,
+    "ast_hash": "b85a0028f255172a9b022abeb1742b8e",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/PresenceSubtitle.tsx": {
+    "mtime": 1792352006.1535819,
+    "seen": 1792352270.801077,
+    "ast_hash": "46abfec48c38586016a2819cba41af7d",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/ReactionsPillList.tsx": {
+    "mtime": 1792352048.249626,
+    "seen": 1792352270.801078,
+    "ast_hash": "27d15ce42083146c295c5bacdbf82919",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/ReplyQuoteBlock.tsx": {
+    "mtime": 1792352023.9998736,
+    "seen": 1792352270.8011131,
+    "ast_hash": "7af0c9a0d949827db76694ef36e8983d",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/SendButton.tsx": {
+    "mtime": 1792352102.2569609,
+    "seen": 1792352270.801114,
+    "ast_hash": "fc42fb0235ce82e4c001ac1f3bb4ecad",
+    "semantic_hash": ""
+  },
+  "apps/mobile/src/screens/chat/components/TitleAndAvatar.tsx": {
+    "mtime": 1792351998.0479305,
+    "seen": 1792352270.8011148,
+    "ast_hash": "4e2626dc4f1b5273274fb7cd02db9068",
+    "semantic_hash": ""
+  },
+  "load-tests/k6.config.js": {
+    "mtime": 1792351981.2229125,
+    "seen": 1792352270.803287,
+    "ast_hash": "4c5abfef57b9e4b73ee151503e1e1647",
+    "semantic_hash": ""
+  },
+  "load-tests/scenarios/reconnect-storm.js": {
+    "mtime": 1792351972.8599532,
+    "seen": 1792352270.803311,
+    "ast_hash": "1eb96010097543330dc3ff8b6208e377",
+    "semantic_hash": ""
+  },
+  "load-tests/scenarios/websocket-fanout.js": {
+    "mtime": 1792351963.033375,
+    "seen": 1792352270.803312,
+    "ast_hash": "c3ad1722d07ed8013a11682a14827167",
+    "semantic_hash": ""
+  },
+  "docs/OPERATIONS_RUNBOOK.md": {
+    "mtime": 1792352229.9643555,
+    "seen": 1792352270.8048341,
+    "ast_hash": "9a639c147698962a952d5ec0b5222745",
     "semantic_hash": ""
   }
 }

@@ -1,4 +1,8 @@
 import { ReceiptIcon } from './ReceiptIcon.js';
+import { ReplyQuoteBlock, type ReplyQuoteBlockProps } from './ReplyQuoteBlock.js';
+import { MessageContent, type MessageContentProps } from './MessageContent.js';
+import { MessageMetadata } from './MessageMetadata.js';
+import { ReactionsPillList, type ReactionSummary } from './ReactionsPillList.js';
 import type { MessageTransmissionStatus } from '@chat/types';
 
 export interface MessageBubbleProps {
@@ -8,6 +12,9 @@ export interface MessageBubbleProps {
   timestamp: string;
   status: MessageTransmissionStatus;
   isEdited?: boolean;
+  replyQuote?: ReplyQuoteBlockProps | null;
+  contentProps?: MessageContentProps | null;
+  reactions?: ReactionSummary[];
 }
 
 export function MessageBubble({
@@ -16,12 +23,14 @@ export function MessageBubble({
   isOutgoing,
   timestamp,
   status,
-  isEdited,
+  isEdited = false,
+  replyQuote = null,
+  contentProps = null,
+  reactions = [],
 }: MessageBubbleProps) {
-  const formattedTime = new Date(timestamp).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const content = contentProps
+    ? MessageContent(contentProps)
+    : MessageContent({ type: 'TEXT', text: plaintext });
 
   return {
     component: 'MessageBubble',
@@ -32,8 +41,15 @@ export function MessageBubble({
       textColor: '#FFFFFF',
       text: plaintext,
       edited: isEdited,
-      time: formattedTime,
-      receipt: isOutgoing ? ReceiptIcon({ status }) : null,
+      replyQuote: replyQuote ? ReplyQuoteBlock(replyQuote) : null,
+      content,
+      metadata: MessageMetadata({
+        timestamp,
+        isOutgoing,
+        status,
+        isEdited,
+      }),
+      reactions: ReactionsPillList({ reactions }),
     },
   };
 }
